@@ -12,7 +12,9 @@ const uri = "mongodb+srv://user1:user1@cluster0.0tlap.mongodb.net/myFirstDatabas
 
 mongoose.connect(uri, { useNewUrlParser: true, dbName: 'crm'}
 );
+
 const connection = mongoose.connection;
+
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
@@ -20,7 +22,7 @@ connection.once('open', () => {
 app.use('/user', userRouter);
 
 app.listen(port, () => {
-    console.log(`server is listening on port`, port)
+    console.log('server is listening on port', port)
 })
 
 // Exports app for testing
