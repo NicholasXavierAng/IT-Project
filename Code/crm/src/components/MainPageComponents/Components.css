@@ -1,0 +1,123 @@
+.topbar {
+  height: 56px;
+  width: 1440px;
+  border-bottom: 1px transparent;
+  border-radius: 8px;
+  box-shadow: 5px 1px 18px #888888;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-left: -250px;
+}
+
+.iconright2 {
+  height: 40px;
+  width: 40px;
+  float: right;
+  background-color: #ffffff;
+}
+
+.header {
+  text-align: center;
+  vertical-align: top;
+  font-size: 50px;
+  font-family: Crimson Text;
+  letter-spacing: -2%;
+  line-height: auto;
+  color: #000;
+  padding-left: 600px;
+}
+
+.searchbar {
+  height: 41px;
+  width: 1104px;
+  display: inline;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p {
+  text-align: center;
+  vertical-align: top;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 10%;
+  line-height: auto;
+  color: #000;
+}
+
+.burgundyButton {
+  border-radius: 8px;
+  height: 56px;
+  width: 254px;
+  padding: 10px;
+  background-color: #804a4a;
+  display: block;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.line3 {
+  height: 56px;
+  width: 1395px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titles {
+  height: 42.35px;
+  width: 1091px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 80px;
+}
+
+.client {
+  height: 55px;
+  width: 937.25px;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  border: none;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 80px;
+  background: transparent;
+}
+
+.lowerpart {
+  display: flex;
+}
+
+.clients {
+  border: 2px transparent;
+  box-shadow: 5px 10px 18px #888888;
+  border-radius: 8px;
+  width: 1180px;
+  height: 800px;
+}
+
+.sidebar {
+  width: 300px;
+  height: 800px;
+  border: 0px solid;
+  padding: 160px;
+}
+
+.name {
+  padding-right: 0px;
+}
+
+.status {
+  padding: 180px;
+  padding-right: 110px;
+}
+
+.progress {
+  padding: 180px;
+}
