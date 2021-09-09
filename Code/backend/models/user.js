@@ -1,3 +1,7 @@
+//////////////////////////////
+// Author(s): Zakarya Butt 
+// Date Made: 07/09/2021
+//////////////////////////////
 const mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({

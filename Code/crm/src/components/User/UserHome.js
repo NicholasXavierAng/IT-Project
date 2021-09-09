@@ -1,3 +1,8 @@
+//////////////////////////////
+// Author(s): Terry, Zakarya Butt 
+// Date Made: 09/09/2021
+//////////////////////////////
+
 import React, { useState } from 'react';
 import Topbar from '../MainPageComponents/Topbar';
 import Line3 from '../MainPageComponents/Line3';

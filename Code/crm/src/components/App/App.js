@@ -1,3 +1,8 @@
+//////////////////////////////
+// Author(s): Nicholas, Zakarya Butt 
+// Date Made: 08/09/2021
+//////////////////////////////
+
 import React, { useState } from 'react';
 import {BrowserRouter as Router, BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -14,14 +19,17 @@ function App() {
     if(!token) {
         return (
             <>
+            {/* This part handles all the different routes that we implement inside our web app */}
                 <Router>
                     <Switch>
+                        {/* At the home route  */}
                         <Route path="/" exact render={(props) => (
                             <>
                                 <Login setToken={setToken} />
                             </>
                         )}>
                         </Route>
+                        {/* User Home Page Route  */}
                         <Route path="/user">
                             <UserHome/>
                         </Route>
