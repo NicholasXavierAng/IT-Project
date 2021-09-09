@@ -10,6 +10,7 @@ var customerSchema = new mongoose.Schema({
     firstName: String, 
     age: Number, 
     email: String, 
+    status: String, 
     phoneNumber: Number,
     companyName: String, //change once schema for company is created
     priority: String, // change once schema for priority is created
