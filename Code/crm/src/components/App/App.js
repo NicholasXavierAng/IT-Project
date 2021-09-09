@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
+import UserHome from '../User/UserHome';
 // import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login';
 // import Preferences from '../Preferences/Preferences';
@@ -11,8 +12,24 @@ function App() {
     const { token, setToken } = useToken();
 
     if(!token) {
-        return <Login setToken={setToken} />
-      }
+        return (
+            <>
+                <Router>
+                    <Switch>
+                        <Route path="/" exact render={(props) => (
+                            <>
+                                <Login setToken={setToken} />
+                            </>
+                        )}>
+                        </Route>
+                        <Route path="/user">
+                            <UserHome/>
+                        </Route>
+                    </Switch>
+                </Router>
+            </>
+        )
+    }
 
     return (
         <div className="wrapper">
@@ -22,6 +39,7 @@ function App() {
         </div>
         <BrowserRouter>
             <Switch>
+              
             {/* <Route path="/dashboard">
                 <Dashboard />
             </Route>

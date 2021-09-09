@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css'; 
-import {Redirect} from 'react-router-dom';
+// import {Redirect} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 // Removed by Zakarya, the response we get from server side is important 
 // And I wasnt able to access it through this function, so I just made it 
@@ -22,7 +23,7 @@ import {Redirect} from 'react-router-dom';
 export default function Login({ setToken }) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
-    // const history = useHistory(); 
+    let history = useHistory(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,14 +42,11 @@ export default function Login({ setToken }) {
 
         // Response we get from db
         res = await res.json(); 
-        // console.log(res);
         
-
         if (res.status) {
             // Successful login
-            console.log("success");
-            // For some reason not redirecting yet. 
-            return <Redirect to="/user"/>
+            // Redirect to the user home page. 
+            history.push('/user');
         }
         else {
             // Send error to user to try again. 
