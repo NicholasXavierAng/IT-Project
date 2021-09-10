@@ -8,9 +8,8 @@ import {BrowserRouter as Router, BrowserRouter, Route, Switch } from 'react-rout
 
 import './App.css';
 import UserHome from '../User/UserHome';
-// import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login';
-// import Preferences from '../Preferences/Preferences';
+import Register from '../Register/Register';
 import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
 
@@ -38,7 +37,10 @@ function App() {
                         <Route path="/user/profile">
                             <Profile/>
                         </Route>
-                        
+                        {/* Register page route */}
+                        <Route path="/register">
+                            <Register/>
+                        </Route>
                     </Switch>
                 </Router>
             </>
@@ -54,12 +56,7 @@ function App() {
         <BrowserRouter>
             <Switch>
               
-            {/* <Route path="/dashboard">
-                <Dashboard />
-            </Route>
-            <Route path="/preferences">
-                <Preferences />
-            </Route> */}
+            
             </Switch>
         </BrowserRouter>
         </div>
