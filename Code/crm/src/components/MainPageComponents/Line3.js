@@ -5,8 +5,8 @@ const Addcontact = () => {
     return (
         <div className ='line3'>
             <section class="createContact">
-                <Button variant="outlined" color="secondary">
-                    + CREATE CONTACT
+                <Button variant="contained" color="secondary">
+                    +  CREATE CONTACT
                 </Button>
             </section>
             {/*<div>
