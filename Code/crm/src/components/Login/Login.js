@@ -8,6 +8,8 @@ import './Login.css';
 // import {Redirect} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import { borders } from '@material-ui/system';
 
 // Removed by Zakarya, the response we get from server side is important 
 // And I wasnt able to access it through this function, so I just made it 
@@ -71,7 +73,6 @@ export default function Login({ setToken }) {
     return(
         <section class="login-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
-            <h2>LOGIN</h2>
             <form onSubmit={handleSubmit}>
             <section class="credentials">
                 <label for="username">
@@ -85,28 +86,53 @@ export default function Login({ setToken }) {
             </section>
             <br></br>
 
+            {/* need to change colour/set up theme */}
+            <section class="headerBox">
+                <Box
+                border={1}
+                bgcolor="secondary.main"
+                borderRadius={16}
+                borderColor="secondary.main"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                width={370}
+                height={56}>
+                    <h2>LOGIN</h2>
+                </Box>
+            </section>
             <section class="newCredentials">
-            <TextField
-            required
-            id="username"
-            label="Username"
-            variant="outlined"
-            color="secondary"
-            height="56px"
-            width="232px"
-            />
-            <br></br>
-            <br></br>
-            <TextField
-            required
-            id="password"
-            label="Password"
-            placeholder="At least 8 symbols..."
-            variant="outlined"
-            color="secondary"
-            height="56px"
-            width="232px"
-            />
+            <section class="credentialsBox">
+                <Box
+                border={1}
+                borderRadius={16}
+                width={370}
+                height={300}>
+                    <br></br>
+                    <TextField
+                        required
+                        id="username"
+                        label="Username"
+                        variant="outlined"
+                        color="secondary"
+                        height="56px"
+                        width="232px"
+                    />
+                    <br></br>
+                    <br></br>
+                    <TextField
+                        required
+                        id="password"
+                        label="Password"
+                        placeholder="At least 8 characters..."
+                        variant="outlined"
+                        color="secondary"
+                        height="56px"
+                        width="232px"
+                    />
+                </Box>
+            </section>
+            
             </section>
             <br></br>
             <section class="submission">

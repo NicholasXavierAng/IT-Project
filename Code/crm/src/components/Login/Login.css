@@ -1,5 +1,5 @@
 * {
-    font-family: sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 .login-wrapper {
@@ -14,4 +14,8 @@
 
 .newCredentials {
     align-items: center;
+}
+
+h2 {
+    color: white;
 }

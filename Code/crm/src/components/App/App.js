@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Nicholas, Zakarya Butt 
+// Author(s): Nicholas, Zakarya Butt, Rebecca
 // Date Made: 08/09/2021
 //////////////////////////////
 
@@ -34,7 +34,7 @@ function App() {
                         <Route path="/user">
                             <UserHome/>
                         </Route>
-
+                        {/* User Profile Route*/}
                         <Route path="/user/profile">
                             <Profile/>
                         </Route>
