@@ -101,7 +101,6 @@ export default function Login({ setToken }) {
                     <h2>LOGIN</h2>
                 </Box>
             </section>
-            <section class="newCredentials">
             <section class="credentialsBox">
                 <Box
                 border={1}
@@ -109,6 +108,7 @@ export default function Login({ setToken }) {
                 width={370}
                 height={300}>
                     <br></br>
+                    <section class="newCredentials">
                     <TextField
                         required
                         id="username"
@@ -130,8 +130,8 @@ export default function Login({ setToken }) {
                         height="56px"
                         width="232px"
                     />
+                    </section>
                 </Box>
-            </section>
             
             </section>
             <br></br>
