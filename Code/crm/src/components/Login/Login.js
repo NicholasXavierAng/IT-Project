@@ -91,7 +91,7 @@ export default function Login({ setToken }) {
             id="username"
             label="Username"
             variant="outlined"
-            colour="secondary"
+            color="secondary"
             height="56px"
             width="232px"
             />

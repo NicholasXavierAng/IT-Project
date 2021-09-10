@@ -1,11 +1,17 @@
 import React from 'react'
+import Button from '@material-ui/core/Button';
 
 const Addcontact = () => {
     return (
         <div className ='line3'>
-            <div>
+            <section class="createContact">
+                <Button variant="outlined" color="secondary">
+                    + CREATE CONTACT
+                </Button>
+            </section>
+            {/*<div>
                 <button className="burgundyButton" style = {{paddingLeft: '50px', color: 'white'}}>CREATE CONTACT</button>
-            </div>
+            </div>*/}
             <div className="titles">
                 <p className="p">Name</p> 
                 <p className="p">Status</p>  
