@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import './Login.css'; 
 // import {Redirect} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
 
 // Removed by Zakarya, the response we get from server side is important 
 // And I wasnt able to access it through this function, so I just made it 
@@ -69,8 +70,8 @@ export default function Login({ setToken }) {
 
     return(
         <section class="login-wrapper">
-            <h1>HOT CHEETOHS</h1>
-            <h2>Login</h2>
+            <img src="/logo.png" alt="logo" width="207" height="55"/>
+            <h2>LOGIN</h2>
             <form onSubmit={handleSubmit}>
             <section class="credentials">
                 <label for="username">
@@ -81,6 +82,31 @@ export default function Login({ setToken }) {
                     <p>Password</p>
                 </label>
                 <input type="password" placeholder="At least 8 symbols..." minlength="8" onChange={e => setPassword(e.target.value)} required/>
+            </section>
+            <br></br>
+
+            <section class="newCredentials">
+            <TextField
+            required
+            id="username"
+            label="Username"
+            variant="outlined"
+            colour="secondary"
+            height="56px"
+            width="232px"
+            />
+            <br></br>
+            <br></br>
+            <TextField
+            required
+            id="password"
+            label="Password"
+            placeholder="At least 8 symbols..."
+            variant="outlined"
+            color="secondary"
+            height="56px"
+            width="232px"
+            />
             </section>
             <br></br>
             <section class="submission">
