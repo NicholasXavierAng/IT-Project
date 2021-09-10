@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Nicholas
+// Author(s): Zakarya Butt, Nicholas, Rebecca
 // Date Made: 07/09/2021
 //////////////////////////////
 import React, { useState } from 'react';
@@ -68,22 +68,26 @@ export default function Login({ setToken }) {
     }
 
     return(
-        <div className="login-wrapper">
+        <section class="login-wrapper">
             <h1>HOT CHEETOHS</h1>
+            <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-            <label>
-                <p>Username</p>
-                <input type="text" onChange={e => setUserName(e.target.value)}/>
-            </label>
-            <label>
-                <p>Password</p>
-                <input type="password" onChange={e => setPassword(e.target.value)}/>
-            </label>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
+            <section class="credentials">
+                <label for="username">
+                    <p>Username</p>
+                </label>
+                <input type="text" placeholder="Enter username" onChange={e => setUserName(e.target.value)} required/>
+                <label for="password">
+                    <p>Password</p>
+                </label>
+                <input type="password" placeholder="At least 8 symbols..." minlength="8" onChange={e => setPassword(e.target.value)} required/>
+            </section>
+            <br></br>
+            <section class="submission">
+                <button type="submit">Log in</button>
+            </section>
             </form>
-        </div>
+        </section>
         )
 }
 
