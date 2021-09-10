@@ -97,16 +97,17 @@ export default function Login({ setToken }) {
                 justifyContent="center"
                 alignItems="center"
                 width={370}
-                height={56}>
+                height={56}
+                boxShadow={4}>
                     <h2>LOGIN</h2>
                 </Box>
             </section>
             <section class="credentialsBox">
                 <Box
-                border={1}
                 borderRadius={16}
                 width={370}
-                height={300}>
+                height={300}
+                boxShadow={6}>
                     <br></br>
                     <section class="newCredentials">
                     <TextField
