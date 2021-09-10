@@ -12,8 +12,11 @@
     float: right;
 }
 
-.credentials {
-    align-items: center;
+/* need to find a better way of centre aligning*/
+.newCredentials {
+    position: relative;
+    top: 65px;
+    left: 75px;
 }
 
 h2 {
