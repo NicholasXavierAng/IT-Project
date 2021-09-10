@@ -81,7 +81,7 @@ export default function Login({ setToken }) {
                 <label for="password">
                     <p>Password</p>
                 </label>
-                <input type="password" placeholder="At least 8 symbols..." minlength="8" onChange={e => setPassword(e.target.value)} required/>
+                <input type="password" placeholder="At least 8 characters..." minlength="8" onChange={e => setPassword(e.target.value)} required/>
             </section>
             <br></br>
 
