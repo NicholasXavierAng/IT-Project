@@ -11,22 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { borders } from '@material-ui/system';
 
-// Removed by Zakarya, the response we get from server side is important 
-// And I wasnt able to access it through this function, so I just made it 
-// into one big function. If you know how to do it separatley do let me know. 
-// async function loginUser(credentials) {
-//     return fetch('http://localhost:5000/login', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(credentials)
-//     })
-  
-//         .then(data => data.json())
-        
-//     }
-
 export default function Login({ setToken }) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
@@ -70,22 +54,16 @@ export default function Login({ setToken }) {
         // setToken(token);
     }
 
+    const register = async (e) => {
+        e.preventDefault();
+        history.push('/register');
+    }
+
     return(
         <section class="login-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
             <form onSubmit={handleSubmit}>
-            <section class="credentials">
-                <label for="username">
-                    <p>Username</p>
-                </label>
-                <input type="text" placeholder="Enter username" onChange={e => setUserName(e.target.value)} required/>
-                <label for="password">
-                    <p>Password</p>
-                </label>
-                <input type="password" placeholder="At least 8 characters..." minlength="8" onChange={e => setPassword(e.target.value)} required/>
-            </section>
-            <br></br>
-
+            
             {/* need to change colour/set up theme */}
             <section class="headerBox">
                 <Box
@@ -109,7 +87,7 @@ export default function Login({ setToken }) {
                 height={300}
                 boxShadow={6}>
                     <br></br>
-                    <section class="newCredentials">
+                    <section class="credentials">
                     <TextField
                         required
                         id="username"
@@ -118,6 +96,7 @@ export default function Login({ setToken }) {
                         color="secondary"
                         height="56px"
                         width="232px"
+                        onChange={e => setUserName(e.target.value)}
                     />
                     <br></br>
                     <br></br>
@@ -130,6 +109,7 @@ export default function Login({ setToken }) {
                         color="secondary"
                         height="56px"
                         width="232px"
+                        onChange={e => setPassword(e.target.value)}
                     />
                     </section>
                 </Box>
@@ -140,6 +120,9 @@ export default function Login({ setToken }) {
                 <button type="submit">Log in</button>
             </section>
             </form>
+            <section class="register">
+                <button type="register" onClick={register}>Register</button>
+            </section>
         </section>
         )
 }

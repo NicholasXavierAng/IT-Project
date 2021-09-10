@@ -13,7 +13,7 @@
 }
 
 /* need to find a better way of centre aligning*/
-.newCredentials {
+.credentials {
     position: relative;
     top: 65px;
     left: 75px;

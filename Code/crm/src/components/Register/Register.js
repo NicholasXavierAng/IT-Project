@@ -35,7 +35,7 @@ export default function Register() {
         
         if (res.status) {
             // Successful registration
-            // Redirect to the user home page. 
+            // Redirect to the login page. 
             history.push('/');
         }
         else {
@@ -44,11 +44,11 @@ export default function Register() {
     }
     
     return(
-        <section class="login-wrapper">
+        <section class="register-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
             <h2>LOGIN</h2>
             <form onSubmit={handleSubmit}>
-            <section class="credentials">
+            <section class="registration">
                 <TextField
                     required
                     id="firstname"
@@ -109,9 +109,8 @@ export default function Register() {
                     width="232px"
                     onChange={e => setPassword(e.target.value)}
                 />
-            </section>
-            <br></br>
-            <section class="register">
+                <br></br>
+                <br></br>
                 <button type="register">Register</button>
             </section>
             </form>
