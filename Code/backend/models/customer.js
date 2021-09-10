@@ -1,3 +1,8 @@
+//////////////////////////////
+// Author(s): Zakarya Butt, Tiana
+// Date Made: 09/09/2021
+//////////////////////////////
+
 const mongoose = require('mongoose');
 
 var customerSchema = new mongoose.Schema({
@@ -5,6 +10,7 @@ var customerSchema = new mongoose.Schema({
     firstName: String, 
     age: Number, 
     email: String, 
+    status: String, 
     phoneNumber: Number,
     companyName: String, //change once schema for company is created
     priority: {

@@ -1,56 +1,51 @@
-import React from 'react'
+//////////////////////////////
+// Author(s): Zakarya Butt, Terry 
+// Date Made: 08/09/2021
+//////////////////////////////
 
+import React, {Component} from 'react'; 
+import axios from 'axios';
 
+export default class ClientToggle extends Component {
+    constructor(props) {
+        super(props); 
+        this.state = {
+            data:[] 
+        }
+    }
 
-const ClientToggle = () => {
-    return (
-        <div className = "lowerpart">
-            <div className = "sidebar"/>
-            <div className = "clients" >
-                <button className = "client" onClick={() => {console.log("To client's profile")}}>
-                    <p className = "name">John Doe</p>
-                    <p className = "status">new</p>
-                    <p className = "progress">high</p>
-                </button>
-                <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
-                </svg>
-                <button className = "client">
-                    <p className = "name">John Doe</p>
-                    <p className = "status">new</p>
-                    <p className = "progress">high</p>
-                </button>
-                <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
-                </svg>
-                <button className = "client">
-                    <p className = "name">John Doe</p>
-                    <p className = "status">new</p>
-                    <p className = "progress">high</p>
-                </button>
-                <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
-                </svg>
-                <button className = "client">
-                    <p className = "name">John Doe</p>
-                    <p className = "status">new</p>
-                    <p className = "progress">high</p>
-                </button>
-                <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
-                </svg>
-                <button className = "client">
-                    <p className = "name">John Doe</p>
-                    <p className = "status">new</p>
-                    <p className = "progress">high</p>
-                </button>
+    async getCustomers() {
+        // Sends a request to the backend to get all customers
+        axios.get('http://localhost:5000/user/customers').then(res => {
+            var data = res.data.customers; 
+            this.setState({data:data})
+        })
+    }
+
+    componentDidMount() {
+        this.getCustomers(); 
+    }
+
+    render() {
+        return (
+            <div className = "lowerpart">
+                <div className = "sidebar"/>
+                <div className = "clients" >
+                    {this.state.data.map(d => (
+                        <>
+                            {/* A loop to handle customers directly from the database  */}
+                            <button className = "client" onClick={() => {console.log("To client's profile")}}>
+                            <p className = "name">{d.firstName} {d.familyName}</p>
+                            <p className = "status">{d.status}</p>
+                            <p className = "progress">{d.progress}</p>
+                            </button>
+                            <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                            <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
+                            </svg>
+                        </>
+                    ))}  
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
-
-
-
-
-
-export default ClientToggle
