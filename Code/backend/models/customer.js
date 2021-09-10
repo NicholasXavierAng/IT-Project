@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Tiana
+// Author(s): Zakarya Butt, Tiana Litchfield
 // Date Made: 09/09/2021
 //////////////////////////////
 
@@ -12,7 +12,7 @@ var customerSchema = new mongoose.Schema({
     email: String, 
     status: String, 
     phoneNumber: Number,
-    companyName: String, //change once schema for company is created
+    companyInfo: {type: mongoose.Schema.Types.ObjectId, ref: 'company'},
     priority: {
         type: String,
         enum: ['High', 'Medium', 'Low',]

@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Nicholas
+// Author(s): Zakarya Butt, Nicholas, Rebecca
 // Date Made: 07/09/2021
 //////////////////////////////
 import React, { useState } from 'react';
@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import './Login.css'; 
 // import {Redirect} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
 
 // Removed by Zakarya, the response we get from server side is important 
 // And I wasnt able to access it through this function, so I just made it 
@@ -68,22 +69,51 @@ export default function Login({ setToken }) {
     }
 
     return(
-        <div className="login-wrapper">
-            <h1>HOT CHEETOHS</h1>
+        <section class="login-wrapper">
+            <img src="/logo.png" alt="logo" width="207" height="55"/>
+            <h2>LOGIN</h2>
             <form onSubmit={handleSubmit}>
-            <label>
-                <p>Username</p>
-                <input type="text" onChange={e => setUserName(e.target.value)}/>
-            </label>
-            <label>
-                <p>Password</p>
-                <input type="password" onChange={e => setPassword(e.target.value)}/>
-            </label>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
+            <section class="credentials">
+                <label for="username">
+                    <p>Username</p>
+                </label>
+                <input type="text" placeholder="Enter username" onChange={e => setUserName(e.target.value)} required/>
+                <label for="password">
+                    <p>Password</p>
+                </label>
+                <input type="password" placeholder="At least 8 characters..." minlength="8" onChange={e => setPassword(e.target.value)} required/>
+            </section>
+            <br></br>
+
+            <section class="newCredentials">
+            <TextField
+            required
+            id="username"
+            label="Username"
+            variant="outlined"
+            color="secondary"
+            height="56px"
+            width="232px"
+            />
+            <br></br>
+            <br></br>
+            <TextField
+            required
+            id="password"
+            label="Password"
+            placeholder="At least 8 symbols..."
+            variant="outlined"
+            color="secondary"
+            height="56px"
+            width="232px"
+            />
+            </section>
+            <br></br>
+            <section class="submission">
+                <button type="submit">Log in</button>
+            </section>
             </form>
-        </div>
+        </section>
         )
 }
 
