@@ -12,6 +12,7 @@ import UserHome from '../User/UserHome';
 import Login from '../Login/Login';
 // import Preferences from '../Preferences/Preferences';
 import useToken from './useToken';
+import Profile from '../Profile/Profile'; 
 
 function App() {
     const { token, setToken } = useToken();
@@ -33,6 +34,11 @@ function App() {
                         <Route path="/user">
                             <UserHome/>
                         </Route>
+
+                        <Route path="/user/profile">
+                            <Profile/>
+                        </Route>
+                        
                     </Switch>
                 </Router>
             </>

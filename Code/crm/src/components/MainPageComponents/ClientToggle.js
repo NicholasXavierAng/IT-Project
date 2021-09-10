@@ -5,6 +5,7 @@
 
 import React, {Component} from 'react'; 
 import axios from 'axios';
+// import { MyContext } from './Provider';
 
 export default class ClientToggle extends Component {
     constructor(props) {
@@ -29,22 +30,32 @@ export default class ClientToggle extends Component {
     render() {
         return (
             <div className = "lowerpart">
-                <div className = "sidebar"/>
-                <div className = "clients" >
-                    {this.state.data.map(d => (
-                        <>
-                            {/* A loop to handle customers directly from the database  */}
-                            <button className = "client" onClick={() => {console.log("To client's profile")}}>
-                            <p className = "name">{d.firstName} {d.familyName}</p>
-                            <p className = "status">{d.status}</p>
-                            <p className = "progress">{d.progress}</p>
-                            </button>
-                            <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                            <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
-                            </svg>
-                        </>
-                    ))}  
-                </div>
+                {/* <MyContext>
+                    {(context) => {
+                        if (context) {
+                            <p>true</p>
+                        }
+                        else {
+                            <p>false</p>
+                        }
+                    }} */}
+                    <div className = "sidebar"/>
+                    <div className = "clients" >
+                        {this.state.data.map(d => (
+                            <>
+                                {/* A loop to handle customers directly from the database  */}
+                                <button className = "client" onClick={() => {console.log("To client's profile")}}>
+                                <p className = "name">{d.firstName} {d.familyName}</p>
+                                <p className = "status">{d.status}</p>
+                                <p className = "progress">{d.progress}</p>
+                                </button>
+                                <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                                <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
+                                </svg>
+                            </>
+                        ))}  
+                    </div>
+                {/* </MyContext> */}
             </div>
         )
     }
