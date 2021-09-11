@@ -9,8 +9,9 @@
 }
 
 .submission {
-    /*float: right;*/
-    visibility: hidden;
+    position: relative;
+    top: 140px;
+    left: 140px;
 }
 
 .headerBox {

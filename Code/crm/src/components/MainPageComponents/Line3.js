@@ -5,7 +5,10 @@ const Addcontact = () => {
     return (
         <div className ='line3'>
             <section class="createContact">
-                <Button variant="contained" color="secondary">
+                <Button
+                variant="contained"
+                color="secondary"
+                style={{minWidth: "254px", minHeight:"56px"}}>
                     +  CREATE CONTACT
                 </Button>
             </section>

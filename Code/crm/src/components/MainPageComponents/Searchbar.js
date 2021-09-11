@@ -50,7 +50,7 @@ const Searchbar = ({keyword}) => {
                 onChange={e => setSearchWord(e.target.value)}
                 /*onRequestSearch={() => doSomethingWith(this.state.value)}*/
                 placeholder={"Search for contacts"}
-            />
+                />
             </form>
             {/* </MyContext.Consumer> */}
         </div>

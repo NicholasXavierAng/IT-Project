@@ -9,6 +9,7 @@ import './Login.css';
 import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 export default function Login({ setToken }) {
     const [username, setUserName] = useState();
@@ -84,7 +85,7 @@ export default function Login({ setToken }) {
                 <Box
                 borderRadius={16}
                 width={370}
-                height={300}
+                height={400}
                 boxShadow={6}>
                     <br></br>
                     <section class="credentials">
@@ -113,13 +114,18 @@ export default function Login({ setToken }) {
                         onChange={e => setPassword(e.target.value)}
                     />
                     </section>
+                    <section class="submission">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="secondary"
+                        style={{minWidth: "85px", minHeight:"35px"}}>
+                        Sign in
+                    </Button>
+            </section>
                 </Box>
             </section>
             <br></br>
-            {/*made invisble to adhere to design but still needed to 'log in'*/}
-            <section class="submission">
-                <button type="submit">Log in</button>
-            </section>
             </form>
             <section class="register">
                 <button type="register" onClick={register}>Register</button>
