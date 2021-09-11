@@ -9,7 +9,13 @@
 }
 
 .submission {
-    float: right;
+    /*float: right;*/
+    visibility: hidden;
+}
+
+.headerBox {
+    /* makes it overlap on top */
+    z-index: 1;
 }
 
 /* need to find a better way of centre aligning*/

@@ -9,7 +9,6 @@ import './Login.css';
 import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
-import { borders } from '@material-ui/system';
 
 export default function Login({ setToken }) {
     const [username, setUserName] = useState();
@@ -63,7 +62,8 @@ export default function Login({ setToken }) {
         <section class="login-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
             <form onSubmit={handleSubmit}>
-            
+            <br></br>
+
             {/* need to change colour/set up theme */}
             <section class="headerBox">
                 <Box
@@ -104,6 +104,7 @@ export default function Login({ setToken }) {
                         required
                         id="password"
                         label="Password"
+                        type="password"
                         placeholder="At least 8 characters..."
                         variant="outlined"
                         color="secondary"
@@ -113,9 +114,9 @@ export default function Login({ setToken }) {
                     />
                     </section>
                 </Box>
-            
             </section>
             <br></br>
+            {/*made invisble to adhere to design but still needed to 'log in'*/}
             <section class="submission">
                 <button type="submit">Log in</button>
             </section>
