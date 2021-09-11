@@ -9,9 +9,6 @@ const Addcontact = () => {
                     +  CREATE CONTACT
                 </Button>
             </section>
-            {/*<div>
-                <button className="burgundyButton" style = {{paddingLeft: '50px', color: 'white'}}>CREATE CONTACT</button>
-            </div>*/}
             <div className="titles">
                 <p className="p">Name</p> 
                 <p className="p">Status</p>  

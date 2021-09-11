@@ -49,18 +49,10 @@
   color: #000;
 }
 
-.burgundyButton {
-  border-radius: 8px;
-  height: 56px;
-  width: 254px;
-  padding: 10px;
-  background-color: #804a4a;
-  display: block;
-  font-family: "Open Sans", sans-serif;
-  font-size: 20px;
-  justify-content: space-between;
-  align-items: center;
+.createContact {
+  padding-left: 10px; /*50px*/
 }
+
 input[type="barStyling"] {
   width: 1077px;
   height: 41px;
