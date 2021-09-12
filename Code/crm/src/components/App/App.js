@@ -30,7 +30,7 @@ function App() {
                         )}>
                         </Route>
                         {/* User Home Page Route  */}
-                        <Route path="/user">
+                        <Route path="/user" exact>
                             <UserHome/>
                         </Route>
                         {/* User Profile Route*/}
