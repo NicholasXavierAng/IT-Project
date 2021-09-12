@@ -12,6 +12,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
+import { ProtectedRoute } from '../Authentication/ProtectedRoute';
 
 function App() {
     const { token, setToken } = useToken();
@@ -30,13 +31,9 @@ function App() {
                         )}>
                         </Route>
                         {/* User Home Page Route  */}
-                        <Route path="/user" exact>
-                            <UserHome/>
-                        </Route>
+                        <ProtectedRoute exact path="/user" component={UserHome}/>
                         {/* User Profile Route*/}
-                        <Route path="/user/profile">
-                            <Profile/>
-                        </Route>
+                        <Route path="/user/profile" component={Profile}/>
                         {/* Register page route */}
                         <Route path="/register">
                             <Register/>
