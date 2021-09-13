@@ -1,14 +1,15 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Rebecca
+// Author(s): Zakarya Butt, Rebecca Ye, Tiana Litchfield
 // Date Made: 12/09/2021
 //////////////////////////////
 
 import './Profile.css'; 
+import TextField from '@material-ui/core/TextField';
 import BackButton from '@material-ui/icons/ArrowBack'; 
 import Bell from '@material-ui/icons/Notifications'; 
 import Pen from '@material-ui/icons/Create'; 
-import { IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import { IconButton } from '@material-ui/core';
 
 export default function Profile() {
     return(
@@ -81,6 +82,28 @@ export default function Profile() {
                     <p><b>Email: </b> <span className="contactInfo">Male</span></p>
                 </div>
             </div>
+            <div className="generalBox">
+                    <div className="editRow">
+                        <h3>Notes</h3>
+                        <div className="editBox">
+                            <IconButton>
+                                <Pen/>
+                            </IconButton>
+                        </div>
+                    </div>
+                    <section class="notes">
+                        <TextField
+                        id="notes"
+                        label="Editing notes"
+                        placeholder="Write notes here"
+                        multiline
+                        variant="outlined"
+                        color="secondary"
+                        height="100px"
+                        width="860px"
+                        />
+                    </section>
+                </div>
         </div>
         </>
     )
