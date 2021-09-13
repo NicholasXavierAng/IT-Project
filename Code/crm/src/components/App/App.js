@@ -3,7 +3,7 @@
 // Date Made: 08/09/2021
 //////////////////////////////
 
-import React, { useState } from 'react';
+import React from 'react';
 import {BrowserRouter as Router, BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
@@ -16,7 +16,7 @@ import { ProtectedRoute } from '../Authentication/ProtectedRoute';
 
 function App() {
     const { token, setToken } = useToken();
-    const {isAuth, setIsAuth} = useState(true); 
+    // const {isAuth, setIsAuth} = useState(true); 
 
     
 

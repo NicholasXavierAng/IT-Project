@@ -5,7 +5,6 @@
 
 import React, {Component} from 'react'; 
 import axios from 'axios';
-import { Redirect, useHistory } from 'react-router-dom';
 // import { MyContext } from './Provider';
 
 export default class ClientToggle extends Component {

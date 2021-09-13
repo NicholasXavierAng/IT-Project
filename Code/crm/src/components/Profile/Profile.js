@@ -10,8 +10,36 @@ import Bell from '@material-ui/icons/Notifications';
 import Pen from '@material-ui/icons/Create'; 
 import Box from '@material-ui/core/Box';
 import { IconButton } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-export default function Profile() {
+export default function Profile({props}) {
+
+    var [customer, setCustomer] = useState(); 
+    var [company, setCompany] = useState(); 
+    let {id} = useParams();
+    
+
+    useEffect(() => {
+        getCustomer();  
+    })
+
+     
+
+    async function getCustomer(){
+        var req = await fetch('http://localhost:5000/user/profile/' + id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+
+        var data = await req.json(); 
+        var cust = data.customer; 
+        var comp = data.company; 
+        setCustomer(cust); 
+        setCompany(comp); 
+    }
     return(
         <>
         <div className="topBar">
@@ -33,15 +61,19 @@ export default function Profile() {
             </Box> 
         </div>
         <div className="rectangle"></div>
-        <div className="leftContainer">
-            <img src="" className="profilePic"></img>
-        </div>
+        {/* <div className="leftContainer">
+            <p>aa</p>
+        </div> */}
         <div className="rightContainer">
             <div className="row">
                 <div className="infoContainer">
-                    <h1>John Doe</h1>
-                    <p><b>Age: </b> 25</p>
-                    <p><b>Gender: </b> Male</p>
+                {customer  && 
+                    <>
+                    <h1>{customer.firstName} {customer.familyName}</h1>
+                    <p><b>Age: </b> {customer.age}</p>
+                    <p><b>Gender: </b> {customer.gender}</p>
+                    </>
+                }
                 </div>
                 <div className="generalBox">
                     <div className="editRow">
@@ -52,22 +84,33 @@ export default function Profile() {
                             </IconButton>
                         </div>
                     </div>
-                    <p><b>Mobile: </b> <span className="contactInfo">25</span></p>
-                    <p><b>Email: </b> <span className="contactInfo">Male</span></p>
+                    {customer &&
+                    <>
+                    <p><b>Mobile: </b> <span className="contactInfo">{customer.phoneNumber}</span></p>
+                    <p><b>Email: </b> <span className="contactInfo">{customer.email}</span></p> 
+                    </>
+                    }
                 </div>
             </div>
             <div className="row">
                 <div className="generalBox">
                     <div className="editRow">
-                        <h3>Contact</h3>
+                        <h3>Company Information</h3>
                         <div className="editBox">
                             <IconButton>
                                 <Pen/>
                             </IconButton>
                         </div>
                     </div>
-                    <p><b>Mobile: </b> <span className="contactInfo">25</span></p>
-                    <p><b>Email: </b> <span className="contactInfo">Male</span></p>
+
+                    {company &&
+                    <>
+                        <p><b>Name: </b> <span className="contactInfo">{company.name}</span></p>
+                        <p><b>Location: </b> <span className="contactInfo">{company.location}</span></p>
+                        <p><b>Position: </b> <span className="contactInfo">{company.position}</span></p>
+                        <p><b>Department: </b> <span className="contactInfo">{company.department}</span></p>
+                    </>
+                    }
                 </div>
                 <div className="generalBox">
                     <div className="editRow">
@@ -107,4 +150,6 @@ export default function Profile() {
         </div>
         </>
     )
+    // }
+    
 }

@@ -12,7 +12,7 @@ var customerSchema = new mongoose.Schema({
     email: String, 
     status: String, 
     phoneNumber: Number,
-    companyInfo: {type: mongoose.Schema.Types.ObjectId, ref: 'company'},
+    companyId: {type: mongoose.Schema.Types.ObjectId, ref: 'company'},
     priority: {
         type: String,
         enum: ['High', 'Medium', 'Low',]
