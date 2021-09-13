@@ -1,6 +1,8 @@
 import React from 'react';
 import './Components.css';
 import Box from '@material-ui/core/Box';
+import NotificationsIcon from '@material-ui/icons/Notifications'; 
+import { IconButton } from '@material-ui/core';
 
 
 const Topbar = () => {
@@ -15,6 +17,9 @@ const Topbar = () => {
                 height={56}
                 boxShadow={4}>
                     <img class="header" src="/logo.png" alt="logo" width="207" height="55"/>
+                    <IconButton>
+                        <NotificationsIcon/>
+                    </IconButton>
             </Box> 
         
     </section>
