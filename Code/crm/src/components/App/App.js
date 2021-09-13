@@ -16,6 +16,9 @@ import { ProtectedRoute } from '../Authentication/ProtectedRoute';
 
 function App() {
     const { token, setToken } = useToken();
+    const {isAuth, setIsAuth} = useState(true); 
+
+    
 
     if(!token) {
         return (
@@ -30,10 +33,14 @@ function App() {
                             </>
                         )}>
                         </Route>
-                        {/* User Home Page Route  */}
-                        <ProtectedRoute exact path="/user" component={UserHome}/>
-                        {/* User Profile Route*/}
-                        <Route path="/user/profile" component={Profile}/>
+                        <ProtectedRoute>
+                            <Switch>
+                                {/* User Home Page Route  */}
+                                <Route exact path="/user" component={UserHome}/>
+                                {/* User Profile Route*/}
+                                <Route path="/user/profile/:id" component={Profile}/>
+                            </Switch>
+                        </ProtectedRoute>
                         {/* Register page route */}
                         <Route path="/register">
                             <Register/>

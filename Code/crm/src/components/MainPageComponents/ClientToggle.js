@@ -5,6 +5,7 @@
 
 import React, {Component} from 'react'; 
 import axios from 'axios';
+import { Redirect, useHistory } from 'react-router-dom';
 // import { MyContext } from './Provider';
 
 export default class ClientToggle extends Component {
@@ -26,6 +27,14 @@ export default class ClientToggle extends Component {
     componentDidMount() {
         this.getCustomers(); 
     }
+    
+
+    takeToProfile(id) {
+         
+        var pathname = "/user/profile/" + id; 
+        console.log(pathname);
+        
+    }
 
     render() {
         return (
@@ -44,7 +53,7 @@ export default class ClientToggle extends Component {
                         {this.state.data.map(d => (
                             <>
                                 {/* A loop to handle customers directly from the database  */}
-                                <button className = "client" onClick={() => {console.log("To client's profile")}}>
+                                <button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
                                 <p className = "name">{d.firstName} {d.familyName}</p>
                                 <p className = "status">{d.status}</p>
                                 <p className = "progress">{d.progress}</p>

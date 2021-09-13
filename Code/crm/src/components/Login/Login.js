@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css'; 
-import Auth from '../Authentication/Auth';
+import auth from '../Authentication/auth';
 // import {Redirect} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -20,6 +20,8 @@ export default function Login({ setToken }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const credentials = {username, password};
+        // var token; 
+        
 
         // Fetch sends credentials which is username and password 
         // to the back end which validates against the db and then 
@@ -35,14 +37,17 @@ export default function Login({ setToken }) {
         // Response we get from db
         res = await res.json(); 
         
+        
         if (res.status) {
             // Successful login
             // Redirect to the user home page. 
-            Auth.authenticated = true; 
+            auth.login(); 
+            // token = true;
             history.push('/user');
         }
         else {
-            // Send error to user to try again. 
+            // Send error to user to try again.
+            // token = false;  
         }
 
 

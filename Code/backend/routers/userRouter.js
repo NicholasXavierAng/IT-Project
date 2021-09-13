@@ -17,6 +17,7 @@ userRouter.post('/search', async (req, res) => {
 
 userRouter.get('/customers', async (req, res) => {
     var customers = await Customer.find().lean(); 
+    // console.log(customers); 
     res.json({"customers": customers}); 
 })
 
