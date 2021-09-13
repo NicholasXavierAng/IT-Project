@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css'; 
-import auth from '../Authentication/auth';
+import Auth from '../Authentication/Auth';
 // import {Redirect} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -41,7 +41,7 @@ export default function Login({ setToken }) {
         if (res.status) {
             // Successful login
             // Redirect to the user home page. 
-            auth.login(); 
+            Auth.login(); 
             // token = true;
             history.push('/user');
         }
