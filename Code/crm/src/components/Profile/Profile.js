@@ -19,13 +19,13 @@ export default function Profile({props}) {
     var [company, setCompany] = useState(); 
     let {id} = useParams();
     
-
+    // Called as soon as the page is loaded.
     useEffect(() => {
         getCustomer();  
     })
 
      
-
+    // Gets data for the specefic customer from the db. 
     async function getCustomer(){
         var req = await fetch('http://localhost:5000/user/profile/' + id, {
             method: 'POST',
@@ -61,9 +61,6 @@ export default function Profile({props}) {
             </Box> 
         </div>
         <div className="rectangle"></div>
-        {/* <div className="leftContainer">
-            <p>aa</p>
-        </div> */}
         <div className="rightContainer">
             <div className="row">
                 <div className="infoContainer">
@@ -149,7 +146,5 @@ export default function Profile({props}) {
                 </div>
         </div>
         </>
-    )
-    // }
-    
+    )    
 }
