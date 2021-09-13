@@ -4,23 +4,32 @@
 //////////////////////////////
 
 import './Profile.css'; 
-import TextField from '@material-ui/core/TextField';
 import BackButton from '@material-ui/icons/ArrowBack'; 
 import Bell from '@material-ui/icons/Notifications'; 
 import Pen from '@material-ui/icons/Create'; 
 import { IconButton } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
 export default function Profile() {
     return(
         <>
         <div className="topBar">
-            <IconButton>
-                <BackButton/>
-            </IconButton>
-            <img src="/logo.png" alt="logo" width="207" height="55"/>
-            <IconButton>
-                <Bell/>
-            </IconButton>
+            <Box
+                borderRadius={16}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                width="100%"
+                height={56}
+                boxShadow={4}>
+                    <IconButton>
+                        <BackButton/>
+                    </IconButton>
+                    <img class="header" src="/logo.png" alt="logo" width="207" height="55"/>
+                    <IconButton>
+                        <Bell/>
+                    </IconButton>
+            </Box> 
         </div>
         <div className="rectangle"></div>
         <div className="leftContainer">
@@ -72,18 +81,6 @@ export default function Profile() {
                     <p><b>Email: </b> <span className="contactInfo">Male</span></p>
                 </div>
             </div>
-
-            <section class="notes">
-                <TextField
-                required
-                id="notes"
-                label="Notes"
-                variant="outlined"
-                color="secondary"
-                height="100px"
-                width="860px"
-                />
-            </section>
         </div>
         </>
     )
