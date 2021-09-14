@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
 const API_URL = "http://localhost:5000/";
 
 async function loginUser(credentials) {
-    return fetch(API_URL + "login", {
+    return fetch(API_URL + "login/", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -34,16 +34,18 @@ export default function Login({ setToken }) {
         // Fetch sends the username and password 
         // to the back end which validates against the db and then 
         // returns a response. 
-        var res = await loginUser({
+        const res = await loginUser({
             username,
             password
         })
+
+        setToken(res);
 
         if (res.status) {
             // Successful login
             // Redirect to the user home page. 
             Auth.authenticated = true; 
-            history.push('/user');
+            //history.push('/user');
         }
         else {
             // Send error to user to try again. 

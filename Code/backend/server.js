@@ -5,16 +5,20 @@
 const express = require("express")
 const app = express()   
 const cors = require('cors');
-const port = process.env.PORT || 5000
+
+require('dotenv').config();
+
+const port = process.env.PORT
 const mongoose = require('mongoose');
 const userRouter = require("../backend/routers/userRouter.js");
 const User = require('./models/user');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 app.use(cors());
 app.use(express.json());
 
-const uri = "mongodb+srv://user1:user1@cluster0.0tlap.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = process.env.DB_URI;
 
 mongoose.connect(uri, { useNewUrlParser: true, dbName: 'crm'}
 );
@@ -60,7 +64,14 @@ app.post('/login', async (req, res) => {
   }
   console.log(user);
   if (user && passwordMatch) {
-    res.json({status:true});
+    user.password = undefined;
+    jwt.sign({ firstName:user.firstName, familyName:user.familyName, username:user.username, email:user.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
+      if (err) console.log(err)
+      res.json({
+        status:true,
+        token:token
+      })
+    })
   }
   else {
     res.json({status:false});

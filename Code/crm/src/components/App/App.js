@@ -19,49 +19,18 @@ function App() {
     const {isAuth, setIsAuth} = useState(true); 
 
     if(!token) {
-        return (
-            <>
-            {/* This part handles all the different routes that we implement inside our web app */}
-                <Router>
-                    <Switch>
-                        {/* At the home route  */}
-                        <Route path="/" exact render={(props) => (
-                            <>
-                                <Login setToken={setToken} />
-                            </>
-                        )}>
-                        </Route>
-                        <ProtectedRoute>
-                            <Switch>
-                                {/* User Home Page Route  */}
-                                <Route exact path="/user" component={UserHome}/>
-                                {/* User Profile Route*/}
-                                <Route path="/user/profile/:id" component={Profile}/>
-                            </Switch>
-                        </ProtectedRoute>
-                        {/* Register page route */}
-                        <Route path="/register">
-                            <Register/>
-                        </Route>
-                    </Switch>
-                </Router>
-            </>
-        )
+        return <Login setToken={setToken} />
     }
 
     return (
-        <div className="wrapper">
-        <h1>Placeholder</h1>
-        <div>
-            <button type="Sign Out">Sign Out</button>
-        </div>
         <BrowserRouter>
             <Switch>
-              
-            
+                {/* User Home Page Route  */}
+                <Route exact path="/" component={UserHome}/>
+                {/* User Profile Route*/}
+                <Route path="/user/profile/:id" component={Profile}/>
             </Switch>
         </BrowserRouter>
-        </div>
     );
 }
 
