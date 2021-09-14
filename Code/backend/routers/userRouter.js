@@ -6,6 +6,7 @@
 const userRouter = require('express').Router();
 const User = require('../models/user');
 const Customer = require('../models/customer');
+const Company = require('../models/company'); 
 
 userRouter.post('/search', async (req, res) => {
     var search = req.body.words;
