@@ -18,8 +18,6 @@ function App() {
     const { token, setToken } = useToken();
     const {isAuth, setIsAuth} = useState(true); 
 
-    
-
     if(!token) {
         return (
             <>

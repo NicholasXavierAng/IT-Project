@@ -6,11 +6,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css'; 
 import Auth from '../Authentication/Auth';
-// import {Redirect} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+
+const API_URL = "http://localhost:5000/";
+
+async function loginUser(credentials) {
+    return fetch(API_URL + "login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(data => data.json())
+   }
 
 export default function Login({ setToken }) {
     const [username, setUserName] = useState();
@@ -19,22 +31,14 @@ export default function Login({ setToken }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const credentials = {username, password};
-
-        // Fetch sends credentials which is username and password 
+        // Fetch sends the username and password 
         // to the back end which validates against the db and then 
         // returns a response. 
-        var res = await fetch('http://localhost:5000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        }); 
+        var res = await loginUser({
+            username,
+            password
+        })
 
-        // Response we get from db
-        res = await res.json(); 
-        
         if (res.status) {
             // Successful login
             // Redirect to the user home page. 
@@ -44,16 +48,6 @@ export default function Login({ setToken }) {
         else {
             // Send error to user to try again. 
         }
-
-
-        // const token = await loginUser({
-        //     username,
-        //     password
-        // });
-        
-        // console.log("token");
-        // console.log(token);
-        // setToken(token);
     }
 
     const register = async (e) => {
