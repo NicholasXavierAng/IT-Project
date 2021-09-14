@@ -20,5 +20,11 @@ userRouter.get('/customers', async (req, res) => {
     res.json({"customers": customers}); 
 })
 
+userRouter.post('/profile/:id', async (req, res) => {
+    var customer = await Customer.findById(req.params.id).lean(); 
+    var company = await Company.findById(customer.companyId);
+    res.json({"customer": customer, "company": company});
+})
+
 module.exports = userRouter; 
 
