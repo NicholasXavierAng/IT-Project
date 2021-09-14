@@ -9,8 +9,15 @@ import Line3 from '../MainPageComponents/Line3';
 import ClientToggle from '../MainPageComponents/ClientToggle';
 import Searchbar from '../MainPageComponents/Searchbar';
 // import Provider from '../MainPageComponents/Provider'; 
+import Button from '@material-ui/core/Button';
 
 function UserHome() {
+  const logOut = async (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.href = '/';
+  }
+  
     return (
       <div className="App">
         {/* <Provider> */}
@@ -22,6 +29,14 @@ function UserHome() {
           <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
           </svg>
           <ClientToggle/>
+          <Button
+            type="logout"
+            variant="contained"
+            color="secondary"
+            style={{minWidth: "85px", minHeight:"35px"}}
+            onClick={logOut}>
+            Log out
+          </Button>
         {/* </Provider> */}
       </div>
     );

@@ -28,7 +28,7 @@ function App() {
                 {/* User Home Page Route  */}
                 <Route exact path="/" component={UserHome}/>
                 {/* User Profile Route*/}
-                <Route path="/user/profile/:id" component={Profile}/>
+                <Route path="/profile/:id" component={Profile}/>
             </Switch>
         </BrowserRouter>
     );
