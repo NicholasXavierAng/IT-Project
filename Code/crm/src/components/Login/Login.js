@@ -61,7 +61,7 @@ export default function Login({ setToken }) {
         <section class="login-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
             <form onSubmit={handleSubmit}>
-            <br></br>
+            <br/>
 
             {/* need to change colour/set up theme */}
             <section class="headerBox">
@@ -75,7 +75,9 @@ export default function Login({ setToken }) {
                 alignItems="center"
                 width={370}
                 height={56}
-                boxShadow={4}>
+                boxShadow={4}
+                position="absolute"
+                top={70}>
                     <h2>LOGIN</h2>
                 </Box>
             </section>
@@ -85,7 +87,7 @@ export default function Login({ setToken }) {
                 width={370}
                 height={400}
                 boxShadow={6}>
-                    <br></br>
+                    <br/>
                     <section class="credentials">
                     <TextField
                         required
@@ -97,8 +99,8 @@ export default function Login({ setToken }) {
                         width="232px"
                         onChange={e => setUserName(e.target.value)}
                     />
-                    <br></br>
-                    <br></br>
+                    <br/>
+                    <br/>
                     <TextField
                         required
                         id="password"
@@ -120,10 +122,10 @@ export default function Login({ setToken }) {
                         style={{minWidth: "85px", minHeight:"35px"}}>
                         Sign in
                     </Button>
-            </section>
+                    </section>
                 </Box>
             </section>
-            <br></br>
+            <br/>
             </form>
             <section class="register">
                 <button type="register" onClick={register}>Register</button>

@@ -2,28 +2,31 @@
     font-family: "Open Sans", sans-serif;
 }
 
+img {
+    margin-top: 5px;
+}
+
 .login-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.credentials {
+    position: relative;
+    top: 110px;
+    left: 75px;
+}
+
 .submission {
     position: relative;
-    top: 140px;
+    top: 165px;
     left: 143px;
 }
 
 .headerBox {
     /* makes it overlap on top */
     z-index: 1;
-}
-
-/* need to find a better way of centre aligning*/
-.credentials {
-    position: relative;
-    top: 65px;
-    left: 75px;
 }
 
 h2 {
