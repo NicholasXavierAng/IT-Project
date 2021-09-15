@@ -8,8 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import BackButton from '@material-ui/icons/ArrowBack'; 
 import Bell from '@material-ui/icons/Notifications'; 
 import Pen from '@material-ui/icons/Create'; 
-import Box from '@material-ui/core/Box';
-import { IconButton } from '@material-ui/core';
+import { IconButton, AppBar, Toolbar, Box } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -42,27 +42,30 @@ export default function Profile({props}) {
     }
     return(
         <>
-        <div className="topBar">
-            <Box
-                borderRadius={16}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                width="100%"
-                height={56}
-                boxShadow={4}>
-                    <IconButton>
-                        <BackButton/>
+        <AppBar position="fixed" color="white" boxShadow={4}>
+            <Toolbar>
+                <Box 
+                    flexGrow={1}>
+                    <IconButton edge="start" marginLeft="auto">
+                        <BackButton />
                     </IconButton>
-                    <img class="header" src="/logo.png" alt="logo" width="207" height="55"/>
-                    <IconButton>
-                        <Bell/>
-                    </IconButton>
-            </Box> 
-        </div>
+                </Box>
+                <Box flexGrow={1}>
+                    <img class="header" src="/logo.png" alt="logo" width="207" height="55" />
+                </Box>
+                <IconButton>
+                    <Bell />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
+
         <div className="rectangle"></div>
         <div className="rightContainer">
-            <div className="row">
+            <Grid container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+            >
                 <div className="infoContainer">
                 {customer  && 
                     <>
@@ -72,65 +75,86 @@ export default function Profile({props}) {
                     </>
                 }
                 </div>
-                <div className="generalBox">
-                    <div className="editRow">
-                        <h3>Contact</h3>
-                        <div className="editBox">
+                <Grid item spacing={4}>
+                    <Box 
+                        boxShadow={4}
+                        borderRadius={5}
+                        style={{ padding: "15px", margin: "5px" }}>
+                        <Box display="flex" justifyContent="space-between">
+                            <h3>Contact</h3>
                             <IconButton>
                                 <Pen/>
                             </IconButton>
-                        </div>
-                    </div>
-                    {customer &&
-                    <>
-                    <p><b>Mobile: </b> <span className="contactInfo">{customer.phoneNumber}</span></p>
-                    <p><b>Email: </b> <span className="contactInfo">{customer.email}</span></p> 
-                    </>
-                    }
-                </div>
-            </div>
-            <div className="row">
-                <div className="generalBox">
-                    <div className="editRow">
-                        <h3>Company Information</h3>
-                        <div className="editBox">
-                            <IconButton>
-                                <Pen/>
-                            </IconButton>
-                        </div>
-                    </div>
+                        </Box>
+                        {customer &&
+                        <>
+                        <p><b>Mobile: </b> <span className="contactInfo">{customer.phoneNumber}</span></p>
+                        <p><b>Email: </b> <span className="contactInfo">{customer.email}</span></p> 
+                        </>
+                        }     
+                    </Box>
+                </Grid>
+            </Grid>
 
-                    {company &&
-                    <>
-                        <p><b>Name: </b> <span className="contactInfo">{company.name}</span></p>
-                        <p><b>Location: </b> <span className="contactInfo">{company.location}</span></p>
-                        <p><b>Position: </b> <span className="contactInfo">{company.position}</span></p>
-                        <p><b>Department: </b> <span className="contactInfo">{company.department}</span></p>
-                    </>
-                    }
-                </div>
-                <div className="generalBox">
-                    <div className="editRow">
-                        <h3>Contact</h3>
-                        <div className="editBox">
+            <Grid container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+            >
+                <Grid item spacing={5}>
+                    <Box 
+                        boxShadow={4}
+                        borderRadius={5}
+                        style={{ padding: "15px", margin: "5px" }}>
+                        <Box display="flex" justifyContent="space-between">
+                            <h3>Company Information</h3>
                             <IconButton>
                                 <Pen/>
                             </IconButton>
-                        </div>
-                    </div>
-                    <p><b>Mobile: </b> <span className="contactInfo">25</span></p>
-                    <p><b>Email: </b> <span className="contactInfo">Male</span></p>
-                </div>
-            </div>
-            <div className="generalBox">
-                    <div className="editRow">
-                        <h3>Notes</h3>
-                        <div className="editBox">
+                        </Box>
+                        {company &&
+                        <>
+                            <p><b>Name: </b> <span className="contactInfo">{company.name}</span></p>
+                            <p><b>Location: </b> <span className="contactInfo">{company.location}</span></p>
+                            <p><b>Position: </b> <span className="contactInfo">{company.position}</span></p>
+                            <p><b>Department: </b> <span className="contactInfo">{company.department}</span></p>
+                        </>
+                        }
+                    </Box>
+                </Grid>
+                <Grid item spacing={5}>
+                    <Box 
+                        boxShadow={4}
+                        borderRadius={5}
+                        style={{ padding: "15px", margin: "5px" }}>
+                        <Box display="flex" justifyContent="space-between">
+                            <h3>Task Information</h3>
                             <IconButton>
                                 <Pen/>
                             </IconButton>
-                        </div>
-                    </div>
+                        </Box>
+                    <p><b>High level description: </b> <span className="contactInfo">...</span></p>
+                    <p><b>Timeline: </b> <span className="contactInfo">...</span></p>
+                    </Box>
+                </Grid>
+            </Grid>
+            <Grid container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="centre"
+                spacing={24}
+            >
+                <Grid item spacing={5}>
+                    <Box 
+                        boxShadow={4}
+                        borderRadius={5}
+                        style={{ padding: "15px", margin: "5px" }}>
+                        <Box display="flex" justifyContent="space-between">
+                            <h3>Notes</h3>
+                            <IconButton>
+                                <Pen/>
+                            </IconButton>
+                        </Box>
                     <section class="notes">
                         <TextField
                         id="notes"
@@ -143,7 +167,9 @@ export default function Profile({props}) {
                         width="860px"
                         />
                     </section>
-                </div>
+                    </Box>
+                </Grid>    
+            </Grid>
         </div>
         </>
     )    
