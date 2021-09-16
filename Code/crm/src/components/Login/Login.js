@@ -10,6 +10,7 @@ import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const API_URL = "http://localhost:5000/";
 
@@ -58,13 +59,13 @@ export default function Login({ setToken }) {
     }
 
     return(
-        <section class="login-wrapper">
+        <section className="login-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
             <form onSubmit={handleSubmit}>
             <br/>
 
             {/* need to change colour/set up theme */}
-            <section class="headerBox">
+            <section className="headerBox">
                 <Box
                 border={1}
                 bgcolor="secondary.main"
@@ -81,55 +82,61 @@ export default function Login({ setToken }) {
                     <h2>LOGIN</h2>
                 </Box>
             </section>
-            <section class="credentialsBox">
+            <section className="credentialsBox">
                 <Box
                 borderRadius={16}
                 width={370}
                 height={400}
                 boxShadow={6}>
                     <br/>
-                    <section class="credentials">
-                    <TextField
-                        required
-                        id="username"
-                        label="Username"
-                        variant="outlined"
-                        color="secondary"
-                        height="56px"
-                        width="232px"
-                        onChange={e => setUserName(e.target.value)}
-                    />
-                    <br/>
-                    <br/>
-                    <TextField
-                        required
-                        id="password"
-                        label="Password"
-                        type="password"
-                        placeholder="At least 8 characters..."
-                        variant="outlined"
-                        color="secondary"
-                        height="56px"
-                        width="232px"
-                        onChange={e => setPassword(e.target.value)}
-                    />
+                    <section className="credentials">
+                        <TextField
+                            required
+                            id="username"
+                            label="Username"
+                            variant="outlined"
+                            color="secondary"
+                            height="56px"
+                            width="232px"
+                            onChange={e => setUserName(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                        <TextField
+                            required
+                            id="password"
+                            label="Password"
+                            type="password"
+                            placeholder="At least 8 characters..."
+                            variant="outlined"
+                            color="secondary"
+                            height="56px"
+                            width="232px"
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                    </section> 
+                    <section className="forgotPassword" onClick={() => { console.log('onClick'); }}>
+                        <Typography variant="subtitle2">
+                            Forgot password
+                        </Typography>
                     </section>
-                    <section class="submission">
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="secondary"
-                        style={{minWidth: "85px", minHeight:"35px"}}>
-                        Sign in
-                    </Button>
+                    <section className="submission">
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "85px", minHeight:"35px"}}>
+                            Sign in
+                        </Button>
                     </section>
                 </Box>
             </section>
             <br/>
             </form>
+            {/*
             <section class="register">
                 <button type="register" onClick={register}>Register</button>
-            </section>
+            </section>*/}
         </section>
         )
 }

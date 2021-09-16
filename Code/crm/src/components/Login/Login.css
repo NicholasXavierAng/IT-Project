@@ -18,9 +18,15 @@ img {
     left: 75px;
 }
 
+.forgotPassword {
+    position: relative;
+    top: 115px;
+    left: 76px;
+}
+
 .submission {
     position: relative;
-    top: 165px;
+    top: 155px;
     left: 143px;
 }
 
