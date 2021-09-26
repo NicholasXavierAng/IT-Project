@@ -15,5 +15,7 @@ import Typography from '@material-ui/core/Typography';
 const API_URL = "http://localhost:5000/";
 
 export default function EditInfo() {
-    
+    return (
+        <h1>EDIT</h1>
+    )
 }

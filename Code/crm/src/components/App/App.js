@@ -14,7 +14,7 @@ import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
 import EditInfo from '../Edit/EditInfo';
 import EditPw from '../Edit/EditPw';
-import { ProtectedRoute } from '../Authentication/ProtectedRoute';
+import AddContact from '../MainPageComponents/AddContact'; 
 
 function App() {
     const { token, setToken } = useToken();
@@ -35,6 +35,8 @@ function App() {
                 <Route path="/edit_infomation" component={EditInfo}/>
                 {/* Edit user pw */}
                 <Route path="/edit_password" component={EditPw}/>
+                {/* Add Contact Route  */}
+                <Route path="/addContact" component={AddContact}/>
             </Switch>
         </BrowserRouter>
     );

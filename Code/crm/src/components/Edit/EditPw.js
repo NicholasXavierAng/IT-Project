@@ -15,5 +15,5 @@ import Typography from '@material-ui/core/Typography';
 const API_URL = "http://localhost:5000/";
 
 export default function EditPw() {
-    
+    <h1>haha</h1>
 }

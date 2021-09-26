@@ -9,6 +9,7 @@ const Addcontact = () => {
         <div className ='line3'>
             <section class="createContact">
                 <Button
+                href="/addContact"
                 variant="contained"
                 color="secondary"
                 style={{minWidth: "254px", minHeight:"56px"}}>
