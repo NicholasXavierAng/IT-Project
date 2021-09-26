@@ -1,9 +1,6 @@
 .topbar {
   height: 56px;
-  border-bottom: 1px transparent;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
+  width: "100%";
 }
 
 .iconright2 {

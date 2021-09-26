@@ -11,7 +11,7 @@ var customerSchema = new mongoose.Schema({
     age: Number, 
     email: String, 
     status: String, 
-    phoneNumber: Number,
+    phoneNumber: String,
     companyInfo: {type: mongoose.Schema.Types.ObjectId, ref: 'company'},
     priority: {
         type: String,
