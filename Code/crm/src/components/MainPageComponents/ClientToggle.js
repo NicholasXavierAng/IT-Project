@@ -24,8 +24,8 @@ export default class ClientToggle extends Component {
             setButtonPopup: false,
             anchorEl1: false,
             anchorEl: false,
-            checked: [true,true,true,true,true],
-            checked1: [true,true,true]
+            checked: [false,false,false,false,false],
+            checked1: [false,false,false],
         }
     }
 
@@ -249,33 +249,22 @@ export default class ClientToggle extends Component {
                         }
                     }} */}
                     <div className = "sidebar">
-                        <div className = "p" style ={{padding: "20px", textAlign: "left"}}> 
-                            Filter By
+                        <div className = "p" style ={{fontSize: "25px", paddingLeft: "5px", paddingBottom: "10px",textAlign: "left", textDecoration: "underline"}}>
+                            Filter By:
                         </div>
-                        <div classname = "filterProgress">
-                            <FormControlLabel
-                                label="Progress"
-                                control={
-                                <Checkbox
-                                    checked={this.state.checked[0] && this.state.checked[1] && this.state.checked[2] && this.state.checked[3] && this.state.checked[4]}
-                                    
-                                    onChange={this.handleChange1}
-                                />
-                                }
-                            />
-                            {childrenProgress}
-                        </div>
-                        <div classname = "filterPriority">
-                            <FormControlLabel
-                                label="Priority"
-                                control={
-                                <Checkbox
-                                    checked1 ={this.state.checked1[0] && this.state.checked1[1] && this.state.checked1[2] }
-                                    onChange={this.handleChange1}
-                                />
-                                }
-                            />
-                            {childrenPriority}
+                        <div className = "filterBar">
+                            <div className= "p" style ={{textAlign: "left"}}>
+                                Progress
+                            </div>
+                            <div style ={{paddingLeft: "10px"}}>
+                                {childrenProgress}
+                            </div>
+                            <div className= "p" style ={{textAlign: "left"}}>
+                                Priority
+                            </div>
+                            <div style ={{paddingLeft: "10px"}}>
+                                {childrenPriority}
+                            </div>
                         </div>
                     </div>
                     <div className = "clients" >
