@@ -5,14 +5,27 @@
 
 import React, {Component} from 'react'; 
 import axios from 'axios';
-import { Redirect, useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import Popup from './Popup';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Box from '@material-ui/core/Box';
 // import { MyContext } from './Provider';
 
 export default class ClientToggle extends Component {
     constructor(props) {
         super(props); 
         this.state = {
-            data:[] 
+            data:[], 
+            buttonPopup: false,
+            setButtonPopup: false,
+            anchorEl1: false,
+            anchorEl: false,
+            checked: [true,true,true,true,true],
+            checked1: [true,true,true]
         }
     }
 
@@ -30,13 +43,200 @@ export default class ClientToggle extends Component {
     
 
     takeToProfile(id) {
-         
+        
         var pathname = "/user/profile/" + id; 
         console.log(pathname);
         
     }
 
+    togglePop = () => {
+        this.setState({
+            buttonPopup: !this.state.buttonPopup
+        });
+    };
+
+    handleClick1 = () => {
+        this.setState({
+            anchorEl1: true
+        })
+    }
+
+    handleClose1 = () => {
+        this.setState({
+            anchorEl1: false
+        })
+    }
+    
+    
+    handleClick = () => {
+        this.setState({
+            buttonPopup: true,
+            anchorEl: true
+        })
+    }
+
+    handleClose = () => {
+        this.setState({
+            anchorEl: false
+        })
+    }
+
+    //Checked change handler for progress filter
+
+    handleChange1 = (event) => {
+        this.setState({
+            checked: [
+                event.target.checked,
+                event.target.checked,
+                event.target.checked,
+                event.target.checked,
+                event.target.checked,]
+        })
+    };
+    handleChange2 = (event) => {
+        this.setState({
+            checked: [
+                event.target.checked,
+                this.state.checked[1],
+                this.state.checked[2],
+                this.state.checked[3],
+                this.state.checked[4],
+            ]
+        })
+    };
+    handleChange3 = (event) => {
+        this.setState({
+            checked: [
+                this.state.checked[0],
+                event.target.checked,
+                this.state.checked[2],
+                this.state.checked[3],
+                this.state.checked[4],
+            ]
+        })
+    };
+    handleChange4 = (event) => {
+        this.setState({
+            checked: [
+                this.state.checked[0],
+                this.state.checked[1],
+                event.target.checked,
+                this.state.checked[3],
+                this.state.checked[4],
+            ]
+        })
+    };
+    handleChange5 = (event) => {
+        this.setState({
+            checked: [
+                this.state.checked[0],
+                this.state.checked[1],
+                this.state.checked[2],
+                event.target.checked,
+                this.state.checked[4],
+            ]
+        })
+    };
+    handleChange6 = (event) => {
+        this.setState({
+            checked: [
+                this.state.checked[0],
+                this.state.checked[1],
+                this.state.checked[2],
+                this.state.checked[3],
+                event.target.checked,
+            ]
+        })
+    };
+
+    //Check change handler for priority filter
+    
+    handleChange7 = (event) => {
+        this.setState({
+            checked1: [
+                event.target.checked,
+                event.target.checked,
+                event.target.checked,
+            ]
+        })
+    };
+
+    handleChange8 = (event) => {
+        this.setState({
+            checked1: [
+                event.target.checked1,
+                this.state.checked1[1],
+                this.state.checked1[2],
+            ]
+        })
+    };
+    handleChange9 = (event) => {
+        this.setState({
+            checked1: [
+                this.state.checked1[0],
+                event.target.checked1,
+                this.state.checked1[2],
+            ]
+        })
+    };
+    handleChange10 = (event) => {
+        this.setState({
+            checked1: [
+                this.state.checked1[0],
+                this.state.checked1[1],
+                event.target.checked1,
+            ]
+        })
+    };
+
+    
+
+
+
+
+    
     render() {
+        const childrenProgress = (
+            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+            <FormControlLabel
+                label="New"
+                control={<Checkbox checked={this.state.checked[0]} onChange={this.handleChange2} />}
+            />
+            <FormControlLabel
+                label="Invited"
+                control={<Checkbox checked={this.state.checked[1]} onChange={this.handleChange3} />}
+            />
+            <FormControlLabel
+                label="Met"
+                control={<Checkbox checked={this.state.checked[2]} onChange={this.handleChange4} />}
+            />
+            <FormControlLabel
+                label="Negotiation"
+                control={<Checkbox checked={this.state.checked[3]} onChange={this.handleChange5} />}
+            />
+            <FormControlLabel
+                label="Conclude"
+                control={<Checkbox checked={this.state.checked[4]} onChange={this.handleChange6} />}
+            />
+            </Box>
+        );
+        const childrenPriority = (
+            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+            <FormControlLabel
+                label="High"
+                control={<Checkbox checked1={this.state.checked1[0]} onChange={this.handleChange8} />}
+            />
+            <FormControlLabel
+                label="Medium"
+                control={<Checkbox checked1={this.state.checked1[1]} onChange={this.handleChange9} />}
+            />
+            <FormControlLabel
+                label="Low"
+                control={<Checkbox checked1={this.state.checked1[2]} onChange={this.handleChange10} />}
+            />
+            </Box>
+            
+        );
         return (
             <div className = "lowerpart">
                 {/* <MyContext>
@@ -48,7 +248,36 @@ export default class ClientToggle extends Component {
                             <p>false</p>
                         }
                     }} */}
-                    <div className = "sidebar"/>
+                    <div className = "sidebar">
+                        <div className = "p" style ={{padding: "20px", textAlign: "left"}}> 
+                            Filter By
+                        </div>
+                        <div classname = "filterProgress">
+                            <FormControlLabel
+                                label="Progress"
+                                control={
+                                <Checkbox
+                                    checked={this.state.checked[0] && this.state.checked[1] && this.state.checked[2] && this.state.checked[3] && this.state.checked[4]}
+                                    
+                                    onChange={this.handleChange1}
+                                />
+                                }
+                            />
+                            {childrenProgress}
+                        </div>
+                        <div classname = "filterPriority">
+                            <FormControlLabel
+                                label="Priority"
+                                control={
+                                <Checkbox
+                                    checked1 ={this.state.checked1[0] && this.state.checked1[1] && this.state.checked1[2] }
+                                    onChange={this.handleChange1}
+                                />
+                                }
+                            />
+                            {childrenPriority}
+                        </div>
+                    </div>
                     <div className = "clients" >
                         {this.state.data.map(d => (
                             <>
@@ -64,6 +293,7 @@ export default class ClientToggle extends Component {
                             </>
                         ))}  
                     </div>
+                    
                 {/* </MyContext> */}
             </div>
         )

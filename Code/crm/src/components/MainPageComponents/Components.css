@@ -108,19 +108,14 @@ input[type="barStyling"] {
   width: 300px;
   height: 800px;
   border: 0px solid;
-  padding: 160px;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.09);
 }
 
-.name {
-  padding-right: 0px;
+.btn {
+  position: absolute;
 }
 
-.status {
-  padding: 180px;
-  padding-right: 110px;
+.options {
+  background-color: rgba(0, 0, 0, 0.2);
 }
-
-.progress {
-  padding: 180px;
-}
-
