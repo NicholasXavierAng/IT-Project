@@ -12,11 +12,13 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
+import EditInfo from '../Edit/EditInfo';
+import EditPw from '../Edit/EditPw';
 import { ProtectedRoute } from '../Authentication/ProtectedRoute';
 
 function App() {
     const { token, setToken } = useToken();
-    const {isAuth, setIsAuth} = useState(true); 
+    // const {isAuth, setIsAuth} = useState(true); 
 
     if(!token) {
         return <Login setToken={setToken} />
@@ -25,10 +27,14 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                {/* User Home Page Route  */}
+                {/* User Home Page Route */}
                 <Route exact path="/" component={UserHome}/>
-                {/* User Profile Route*/}
+                {/* User Profile Route */}
                 <Route path="/profile/:id" component={Profile}/>
+                {/* Edit user information */}
+                <Route path="/edit_infomation" component={EditInfo}/>
+                {/* Edit user pw */}
+                <Route path="/edit_password" component={EditPw}/>
             </Switch>
         </BrowserRouter>
     );

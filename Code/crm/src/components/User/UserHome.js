@@ -17,6 +17,16 @@ function UserHome() {
     localStorage.clear();
     window.location.href = '/';
   }
+
+  const editInfo = async (e) => {
+    e.preventDefault();
+    window.location.href = '/edit_information';
+  }
+
+  const editPw = async (e) => {
+    e.preventDefault();
+    window.location.href = '/edit_password';
+  }
   
     return (
       <div className="App">
@@ -36,6 +46,22 @@ function UserHome() {
             style={{minWidth: "85px", minHeight:"35px"}}
             onClick={logOut}>
             Log out
+          </Button>
+          <Button
+            type="editInfo"
+            variant="contained"
+            color="secondary"
+            style={{minWidth: "85px", minHeight:"35px"}}
+            onClick={editInfo}>
+            Edit Inforation
+          </Button>
+          <Button
+            type="logout"
+            variant="contained"
+            color="secondary"
+            style={{minWidth: "85px", minHeight:"35px"}}
+            onClick={editPw}>
+            Change Password
           </Button>
         {/* </Provider> */}
       </div>

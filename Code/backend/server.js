@@ -49,6 +49,33 @@ app.post('/register', async (req, res) => {
   res.json({status:true});
 })
 
+app.put('/edit', async (req, res) => {
+  User.findOneAndUpdate({ username: req.body.username }, (req.body), (err, result) => {
+    jwt.sign({ firstName:result.firstName, familyName:result.familyName, username:result.username, email:result.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
+      if (err) console.log(err)
+      res.json({
+        token:token
+      })
+    })
+  })
+})
+
+app.put('/changePassword', async (req, res) => {
+  const user = await User.findOne({ username: req.body.username });
+  if(!user) {
+    return res.json({ msg: `No account with this username found` });
+  }
+  const passwordMatch = bcrypt.compareSync(password, user.password);
+  if(!passwordMatch) {
+    console.log("wrong password\n");
+    return res.json({ msg: `Passwords did not match` });
+  }
+  if (user && passwordMatch) {
+    if (req.body.newPw != req.body.confirm) return res.json({ msg: "Passwords don't match."})
+    user.updateOne(user, { password: bcrypt.hashSync(req.body.newPw, bcrypt.genSaltSync())})
+  }
+})
+
 app.post('/login', async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -68,13 +95,9 @@ app.post('/login', async (req, res) => {
     jwt.sign({ firstName:user.firstName, familyName:user.familyName, username:user.username, email:user.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
       if (err) console.log(err)
       res.json({
-        status:true,
         token:token
       })
     })
-  }
-  else {
-    res.json({status:false});
   }
 })
 
