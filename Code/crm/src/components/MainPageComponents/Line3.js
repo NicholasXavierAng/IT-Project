@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
+import { IconButton, Typography } from '@material-ui/core';
+import Sort from '@material-ui/icons/Sort';
 
 
 
@@ -20,7 +22,9 @@ const Addcontact = () => {
                 <p className="p">Name</p> 
                 <p className="p">Status</p>  
                 <p className="p">Progress</p>
-                
+                <IconButton>
+		            <Sort />
+	            </IconButton>
             </div>
             
     
