@@ -84,21 +84,26 @@ input[type="barStyling"] {
   display: flex;
   border: none;
   justify-content: space-between;
-  align-items: center;
   padding-left: 80px;
   background: transparent;
 }
 
-.lowerpart {
-  display: flex;
+.name {
+  position: absolute;
 }
 
-.clients {
-  border: 2px transparent;
-  box-shadow: 5px 10px 18px #888888;
-  border-radius: 8px;
-  width: 1180px;
-  height: 800px;
+.status {
+  position: absolute;
+  left: 690px;
+}
+
+.progress {
+  position: absolute;
+  left: 1025px;
+}
+
+.lowerpart {
+  display: flex;
 }
 
 .sidebar {

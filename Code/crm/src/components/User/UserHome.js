@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Terry, Zakarya Butt 
+// Author(s): Terry, Zakarya Butt, Rebecca Ye
 // Date Made: 09/09/2021
 //////////////////////////////
 
@@ -12,110 +12,110 @@ import Line3 from '../MainPageComponents/Line3';
 import Button from '@material-ui/core/Button';
 import SearchBar from 'material-ui-search-bar';
 import axios from 'axios';
-import Box from '@material-ui/core/Box';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Box from '@material-ui/core/Box';
 
 function UserHome() {
-    const [customers, setCustomers] = useState();
-    // For search
-    const [search, setSearch] = useState(false);  
-    const [words, setSearchWord] = useState();
-    const [number, setNumber] = useState(false);
-    // For progress
-    const [newCustomer, setNew] = useState(false);
-    const [invite, setInvite] = useState(false);
-    const [met, setMet] = useState(false);
-    const [negotiation, setNegotiation] = useState(false);
-    const [conclude, setConclude] = useState(false);
-    // For priority
-    const [high, setHigh] = useState(false);
-    const [medium, setMedium] = useState(false);
-    const [low, setLow] = useState(false);
+	const [customers, setCustomers] = useState();
+	// For search
+	const [search, setSearch] = useState(false);  
+	const [words, setSearchWord] = useState();
+	const [number, setNumber] = useState(false);
+	// For progress
+	const [newCustomer, setNew] = useState(false);
+	const [invite, setInvite] = useState(false);
+	const [met, setMet] = useState(false);
+	const [negotiation, setNegotiation] = useState(false);
+	const [conclude, setConclude] = useState(false);
+	// For priority
+	const [high, setHigh] = useState(false);
+	const [medium, setMedium] = useState(false);
+	const [low, setLow] = useState(false);
 
 
 
-    const logOut = async (e) => {
-      e.preventDefault();
-      localStorage.clear();
-      window.location.href = '/';
-    }
+	const logOut = async (e) => {
+	  e.preventDefault();
+	  localStorage.clear();
+	  window.location.href = '/';
+	}
   
-    const editInfo = async (e) => {
-      e.preventDefault();
-      window.location.href = '/edit_information';
-    }
+	const editInfo = async (e) => {
+	  e.preventDefault();
+	  window.location.href = '/edit_information';
+	}
   
-    const editPw = async (e) => {
-      e.preventDefault();
-      window.location.href = '/edit_password';
-    }
+	const editPw = async (e) => {
+	  e.preventDefault();
+	  window.location.href = '/edit_password';
+	}
 
-    // If we detect a change in the search property then this is run.
-    useEffect(()=> {
-      if (!search) {
-        getCustomers();
-      } 
-    }, [search]); 
+	// If we detect a change in the search property then this is run.
+	useEffect(()=> {
+	  if (!search) {
+		getCustomers();
+	  } 
+	}, [search]); 
 
-    // If we detect a change in the filter then this is run.
-    useEffect(()=> { 
-      var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
-      if (!filter) {
-        getCustomers(); 
-      }
-      else {
-        const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-        axios.post('http://localhost:5000/user/filter', filters).then(res => {
-          var data = res.data.customers;
-          if (data.length > 0) {
-            setCustomers(data);
-          }  
-        }) 
+	// If we detect a change in the filter then this is run.
+	useEffect(()=> { 
+	  var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
+	  if (!filter) {
+		getCustomers(); 
+	  }
+	  else {
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
+		axios.post('http://localhost:5000/user/filter', filters).then(res => {
+		  var data = res.data.customers;
+		  if (data.length > 0) {
+			setCustomers(data);
+		  }  
+		}) 
 
-      } 
-    }, [newCustomer, invite, met, negotiation, conclude, high, medium, low]); 
+	  } 
+	}, [newCustomer, invite, met, negotiation, conclude, high, medium, low]); 
 
-    const getCustomers = () => {
-      // Sends a request to the backend to get all customers
-      axios.get('http://localhost:5000/user/customers').then(res => {
-          var data = res.data.customers; 
-          setCustomers(data); 
-      }) 
-    }
-    
-    const searchWord = (e) => {
-      // e.preventDefault(); 
-      if (e == "") {
-        setSearch(false); 
-      }
-      else {
-        if (!isNaN(e)) {
-          // Its a number
-          setSearchWord(e); 
-          setNumber(true); 
-        }
-        else {
-          // Its a name
-          setSearchWord(e); 
-          setNumber(false);
-        }
-      }
-    }
-    
+	const getCustomers = () => {
+	  // Sends a request to the backend to get all customers
+	  axios.get('http://localhost:5000/user/customers').then(res => {
+		  var data = res.data.customers; 
+		  setCustomers(data); 
+	  }) 
+	}
+	
+	const searchWord = (e) => {
+	  // e.preventDefault(); 
+	  if (e == "") {
+		setSearch(false); 
+	  }
+	  else {
+		if (!isNaN(e)) {
+		  // Its a number
+		  setSearchWord(e); 
+		  setNumber(true); 
+		}
+		else {
+		  // Its a name
+		  setSearchWord(e); 
+		  setNumber(false);
+		}
+	  }
+	}
+	
 
-    const doSearch = async (e) => {
-        e.preventDefault(); 
-        const req = {"words":words, "number":number}; 
-        axios.post('http://localhost:5000/user/search', req).then(res => {
-          var data = res.data.customers; 
-          if (data.length > 0) {
-            setSearch(true);
-            var cust = data; 
-            setCustomers(cust);
-          } 
-      })
-    }
+	const doSearch = async (e) => {
+		e.preventDefault(); 
+		const req = {"words":words, "number":number}; 
+		axios.post('http://localhost:5000/user/search', req).then(res => {
+		  var data = res.data.customers; 
+		  if (data.length > 0) {
+			setSearch(true);
+			var cust = data; 
+			setCustomers(cust);
+		  } 
+	  })
+	}
 
     // const colorPriority = async (e) => {
     //   console.log(e); 
