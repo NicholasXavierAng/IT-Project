@@ -51,12 +51,8 @@ app.post('/register', async (req, res) => {
 
 app.put('/edit', async (req, res) => {
   User.findOneAndUpdate({ username: req.body.username }, (req.body), (err, result) => {
-    jwt.sign({ firstName:result.firstName, familyName:result.familyName, username:result.username, email:result.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
-      if (err) console.log(err)
-      res.json({
-        token:token
-      })
-    })
+    if (err) return res.json({ msg: "Could not update." });
+    return res.json({status:true});
   })
 })
 
@@ -65,14 +61,15 @@ app.put('/changePassword', async (req, res) => {
   if(!user) {
     return res.json({ msg: `No account with this username found` });
   }
-  const passwordMatch = bcrypt.compareSync(password, user.password);
+  const passwordMatch = bcrypt.compareSync(req.body.oldPw, user.password);
   if(!passwordMatch) {
     console.log("wrong password\n");
     return res.json({ msg: `Passwords did not match` });
   }
   if (user && passwordMatch) {
-    if (req.body.newPw != req.body.confirm) return res.json({ msg: "Passwords don't match."})
-    user.updateOne(user, { password: bcrypt.hashSync(req.body.newPw, bcrypt.genSaltSync())})
+    if (req.body.newPw != req.body.confirmPw) return res.json({ msg: "Passwords don't match."})
+    User.findOneAndUpdate({username: user.username}, {$set: { password: bcrypt.hashSync(req.body.newPw, bcrypt.genSaltSync())}})
+    return res.json({status:true});
   }
 })
 

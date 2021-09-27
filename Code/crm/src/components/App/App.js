@@ -13,7 +13,7 @@ import Register from '../Register/Register';
 import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
 import EditInfo from '../Edit/EditInfo';
-import EditPw from '../Edit/EditPw';
+import EditPw from '../Edit/EditPw'
 import AddContact from '../MainPageComponents/AddContact'; 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
                 {/* User Profile Route */}
                 <Route path="/profile/:id" component={Profile}/>
                 {/* Edit user information */}
-                <Route path="/edit_infomation" component={EditInfo}/>
+                <Route path="/edit_information" component={EditInfo}/>
                 {/* Edit user pw */}
                 <Route path="/edit_password" component={EditPw}/>
                 {/* Add Contact Route  */}

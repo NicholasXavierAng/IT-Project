@@ -153,7 +153,7 @@ function UserHome() {
             Edit Inforation
           </Button>
           <Button
-            type="logout"
+            type="editPw"
             variant="contained"
             color="secondary"
             style={{minWidth: "85px", minHeight:"35px"}}
