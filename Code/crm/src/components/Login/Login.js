@@ -41,16 +41,6 @@ export default function Login({ setToken }) {
         })
 
         setToken(res);
-
-        if (res.status) {
-            // Successful login
-            // Redirect to the user home page. 
-            Auth.authenticated = true; 
-            //history.push('/user');
-        }
-        else {
-            // Send error to user to try again. 
-        }
     }
 
     const register = async (e) => {
