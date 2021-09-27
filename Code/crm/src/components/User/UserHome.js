@@ -117,6 +117,10 @@ function UserHome() {
       })
     }
 
+    // const colorPriority = async (e) => {
+    //   console.log(e); 
+    // }
+
 
     return (
       <div className="App">
@@ -221,7 +225,7 @@ function UserHome() {
                                 {/* A loop to handle customers directly from the database  */}
                                 <button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
                                 <p className = "name">{d.firstName} {d.familyName}</p>
-                                <p className = "status">{d.status}</p>
+                                <p className = "progress" style ={{color: d.progress === 'High' ? "Red" : 'Medium' ? "Orange" : "yellow"}}>{d.progress}</p>
                                 <p className = "progress">{d.progress}</p>
                                 </button>
                                 <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
