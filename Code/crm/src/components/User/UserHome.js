@@ -133,9 +133,9 @@ function UserHome() {
             </form>
           </div>
           <Line3/>
-          <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" style = {{paddingLeft: '330px', paddingBottom: '20px'}}>
-          <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
-          </svg>
+          {/*Add proper line here */}
+          <hr width="67%" align="center"/>
+          <br/>
           <Button
             type="logout"
             variant="contained"
@@ -222,11 +222,9 @@ function UserHome() {
                                 <button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
                                 <p className = "name">{d.firstName} {d.familyName}</p>
                                 <p className = "status">{d.status}</p>
-                                <p className = "progress">{d.progress}</p>
+                                <p className = "progress" style ={{color: d.progress === 'High' ? "Red" : 'Medium' ? "Orange" : "yellow"}}>{d.progress}</p>
                                 </button>
-                                <svg width="1104" height="4" viewBox="0 0 1104 4" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                                <path d="M0 2L1104 2.35158" stroke="#C4C4C4" stroke-opacity="0.5" stroke-width="2.08177"/>
-                                </svg>
+                                <hr width="95%" align="center"/>
                             </>
                          ))}   
                     </div>
