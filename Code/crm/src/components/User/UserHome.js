@@ -216,6 +216,11 @@ function UserHome() {
                         </div>
                     </div>
                     <div className = "clients" >
+                        <Box
+                        borderRadius={16}
+                        width={1000}
+                        height={1080}
+                        boxShadow={6}>
                         {customers && customers.map(d => (
                             <>
                                 {/* A loop to handle customers directly from the database  */}
@@ -226,7 +231,10 @@ function UserHome() {
                                 </button>
                                 <hr width="95%" align="center"/>
                             </>
-                         ))}   
+                         ))}
+
+                        <p>insert total number of contacts</p>
+						            </Box>   
                     </div>
             </div>
       </div>
