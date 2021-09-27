@@ -8,8 +8,43 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import './AddContact.css'; 
 import Button from '@material-ui/core/Button';
+import React, { useState ,useEffect} from 'react';
+import axios from 'axios';
 
 export default function EditInfo() {
+    // Client information
+    const [firstName, setFirst] = useState(); 
+    const [familyName, setFamily] = useState(); 
+    const [dob, setDob] = useState(); 
+    const [gender, setGender] = useState(); 
+    const [number, setNumber] = useState(); 
+    const [email, setEmail] = useState(); 
+
+    // Company informtion
+    const [companyName, setCompanyName]= useState(); 
+    const [location, setLocation] = useState(); 
+    const [position, setPosition] = useState(); 
+    const [department, setDepartment]= useState(); 
+    const [priority, setPriority] = useState(); 
+    const [status, setStatus] = useState(); 
+
+
+    const makeCustomer = () => {
+        // Sends a request to the backend to make a new customer
+        var req = {
+            client : {"firstName":firstName, "familyName": familyName, "dob": dob, "gender":gender, "number":number, "email":email}, 
+            company : {"name":companyName, "location":location, "position":position, "department":department, "priority": priority, "status": status}
+        }
+        console.log(req);
+        axios.post('http://localhost:5000/user/addCustomer', req).then(res => {
+            var data = res.data.customers; 
+            console.log(data); 
+        }) 
+      }
+  
+
+
+
     return (
         <>
             <Topbar />
@@ -36,7 +71,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setFirst(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -50,7 +85,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setFamily(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -63,7 +98,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setDob(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -76,7 +111,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setGender(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -89,7 +124,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setNumber(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -102,7 +137,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </section> 
     
@@ -129,7 +164,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setCompanyName(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -143,7 +178,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setLocation(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -156,7 +191,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setPosition(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -169,7 +204,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setDepartment(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -182,7 +217,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setPriority(e.target.value)}
                         />
                         <br/>
                         <br/>
@@ -195,7 +230,7 @@ export default function EditInfo() {
                             color="secondary"
                             height="56px"
                             width="232px"
-                            onChange={e => console.log(e.target.value)}
+                            onChange={e => setStatus(e.target.value)}
                         />
                     </section> 
     
@@ -205,6 +240,7 @@ export default function EditInfo() {
             </section>
             <section className="add-contact">
                 <Button
+                    onClick={makeCustomer}
                     className 
                     type="submit"
                     variant="contained"

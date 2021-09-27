@@ -7,6 +7,8 @@ const userRouter = require('express').Router();
 const User = require('../models/user');
 const Customer = require('../models/customer');
 const Company = require('../models/company'); 
+const { Mongoose } = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 userRouter.post('/search', async (req, res) => {
     var search = req.body;  
@@ -77,15 +79,34 @@ userRouter.post('/profile/:id', async (req, res) => {
 })
 
 userRouter.post('/addCustomer', async (req, res) => {
-		
+  var client = req.body.client; 
+  var company = req.body.company; 
   const newCompany = await Company.create({
-    name: req.body.name,
-    department: req.body.department,
-    location: req.body.location,
-    position: req.body.positon
+    name:company.name,
+    department: company.department,
+    location: company.location,
+    position: company.positon
   })
   
   await newCompany.save(); 
+
+  var comp = await Company.findOne({name:company.name, department: company.department,location: company.location,position: company.positon})
+
+  var compId = comp._id; 
+  var customer = await Customer.create({
+    firstName: client.firstName, 
+    familyName: client.familyName, 
+    age: 40, 
+    dob: client.dob, 
+    gender: client.gender, 
+    phoneNumber: client.number, 
+    email: client.email, 
+    companyInfo: ObjectId(compId), 
+    priority: company.priority,
+    progress: company.status
+  })
+
+  await customer.save(); 
   res.json({status:true});
 })
 
