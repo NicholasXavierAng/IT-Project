@@ -20,8 +20,8 @@ const Addcontact = () => {
             </section>
             <div className="titles">
                 <p className="p">Name</p> 
-                <p className="p">Status</p>  
-                <p className="p">Progress</p>
+                <p className="p">Progress</p>  
+                <p className="p">Priority</p>
                 <IconButton>
 		            <Sort />
 	            </IconButton>

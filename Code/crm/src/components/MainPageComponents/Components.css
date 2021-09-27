@@ -84,9 +84,22 @@ input[type="barStyling"] {
   display: flex;
   border: none;
   justify-content: space-between;
-  align-items: center;
   padding-left: 80px;
   background: transparent;
+}
+
+.name {
+  position: absolute;
+}
+
+.status {
+  position: absolute;
+  left: 690px;
+}
+
+.progress {
+  position: absolute;
+  left: 1025px;
 }
 
 .lowerpart {
