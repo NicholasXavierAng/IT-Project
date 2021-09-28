@@ -16,6 +16,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
 
+// import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import Sort from '@material-ui/icons/Sort';
+import Popup from 'reactjs-popup';
+import { IconButton } from '@material-ui/core';
+
 function UserHome() {
 	const [customers, setCustomers] = useState();
 	// For search
@@ -132,7 +138,79 @@ function UserHome() {
                 />
             </form>
           </div>
-          <Line3/>
+          <div className ='line3'>
+            <section class="createContact">
+                <Button
+                href="/addContact"
+                variant="contained"
+                color="secondary"
+                style={{minWidth: "254px", minHeight:"56px"}}>
+                    +  CREATE CONTACT
+                </Button>
+            </section>
+            <div className="titles">
+                <p className="p">Name</p> 
+                <p className="p">Progress</p>  
+                <p className="p">Priority</p>
+
+                <Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
+							<div>
+								<div className= "p" style ={{textAlign: "left"}}>
+									Progress
+								</div>
+								<div style ={{paddingLeft: "10px"}}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+                                <FormControlLabel
+                                    label="New"
+                                    control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
+                                />
+                                <FormControlLabel
+                                    label="Invited"
+                                    control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
+                                />
+                                <FormControlLabel
+                                    label="Met"
+                                    control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
+                                />
+                                <FormControlLabel
+                                    label="Negotiation"
+                                    control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
+                                />
+                                <FormControlLabel
+                                    label="Conclude"
+                                    control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
+                                />
+                                </Box>
+                            </div>
+							<div className= "p" style ={{textAlign: "left"}}>
+                                Priority
+                            </div>
+                            <div style ={{paddingLeft: "10px"}}>
+                                {/* {childrenPriority} */}
+                                <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+                                <FormControlLabel
+                                    label="High"
+                                    control={<Checkbox checked1={high} onChange={() => setHigh(!high)} />}
+                                />
+                                <FormControlLabel
+                                    label="Medium"
+                                    control={<Checkbox checked1={medium} onChange={() => setMedium(!medium)} />}
+                                />
+                                <FormControlLabel
+                                    label="Low"
+                                    control={<Checkbox checked1={low} onChange={() => setLow(!low)} />}
+                                />
+                                </Box>
+                            </div>
+
+							</div>
+				</Popup>
+                {/* <IconButton><Sort /></IconButton> */}
+            </div>
+            
+    
+        </div>
+		{/* End of Line3 */}
           {/*Add proper line here */}
           <hr width="67%" align="center"/>
           <br/>
@@ -161,60 +239,7 @@ function UserHome() {
             Change Password
           </Button>
           <div className = "lowerpart">
-                    <div className = "sidebar">
-                        <div className = "p" style ={{fontSize: "25px", paddingLeft: "5px", paddingBottom: "10px",textAlign: "left", textDecoration: "underline"}}>
-                            Filter By:
-                        </div>
-                        <div className = "filterBar">
-                            <div className= "p" style ={{textAlign: "left"}}>
-                                Progress
-                            </div>
-                            <div style ={{paddingLeft: "10px"}}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-                                <FormControlLabel
-                                    label="New"
-                                    control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
-                                />
-                                <FormControlLabel
-                                    label="Invited"
-                                    control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
-                                />
-                                <FormControlLabel
-                                    label="Met"
-                                    control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
-                                />
-                                <FormControlLabel
-                                    label="Negotiation"
-                                    control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
-                                />
-                                <FormControlLabel
-                                    label="Conclude"
-                                    control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
-                                />
-                                </Box>
-                            </div>
-                            <div className= "p" style ={{textAlign: "left"}}>
-                                Priority
-                            </div>
-                            <div style ={{paddingLeft: "10px"}}>
-                                {/* {childrenPriority} */}
-                                <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-                                <FormControlLabel
-                                    label="High"
-                                    control={<Checkbox checked1={high} onChange={() => setHigh(!high)} />}
-                                />
-                                <FormControlLabel
-                                    label="Medium"
-                                    control={<Checkbox checked1={medium} onChange={() => setMedium(!medium)} />}
-                                />
-                                <FormControlLabel
-                                    label="Low"
-                                    control={<Checkbox checked1={low} onChange={() => setLow(!low)} />}
-                                />
-                                </Box>
-                            </div>
-                        </div>
-                    </div>
+                    <div className = "sidebar"></div>
                     <div className = "clients" >
                         <Box
                         borderRadius={16}
