@@ -5,7 +5,7 @@
 
 import React, { useState ,useEffect} from 'react';
 import Topbar from '../MainPageComponents/Topbar';
-import Line3 from '../MainPageComponents/Line3';
+// import Line3 from '../MainPageComponents/Line3';
 // import ClientToggle from '../MainPageComponents/ClientToggle';
 // import Searchbar from '../MainPageComponents/Searchbar';
 // import Provider from '../MainPageComponents/Provider'; 
