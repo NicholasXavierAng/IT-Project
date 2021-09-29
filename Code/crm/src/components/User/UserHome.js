@@ -148,7 +148,7 @@ function UserHome() {
 					+  CREATE CONTACT
 				</Button>
 			</section>
-			<div className="titles">
+			<div className="titles" style ={{fontWeight: 'bold'}}>
 				<p className="p">Name</p> 
 				<p className="p">Progress</p>  
 				<p className="p">Priority</p>
@@ -252,7 +252,7 @@ function UserHome() {
 							<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
 							<p className = "name">{d.firstName} {d.familyName}</p>
 							<p className = "status">{d.status}</p>
-							<p className = "progress" style ={{fontWeight: 'bold', color: d.progress === 'High' ? "Red" : 'Medium' ? "Orange" : "yellow"}}>{d.progress}</p>
+							<p className = "progress" style ={{fontWeight: 'bold', color: d.progress === 'High' ? "Red" : d.progress === 'Medium' ? "Orange" : d.progress === "Low" ? "Green": "Yellow"}}>{d.progress}</p>
 							</button>
 							<hr width="95%" align="center"/>
 						</>
