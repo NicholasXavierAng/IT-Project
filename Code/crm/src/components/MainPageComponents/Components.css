@@ -1,126 +1,101 @@
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
 .topbar {
-  height: 56px;
-  width: "100%";
-}
-
-.iconright2 {
-  height: 40px;
-  width: 40px;
-  float: right;
-}
-
-.logo {
-  align-items: center;
+	height: 56px;
+	width: "100%";
 }
 
 .searchbar {
-  height: 41px;
-  width: 1104px;
-  display: inline;
-  justify-content: space-between;
-  align-items: center;
+	height: 41px;
+	width: 1104px;
+	display: inline;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .p {
-  text-align: center;
-  vertical-align: top;
-  font-size: 20px;
-  font-family: "Open Sans", sans-serif;
-  letter-spacing: 10%;
-  line-height: auto;
-  color: #000;
+	text-align: center;
+	vertical-align: top;
+	font-size: 20px;
+	font-family: "Open Sans", sans-serif;
+	letter-spacing: 10%;
+	line-height: auto;
+	color: #000;
 }
 
 .createContact {
-  padding-left: 43px;
-}
-
-input[type="barStyling"] {
-  width: 1077px;
-  height: 41px;
-  background: #f2f1f9;
-  border-top: 5px;
-  border-left: 0px;
-  border-right: 0px;
-  background-color: rgba(255, 255, 255, 0);
-  padding: 0.5rem;
-  vertical-align: top;
-  font-size: 20px;
-  font-family: "Open Sans", sans-serif;
-  letter-spacing: 10%;
-  line-height: auto;
+	padding-left: 43px;
 }
 
 .searchbar {
-  width: 1104px;
-  height: 41px;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 330px;
+	width: 1104px;
+	height: 41px;
+	display: flex;
+	justify-content: space-between;
+	padding-left: 330px;
 }
 
 .line3 {
-  height: 56px;
-  width: 1395px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	height: 56px;
+	width: 1395px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .titles {
-  height: 42.35px;
-  width: 1091px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 80px;
+	height: 42.35px;
+	width: 1091px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 80px;
 }
 
 .client {
-  height: 55px;
-  width: 937.25px;
-  font-size: 20px;
-  font-family: "Open Sans", sans-serif;
-  display: flex;
-  border: none;
-  justify-content: space-between;
-  padding-left: 80px;
-  background: transparent;
+	height: 55px;
+	width: 937.25px;
+	font-size: 20px;
+	font-family: "Open Sans", sans-serif;
+	display: flex;
+	border: none;
+	justify-content: space-between;
+	padding-left: 80px;
+	background: transparent;
 }
 
 .name {
-  position: absolute;
+	position: absolute;
 }
 
 .status {
-  position: absolute;
-  left: 690px;
+	position: absolute;
+	left: 690px;
 }
 
 .progress {
-  position: absolute;
-  left: 1025px;
+	position: absolute;
+	left: 1025px;
 }
 
 .lowerpart {
-  display: flex;
+	display: flex;
 }
 
 .sidebar {
-  width: 300px;
-  height: 800px;
-  border: 0px solid;
-  display: inline-block;
+	width: 300px;
+	height: 800px;
+	border: 0px solid;
+	display: inline-block;
 }
 
-.btn {
-  position: absolute;
+.total {
+	text-align: center;
+	color: grey;
 }
 
-.options {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.filterBar {
-  padding-left: 30px;
+hr {
+	border: 1px solid lightgrey;
 }
