@@ -105,11 +105,6 @@ export default function Login({ setToken }) {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </section> 
-                    <section className="forgotPassword" onClick={() => { console.log('onClick'); }}>
-                        <Typography variant="subtitle2">
-                            Forgot password
-                        </Typography>
-                    </section>
                     <section className="submission">
                         <Button
                             type="submit"

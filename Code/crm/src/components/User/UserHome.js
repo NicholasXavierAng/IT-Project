@@ -234,7 +234,7 @@ function UserHome() {
                          ))}
 
                         <p>insert total number of contacts</p>
-						            </Box>   
+						</Box>   
                     </div>
             </div>
       </div>
