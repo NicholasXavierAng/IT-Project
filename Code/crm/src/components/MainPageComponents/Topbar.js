@@ -107,7 +107,7 @@ function Topbar () {
                         MenuListProps={{
                         'aria-labelledby': 'basic-button',
                         }}
-                        style = {{position: "absolute", top: "50px"}}
+                        style = {{position: "fixed", top: "50px"}}
                     >
                         <MenuItem onClick={handleClose}>
                             <div className = "notifications">
