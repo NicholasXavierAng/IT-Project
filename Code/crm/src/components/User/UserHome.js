@@ -131,11 +131,14 @@ function UserHome() {
 		  <div className = "searchbar">
 			<form onSubmit={doSearch}>        
 				{/* can handle searches */}
-				<SearchBar
-				value=""
-				onChange={e => searchWord(e)}
-				placeholder={"Search for contacts"}
-				/>
+				<Box pl={38}>
+					<SearchBar
+					value=""
+					onChange={e => searchWord(e)}
+					placeholder={"Search for contacts"}
+					style={{maxWidth: "1000px", maxHeight:"56px"}}
+					/>
+				</Box>
 			</form>
 		  </div>
 		  <div className ='line3'>
@@ -260,7 +263,7 @@ function UserHome() {
 						
 					{/* total number of contacts */}
 					<div className="total">
-						<p>{customers && customers.length} contacts.</p>
+						<p>{customers && customers.length} contact(s).</p>
 					</div>
 					</Box>   
 				</div>

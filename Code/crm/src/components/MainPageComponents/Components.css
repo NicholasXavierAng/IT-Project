@@ -29,9 +29,8 @@
 }
 
 .searchbar {
-	width: 1104px;
+	width: 2000px;
 	height: 41px;
-	display: flex;
 	justify-content: space-between;
 	padding-left: 330px;
 }
