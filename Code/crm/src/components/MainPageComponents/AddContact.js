@@ -11,6 +11,9 @@ import Button from '@material-ui/core/Button';
 import React, { useState ,useEffect} from 'react';
 import axios from 'axios';
 
+const config = require('../Configuration/config.json');
+const API_URL =  config.API_URL; 
+
 export default function EditInfo() {
     // Client information
     const [firstName, setFirst] = useState(); 
@@ -36,7 +39,7 @@ export default function EditInfo() {
             company : {"name":companyName, "location":location, "position":position, "department":department, "priority": priority, "status": status}
         }
         console.log(req);
-        axios.post('http://localhost:5000/user/addCustomer', req).then(res => {
+        axios.post(API_URL + 'user/addCustomer', req).then(res => {
             var data = res.data.customers; 
             console.log(data); 
         }) 

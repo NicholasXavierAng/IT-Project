@@ -17,8 +17,7 @@ import EditPw from '../Edit/EditPw'
 import AddContact from '../MainPageComponents/AddContact'; 
 
 function App() {
-    const { token, setToken } = useToken();
-    // const {isAuth, setIsAuth} = useState(true); 
+    const { token, setToken } = useToken(); 
 
     if(!token) {
         return <Login setToken={setToken} />

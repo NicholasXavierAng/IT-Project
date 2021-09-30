@@ -11,7 +11,8 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const API_URL = "http://localhost:5000/";
+const config = require('../Configuration/config.json');
+const API_URL =  config.API_URL; 
 
 async function editPw(password) {
     return fetch(API_URL + "changePassword/", {

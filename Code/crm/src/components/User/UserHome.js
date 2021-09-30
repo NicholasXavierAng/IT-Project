@@ -5,10 +5,6 @@
 
 import React, { useState ,useEffect} from 'react';
 import Topbar from '../MainPageComponents/Topbar';
-// import Line3 from '../MainPageComponents/Line3';
-// import ClientToggle from '../MainPageComponents/ClientToggle';
-// import Searchbar from '../MainPageComponents/Searchbar';
-// import Provider from '../MainPageComponents/Provider'; 
 import Button from '@material-ui/core/Button';
 import SearchBar from 'material-ui-search-bar';
 import axios from 'axios';
@@ -23,6 +19,9 @@ import Popup from 'reactjs-popup';
 import { IconButton } from '@material-ui/core';
 
 function UserHome() {
+	const config = require('../Configuration/config.json');
+	const link =  config.API_URL; 
+	console.log(process.env.REACT_APP_BASE_URL); 
 	const [customers, setCustomers] = useState();
 	// For search
 	const [search, setSearch] = useState(false);  
@@ -59,7 +58,7 @@ function UserHome() {
 	  }
 	  else {
 		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-		axios.post('http://localhost:5000/user/filter', filters).then(res => {
+		axios.post(link + 'user/filter', filters).then(res => {
 		  var data = res.data.customers;
 		  if (data.length > 0) {
 			setCustomers(data);
@@ -71,7 +70,7 @@ function UserHome() {
 
 	const getCustomers = () => {
 	  // Sends a request to the backend to get all customers
-	  axios.get('http://localhost:5000/user/customers').then(res => {
+	  axios.get(link + 'user/customers').then(res => {
 		  var data = res.data.customers; 
 		  setCustomers(data); 
 	  }) 
@@ -89,7 +88,7 @@ function UserHome() {
 		  setSearchWord(e); 
 		  setNumber(true); 
 		  const req = {"words":words, "number":e}; 
-		  axios.post('http://localhost:5000/user/search', req).then(res => {
+		  axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
 			if (data.length > 0) {
 			  setSearch(true);
@@ -103,7 +102,7 @@ function UserHome() {
 		  setSearchWord(e); 
 		  setNumber(false);
 		  const req = {"words":e, "number":number}; 
-		  axios.post('http://localhost:5000/user/search', req).then(res => {
+		  axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
 			if (data.length > 0) {
 			  setSearch(true);
@@ -120,7 +119,7 @@ function UserHome() {
 	const doSearch = async (e) => {
 		e.preventDefault(); 
 		const req = {"words":words, "number":number}; 
-		axios.post('http://localhost:5000/user/search', req).then(res => {
+		axios.post(link + 'user/search', req).then(res => {
 		  var data = res.data.customers; 
 		  if (data.length > 0) {
 			setSearch(true);
