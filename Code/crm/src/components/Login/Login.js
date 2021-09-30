@@ -10,7 +10,7 @@ import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 
 const API_URL = "http://localhost:5000/";
 
