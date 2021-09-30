@@ -47,10 +47,10 @@ function UserHome() {
 	  window.location.href = '/';
 	}
   
-	const editInfo = async (e) => {
-	  e.preventDefault();
-	  window.location.href = '/edit_information';
-	}
+	// const editInfo = async (e) => {
+	//   e.preventDefault();
+	//   window.location.href = '/edit_information';
+	// }
   
 	const editPw = async (e) => {
 	  e.preventDefault();
@@ -140,13 +140,13 @@ function UserHome() {
 		  </div>
 		  <div className ='line3'>
 			<section class="createContact">
-				<Button
+				{/* <Button
 				href="/addContact"
 				variant="contained"
 				color="secondary"
 				style={{minWidth: "254px", minHeight:"56px"}}>
 					+  CREATE CONTACT
-				</Button>
+				</Button> */}
 			</section>
 			<div className="titles" style ={{fontWeight: 'bold'}}>
 				<p className="p">Name</p> 
@@ -214,30 +214,30 @@ function UserHome() {
 		  {/*Add proper line here */}
 		  <hr width="67%" align="center"/>
 		  <br/>
-		  <Button
+		  {/* <Button
 			type="logout"
 			variant="contained"
 			color="secondary"
 			style={{minWidth: "85px", minHeight:"35px"}}
 			onClick={logOut}>
 			Log out
-		  </Button>
-		  <Button
+		  </Button> */}
+		  {/* <Button
 			type="editInfo"
 			variant="contained"
 			color="secondary"
 			style={{minWidth: "85px", minHeight:"35px"}}
 			onClick={editInfo}>
 			Edit Inforation
-		  </Button>
-		  <Button
+		  </Button> */}
+		  {/* <Button
 			type="editPw"
 			variant="contained"
 			color="secondary"
 			style={{minWidth: "85px", minHeight:"35px"}}
 			onClick={editPw}>
 			Change Password
-		  </Button>
+		  </Button> */}
 		  <div className = "lowerpart">
 				<div className = "sidebar"></div>
 				<div className = "clients" >
