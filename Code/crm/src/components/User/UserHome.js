@@ -38,19 +38,6 @@ function UserHome() {
 	const [high, setHigh] = useState(false);
 	const [medium, setMedium] = useState(false);
 	const [low, setLow] = useState(false);
-
-
-
-	const logOut = async (e) => {
-	  e.preventDefault();
-	  localStorage.clear();
-	  window.location.href = '/';
-	}
-  
-	const editInfo = async (e) => {
-	  e.preventDefault();
-	  window.location.href = '/edit_information';
-	}
   
 	const editPw = async (e) => {
 	  e.preventDefault();
@@ -92,6 +79,7 @@ function UserHome() {
 	
 	const searchWord = (e) => {
 	  // e.preventDefault(); 
+	  console.log(e); 
 	  if (e == "") {
 		setSearch(false); 
 	  }
@@ -100,11 +88,30 @@ function UserHome() {
 		  // Its a number
 		  setSearchWord(e); 
 		  setNumber(true); 
+		  const req = {"words":words, "number":e}; 
+		  axios.post('http://localhost:5000/user/search', req).then(res => {
+			var data = res.data.customers; 
+			if (data.length > 0) {
+			  setSearch(true);
+			  var cust = data; 
+			  setCustomers(cust);
+			} 
+		})
 		}
 		else {
 		  // Its a name
 		  setSearchWord(e); 
 		  setNumber(false);
+		  const req = {"words":e, "number":number}; 
+		  axios.post('http://localhost:5000/user/search', req).then(res => {
+			var data = res.data.customers; 
+			if (data.length > 0) {
+			  setSearch(true);
+			  var cust = data; 
+			  setCustomers(cust);
+			} 
+		})
+		  
 		}
 	  }
 	}
@@ -142,15 +149,7 @@ function UserHome() {
 			</form>
 		  </div>
 		  <div className ='line3'>
-			<section class="createContact">
-				<Button
-				href="/addContact"
-				variant="contained"
-				color="secondary"
-				style={{minWidth: "254px", minHeight:"56px"}}>
-					+  CREATE CONTACT
-				</Button>
-			</section>
+			<section class="createContact"></section>
 			<div className="titles" style ={{fontWeight: 'bold'}}>
 				<p className="p">Name</p> 
 				<p className="p">Progress</p>  
@@ -208,39 +207,12 @@ function UserHome() {
 
 							</div>
 				</Popup>
-				{/* <IconButton><Sort /></IconButton> */}
 			</div>
 			
 	
 		</div>
-		{/* End of Line3 */}
-		  {/*Add proper line here */}
 		  <hr width="67%" align="center"/>
 		  <br/>
-		  <Button
-			type="logout"
-			variant="contained"
-			color="secondary"
-			style={{minWidth: "85px", minHeight:"35px"}}
-			onClick={logOut}>
-			Log out
-		  </Button>
-		  <Button
-			type="editInfo"
-			variant="contained"
-			color="secondary"
-			style={{minWidth: "85px", minHeight:"35px"}}
-			onClick={editInfo}>
-			Edit Inforation
-		  </Button>
-		  <Button
-			type="editPw"
-			variant="contained"
-			color="secondary"
-			style={{minWidth: "85px", minHeight:"35px"}}
-			onClick={editPw}>
-			Change Password
-		  </Button>
 		  <div className = "lowerpart">
 				<div className = "sidebar"></div>
 				<div className = "clients" >
