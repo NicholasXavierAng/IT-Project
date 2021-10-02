@@ -12,14 +12,15 @@ const { ObjectId } = require('mongodb');
 
 userRouter.post('/search', async (req, res) => {
     var search = req.body;  
-    var number = search.number; 
-    if (!number) {
-      // Added regex and made it case insensitive  
-      customers = await Customer.find({firstName: {$regex:search.words, $options: "i"}});
-    }
-    else {
-      customers = await Customer.find({phoneNumber: {$regex:search.words}});
-    }
+	customers = await Customer.find({
+		"$expr": {
+		  "$regexMatch": {
+			"input": { "$concat": ["$firstName", " ", "$familyName"] },
+			"regex": search.words,  //Your text search here
+			"options": "i"
+		  }
+		}
+	  });
     res.json({"customers": customers});
 })
 
@@ -29,11 +30,24 @@ userRouter.get('/customers', async (req, res) => {
     res.json({"customers": customers}); 
 })
 
+
+
 var addFiltered = (customers, c) => {
-  for (var i = 0 ; i < c.length; i++) {
-    customers.push(c[i]); 
-  } 
+	// console.log(customers.includes(c[0])); 
+	for (var i = 0 ; i < c.length; i++) {
+		if (!customers.includes(c[i])) {
+			customers.push(c[i]); 
+			// console.log(customers.includes(c[i]))
+		}	
+  	} 
 }
+
+// Removes duplicates from the array.
+const removeDuplicates = (arr) => [...new Set(
+	arr.map(el => JSON.stringify(el))
+)].map(e => JSON.parse(e));
+
+
 userRouter.post('/filter', async (req, res) => {
   var customers = [] ; 
   if (req.body.new) {
@@ -68,7 +82,7 @@ userRouter.post('/filter', async (req, res) => {
     c = await Customer.find({"progress":"Low"})
     addFiltered(customers, c);
   }
-
+  customers = removeDuplicates(customers); 
   res.json({"customers":customers});  
 })
 

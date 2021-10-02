@@ -59,10 +59,8 @@ function UserHome() {
 	  else {
 		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
 		axios.post(link + 'user/filter', filters).then(res => {
-		  var data = res.data.customers;
-		  if (data.length > 0) {
-			setCustomers(data);
-		  }  
+		var data = res.data.customers;
+		setCustomers(data);
 		}) 
 
 	  } 
@@ -191,15 +189,15 @@ function UserHome() {
 								<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
 								<FormControlLabel
 									label="High"
-									control={<Checkbox checked1={high} onChange={() => setHigh(!high)} />}
+									control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
 								/>
 								<FormControlLabel
 									label="Medium"
-									control={<Checkbox checked1={medium} onChange={() => setMedium(!medium)} />}
+									control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
 								/>
 								<FormControlLabel
 									label="Low"
-									control={<Checkbox checked1={low} onChange={() => setLow(!low)} />}
+									control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
 								/>
 								</Box>
 							</div>
