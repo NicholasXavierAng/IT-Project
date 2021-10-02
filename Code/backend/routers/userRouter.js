@@ -51,35 +51,35 @@ const removeDuplicates = (arr) => [...new Set(
 userRouter.post('/filter', async (req, res) => {
   var customers = [] ; 
   if (req.body.new) {
-    c = await Customer.find({"status":"New"})
+    c = await Customer.find({"progress":"New"})
     addFiltered(customers, c); 
   }
   if (req.body.conclude) {
-    c = await Customer.find({"status":"Conclude"})
+    c = await Customer.find({"progress":"Conclude"})
     addFiltered(customers, c);
   }
   if (req.body.invited) {
-    c = await Customer.find({"status":"Invited"})
+    c = await Customer.find({"progress":"Invited"})
     addFiltered(customers, c);
   }
   if (req.body.met) {
-    c = await Customer.find({"status":"Met"})
+    c = await Customer.find({"progress":"Met"})
     addFiltered(customers, c);
   }
   if (req.body.negotiation) {
-    c = await Customer.find({"status":"Negotiation"})
+    c = await Customer.find({"progress":"Negotiation"})
     addFiltered(customers, c);
   }
   if (req.body.high) {
-    c = await Customer.find({"progress":"High"})
+    c = await Customer.find({"priority":"High"})
     addFiltered(customers, c);
   }
   if (req.body.medium) {
-    c = await Customer.find({"progress":"Medium"})
+    c = await Customer.find({"priority":"Medium"})
     addFiltered(customers, c);
   }
   if (req.body.low) {
-    c = await Customer.find({"progress":"Low"})
+    c = await Customer.find({"priority":"Low"})
     addFiltered(customers, c);
   }
   customers = removeDuplicates(customers); 
@@ -119,6 +119,8 @@ userRouter.post('/addCustomer', async (req, res) => {
     priority: company.priority,
     progress: company.status
   })
+
+  console.log(company.priority); 
 
   await customer.save(); 
   res.json({status:true});

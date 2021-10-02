@@ -21,7 +21,7 @@ import { IconButton } from '@material-ui/core';
 function UserHome() {
 	const config = require('../Configuration/config.json');
 	const link =  config.API_URL; 
-	console.log(process.env.REACT_APP_BASE_URL); 
+	// console.log(process.env.REACT_APP_BASE_URL); 
 	const [customers, setCustomers] = useState();
 	// For search
 	const [search, setSearch] = useState(false);  
@@ -96,17 +96,15 @@ function UserHome() {
 		})
 		}
 		else {
-		  // Its a name
-		  setSearchWord(e); 
-		  setNumber(false);
-		  const req = {"words":e, "number":number}; 
-		  axios.post(link + 'user/search', req).then(res => {
+			// Its a name
+			setSearchWord(e); 
+			setNumber(false);
+			const req = {"words":e, "number":number}; 
+			axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
-			if (data.length > 0) {
-			  setSearch(true);
-			  var cust = data; 
-			  setCustomers(cust);
-			} 
+			setSearch(true);
+			var cust = data; 
+			setCustomers(cust);
 		})
 		  
 		}
@@ -223,8 +221,8 @@ function UserHome() {
 							{/* A loop to handle customers directly from the database  */}
 							<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
 							<p className = "name">{d.firstName} {d.familyName}</p>
-							<p className = "status">{d.status}</p>
-							<p className = "progress" style ={{fontWeight: 'bold', color: d.progress === 'High' ? "Red" : d.progress === 'Medium' ? "Orange" : d.progress === "Low" ? "Green": "Yellow"}}>{d.progress}</p>
+							<p className = "status">{d.progress}</p>
+							<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
 							</button>
 							<hr width="95%" align="center"/>
 						</>
