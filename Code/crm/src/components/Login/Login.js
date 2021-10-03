@@ -42,11 +42,6 @@ export default function Login({ setToken }) {
         setToken(res);
     }
 
-    const register = async (e) => {
-        e.preventDefault();
-        history.push('/register');
-    }
-
     return(
         <section className="login-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
@@ -117,10 +112,6 @@ export default function Login({ setToken }) {
             </section>
             <br/>
             </form>
-            {/*
-            <section class="register">
-                <button type="register" onClick={register}>Register</button>
-            </section>*/}
         </section>
         )
 }

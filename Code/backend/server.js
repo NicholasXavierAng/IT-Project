@@ -49,15 +49,32 @@ app.post('/register', async (req, res) => {
     res.json({status:true});
 })
 
-app.put('/edit', async (req, res) => {
-    User.findOneAndUpdate({ username: req.body.username }, (req.body), (err, result) => {
-        if (err) return res.json({ msg: "Could not update." });
-        return res.json({status:true});
-    })
+app.put('/edit_information', async (req, res) => {
+    if (req.body.username != req.body.oldUsername) {
+        if (req.body.username) {
+            const existingUser = await User.findOne({ username: req.body.username });
+            if (existingUser) {
+                console.log("Username already in use.");
+                return res.status(500).send({ error: 'Username already in use.'});
+            }
+        }
+    }
+    
+    User.findOneAndUpdate({ username: req.body.oldUsername },
+        {$set: { username: req.body.username, firstName: req.body.firstName, familyName: req.body.familyName, email: req.body.email}}, {new: true}, (err, result) => {
+        if (err) return res.json({ msg: "Could not update." });   
+        jwt.sign({ firstName: result.firstName, familyName: result.familyName, username: result.username, email: result.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
+            if (err) console.log(err)
+            res.json({
+                token:token
+            })
+        })
+        console.log(result);
+    })    
 })
 
 app.put('/edit_password', async (req, res) => {
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.usernamePw });
     if(!user) {
         return res.json({ msg: `No account with this username found` });
     }
@@ -68,7 +85,9 @@ app.put('/edit_password', async (req, res) => {
     }
     if (user && passwordMatch) {
         if (req.body.newPw != req.body.confirmPw) return res.json({ msg: "Passwords don't match."})
-        User.findOneAndUpdate({username: user.username}, {$set: { password: bcrypt.hashSync(req.body.newPw, bcrypt.genSaltSync())}})
+        User.findOneAndUpdate({username: user.usernamePw}, {$set: { password: bcrypt.hashSync(req.body.newPw, bcrypt.genSaltSync())}}, {new: true}, (err, result) => {
+            console.log(result);
+        })
         return res.json({status:true});
     }
 })
@@ -89,11 +108,11 @@ app.post('/login', async (req, res) => {
     console.log(user);
     if (user && passwordMatch) {
         user.password = undefined;
-        jwt.sign({ firstName:user.firstName, familyName:user.familyName, username:user.username, email:user.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
-        if (err) console.log(err)
-        res.json({
-            token:token
-        })
+        jwt.sign({ firstName: user.firstName, familyName: user.familyName, username: user.username, email: user.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
+            if (err) console.log(err)
+            res.json({
+                token:token
+            })
         })
     }
 })
