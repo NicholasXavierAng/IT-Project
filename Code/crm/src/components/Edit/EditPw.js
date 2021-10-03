@@ -16,13 +16,13 @@ const API_URL =  config.API_URL;
 
 async function editPw(password) {
     return fetch(API_URL + "changePassword/", {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(password)
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(password)
     })
-      .then(data => data.json())
+    .then(data => data.json())
 }
 
 export default function EditPw() {
