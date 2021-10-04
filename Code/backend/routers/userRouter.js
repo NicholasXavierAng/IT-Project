@@ -4,23 +4,60 @@
 //////////////////////////////
 
 const userRouter = require('express').Router();
-const User = require('../models/user');
 const Customer = require('../models/customer');
 const Company = require('../models/company'); 
-const { Mongoose } = require('mongoose');
 const { ObjectId } = require('mongodb');
 
+
+const searchAndFilter = async (filters, search) => {
+	customers = []
+	if (filters.new) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "progress": "New"});
+		addFiltered(customers, c);
+	}
+	if (filters.conclude) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "progress": "Conclude"});
+		addFiltered(customers, c);
+	}	
+	if (filters.invited) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "progress": "Invited"});
+		addFiltered(customers, c);
+	}	
+	if (filters.met) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "progress": "Met"});
+		addFiltered(customers, c);
+	}	
+	if (filters.negotiation) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "progress": "Negotiation"});
+		addFiltered(customers, c);
+	}	
+	if (filters.high) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "priority":"High"});
+		addFiltered(customers, c);
+	}	
+	if (filters.medium) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "priority":"Medium"});
+		addFiltered(customers, c);
+	}	
+	if (filters.low) {
+		c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"]},"regex": search.words, "options": "i"}}, "priority":"Low"});
+		addFiltered(customers, c);
+	}	
+	return customers; 
+}
 userRouter.post('/search', async (req, res) => {
-    var search = req.body;  
-	customers = await Customer.find({
-		"$expr": {
-		  "$regexMatch": {
-			"input": { "$concat": ["$firstName", " ", "$familyName"] },
-			"regex": search.words,  //Your text search here
-			"options": "i"
-		  }
+    var search = req.body; 
+	var filters = search.filters;  
+	var customers = [] ; 
+	if (!search.filter) {
+		c = await Customer.find({
+			"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}});
+			addFiltered(customers, c); 
 		}
-	  });
+	else {
+		customers = await searchAndFilter(filters, search); 		 
+	}
+	customers = removeDuplicates(customers);  
     res.json({"customers": customers});
 })
 
@@ -49,41 +86,55 @@ const removeDuplicates = (arr) => [...new Set(
 
 
 userRouter.post('/filter', async (req, res) => {
-  var customers = [] ; 
-  if (req.body.new) {
-    c = await Customer.find({"progress":"New"})
-    addFiltered(customers, c); 
-  }
-  if (req.body.conclude) {
-    c = await Customer.find({"progress":"Conclude"})
-    addFiltered(customers, c);
-  }
-  if (req.body.invited) {
-    c = await Customer.find({"progress":"Invited"})
-    addFiltered(customers, c);
-  }
-  if (req.body.met) {
-    c = await Customer.find({"progress":"Met"})
-    addFiltered(customers, c);
-  }
-  if (req.body.negotiation) {
-    c = await Customer.find({"progress":"Negotiation"})
-    addFiltered(customers, c);
-  }
-  if (req.body.high) {
-    c = await Customer.find({"priority":"High"})
-    addFiltered(customers, c);
-  }
-  if (req.body.medium) {
-    c = await Customer.find({"priority":"Medium"})
-    addFiltered(customers, c);
-  }
-  if (req.body.low) {
-    c = await Customer.find({"priority":"Low"})
-    addFiltered(customers, c);
-  }
-  customers = removeDuplicates(customers); 
-  res.json({"customers":customers});  
+	var search = req.body; 
+	var filters = search.filters;  
+	var customers = [] ; 
+	// console.log("AA"); 
+	// console.log(search); 
+	if (!search.search) {
+		if (filters.new) {
+			c = await Customer.find({"progress":"New"})
+			addFiltered(customers, c); 
+		}
+		if (filters.conclude) {
+			c = await Customer.find({"progress":"Conclude"})
+			addFiltered(customers, c);
+		}
+		if (filters.invited) {
+			c = await Customer.find({"progress":"Invited"})
+			addFiltered(customers, c);
+		}
+		if (filters.met) {
+			c = await Customer.find({"progress":"Met"})
+			addFiltered(customers, c);
+		}
+		if (filters.negotiation) {
+			c = await Customer.find({"progress":"Negotiation"})
+			addFiltered(customers, c);
+		}
+		if (filters.high) {
+			c = await Customer.find({"priority":"High"})
+			addFiltered(customers, c);
+		}
+		if (filters.medium) {
+			c = await Customer.find({"priority":"Medium"})
+			addFiltered(customers, c);
+		}
+		if (filters.low) {
+			c = await Customer.find({"priority":"Low"})
+			addFiltered(customers, c);
+		}
+	}
+	else if (search.search && search.filter){
+		customers = await searchAndFilter(filters, search); 
+	}
+	else {
+		c = await Customer.find({
+			"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}});
+			addFiltered(customers, c); 
+	}
+	customers = removeDuplicates(customers); 
+	res.json({"customers":customers});  
 })
 
 userRouter.post('/profile/:id', async (req, res) => {

@@ -19,6 +19,7 @@ import Sort from '@material-ui/icons/Sort';
 import Popup from 'reactjs-popup';
 import { IconButton } from '@material-ui/core';
 
+// WHEN SEARCHING CHECK IF FILTER IS ON TOO AND VICE VERSA
 function UserHome() {
 	const config = require('../Configuration/config.json');
 	const link =  config.API_URL; 
@@ -38,33 +39,71 @@ function UserHome() {
 	const [high, setHigh] = useState(false);
 	const [medium, setMedium] = useState(false);
 	const [low, setLow] = useState(false);
-  
-	const editPw = async (e) => {
-	  e.preventDefault();
-	  window.location.href = '/edit_password';
-	}
 
 	// If we detect a change in the search property then this is run.
 	useEffect(()=> {
-	  if (!search) {
-		getCustomers();
-	  } 
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
+		if (!search && !filter) {
+			// console.log("NS"); 
+			getCustomers();
+		}
+		else if (filter){
+			var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
+			const req = {"words":words, "filters": filters, "search": search}; 
+			axios.post(link + 'user/filter', req).then(res => {
+			var data = res.data.customers; 
+			var cust = data; 
+			setCustomers(cust);
+		})
+		}
 	}, [search]); 
+
+	const getSearchAndFilter = () => {
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
+		axios.post(link + 'user/search', filters).then(res => {
+			var data = res.data.customers;
+			setCustomers(data);
+		})
+	}
 
 	// If we detect a change in the filter then this is run.
 	useEffect(()=> { 
 	  var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
-	  if (!filter) {
+	//   console.log(newCustomer); 
+	var a = !filter && !search; 
+	console.log("A +", a); 
+	  if (!filter && !search) {
 		getCustomers(); 
 	  }
-	  else {
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-		axios.post(link + 'user/filter', filters).then(res => {
-		var data = res.data.customers;
-		setCustomers(data);
-		}) 
-
+	  else if (search && filter)  {
+		// const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
+		// axios.post(link + 'user/filter', filters).then(res => {
+		// 	var data = res.data.customers;
+		// 	setCustomers(data);
+		// }) 
+		console.log("F A S"); 
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
+		const req = {"words":words, "filters": filters, "search": search, "filter":filter}; 
+		axios.post(link + 'user/filter', req).then(res => {
+			var data = res.data.customers; 
+			var cust = data; 
+			setCustomers(cust);
+		})
 	  } 
+	  else {
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
+		const req = {"words":words, "filters": filters, "search": search}; 
+		axios.post(link + 'user/filter', req).then(res => {
+			var data = res.data.customers; 
+			var cust = data; 
+			setCustomers(cust);
+		})
+	  }
+
+	  // PIT A LAST ELSE 
 	}, [newCustomer, invite, met, negotiation, conclude, high, medium, low]); 
 
 	const getCustomers = () => {
@@ -77,52 +116,40 @@ function UserHome() {
 	
 	const searchWord = (e) => {
 	  // e.preventDefault(); 
-	  console.log(e); 
+	//   console.log(e); 
 	  if (e == "") {
 		setSearch(false); 
 	  }
 	  else {
-		if (!isNaN(e)) {
-		  // Its a number
-		  setSearchWord(e); 
-		  setNumber(true); 
-		  const req = {"words":words, "number":e}; 
-		  axios.post(link + 'user/search', req).then(res => {
+		// Its a name
+		setSearchWord(e); 
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
+		const req = {"words":e, "filters": filters, "filter": filter}; 
+		axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
-			if (data.length > 0) {
-			  setSearch(true);
-			  var cust = data; 
-			  setCustomers(cust);
-			} 
-		})
-		}
-		else {
-			// Its a name
-			setSearchWord(e); 
-			setNumber(false);
-			const req = {"words":e, "number":number}; 
-			axios.post(link + 'user/search', req).then(res => {
-			var data = res.data.customers; 
+			console.log(data); 
 			setSearch(true);
 			var cust = data; 
 			setCustomers(cust);
 		})
 		  
-		}
+		
 	  }
 	}
 	
 
 	const doSearch = async (e) => {
 		e.preventDefault(); 
-		const req = {"words":words, "number":number}; 
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
+		const req = {"words":words, "filters": filters, "filter": filter}; 
+		console.log(req); 
 		axios.post(link + 'user/search', req).then(res => {
-		  var data = res.data.customers; 
-		  if (data.length > 0) {
+			var data = res.data.customers; 
 			setSearch(true);
 			var cust = data; 
 			setCustomers(cust);
-		  } 
 	  })
 	}
 
