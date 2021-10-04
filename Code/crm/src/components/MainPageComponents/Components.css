@@ -32,7 +32,7 @@
 	width: 2000px;
 	height: 41px;
 	justify-content: space-between;
-	padding-left: 330px;
+	padding-top: 10px;
 }
 
 .line3 {
@@ -75,17 +75,6 @@
 .progress {
 	position: absolute;
 	left: 1025px;
-}
-
-.lowerpart {
-	display: flex;
-}
-
-.sidebar {
-	width: 300px;
-	height: 800px;
-	border: 0px solid;
-	display: inline-block;
 }
 
 .total {

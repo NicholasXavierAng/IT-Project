@@ -11,6 +11,7 @@ import axios from 'axios';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
+//import Grid from '@material-ui/core/Grid';
 
 // import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -130,109 +131,116 @@ function UserHome() {
 	  <div className="App">
 		  <Topbar/>
 		  <br/>
-		  <div className = "searchbar">
-			<form onSubmit={doSearch}>        
-				{/* can handle searches */}
-				<Box pl={38}>
-					<SearchBar
-					value=""
-					onChange={e => searchWord(e)}
-					placeholder={"Search for contacts"}
-					style={{maxWidth: "1000px", maxHeight:"56px"}}
-					/>
-				</Box>
-			</form>
-		  </div>
-		  <div className ='line3'>
-			<section class="createContact"></section>
-			<div className="titles" style ={{fontWeight: 'bold'}}>
-				<p className="p">Name</p> 
-				<p className="p">Progress</p>  
-				<p className="p">Priority</p>
+		  <div className="content">
+			<div className = "searchbar">
+				<form onSubmit={doSearch}>        
+					{/* can handle searches */}
+					<Box
+					style = {{position: "relative", left: "20%"}}
+					>
+						<SearchBar
+						value=""
+						onChange={e => searchWord(e)}
+						placeholder={"Search for contacts"}
+						style={{maxWidth: "1000px", maxHeight:"56px"}}
+						/>
+					</Box>
+				</form>
+			</div>
+			<div className ='line3'>
+				<section class="createContact"></section>
+				<div className="titles" style ={{fontWeight: 'bold'}}>
+					<p className="p">Name</p> 
+					<p className="p">Progress</p>  
+					<p className="p">Priority</p>
 
-				<Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
-							<div>
+					<Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
+								<div>
+									<div className= "p" style ={{textAlign: "left"}}>
+										Progress
+									</div>
+									<div style ={{paddingLeft: "10px"}}>
+									<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+									<FormControlLabel
+										label="New"
+										control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
+									/>
+									<FormControlLabel
+										label="Invited"
+										control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
+									/>
+									<FormControlLabel
+										label="Met"
+										control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
+									/>
+									<FormControlLabel
+										label="Negotiation"
+										control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
+									/>
+									<FormControlLabel
+										label="Conclude"
+										control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
+									/>
+									</Box>
+								</div>
 								<div className= "p" style ={{textAlign: "left"}}>
-									Progress
+									Priority
 								</div>
 								<div style ={{paddingLeft: "10px"}}>
-								<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-								<FormControlLabel
-									label="New"
-									control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
-								/>
-								<FormControlLabel
-									label="Invited"
-									control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
-								/>
-								<FormControlLabel
-									label="Met"
-									control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
-								/>
-								<FormControlLabel
-									label="Negotiation"
-									control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
-								/>
-								<FormControlLabel
-									label="Conclude"
-									control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
-								/>
-								</Box>
-							</div>
-							<div className= "p" style ={{textAlign: "left"}}>
-								Priority
-							</div>
-							<div style ={{paddingLeft: "10px"}}>
-								{/* {childrenPriority} */}
-								<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-								<FormControlLabel
-									label="High"
-									control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
-								/>
-								<FormControlLabel
-									label="Medium"
-									control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
-								/>
-								<FormControlLabel
-									label="Low"
-									control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
-								/>
-								</Box>
-							</div>
+									{/* {childrenPriority} */}
+									<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+									<FormControlLabel
+										label="High"
+										control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
+									/>
+									<FormControlLabel
+										label="Medium"
+										control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
+									/>
+									<FormControlLabel
+										label="Low"
+										control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
+									/>
+									</Box>
+								</div>
 
-							</div>
-				</Popup>
+								</div>
+					</Popup>
+				</div>
+				
+		
 			</div>
-			
-	
-		</div>
-		  <hr width="67%" align="center"/>
-		  <br/>
-		  <div className = "lowerpart">
-				<div className = "sidebar"></div>
-				<div className = "clients" >
-					<Box
-					borderRadius={16}
-					width={1000}
-					height={1080}
-					boxShadow={6}>
-					{customers && customers.map(d => (
-						<>
-							{/* A loop to handle customers directly from the database  */}
-							<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
-							<p className = "name">{d.firstName} {d.familyName}</p>
-							<p className = "status">{d.progress}</p>
-							<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
-							</button>
-							<hr width="95%" align="center"/>
-						</>
-					))}
-						
-					{/* total number of contacts */}
-					<div className="total">
-						<p>{customers && customers.length} contact(s).</p>
+			<hr width="80%" align="center"/>
+			<br/>
+			<div className = "lowerpart">
+					<div className = "sidebar"></div>
+					<div className = "clients" >
+						<Box
+						borderRadius={16}
+						width={1200}
+						height="100%"
+						boxShadow={6}
+						style = {{position: "relative", left: "20%"}}
+						>
+						{customers && customers.map(d => (
+							<>
+								{/* A loop to handle customers directly from the database  */}
+								<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
+								<p className = "name">{d.firstName} {d.familyName}</p>
+								<p className = "status">{d.progress}</p>
+								<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
+								</button>
+								<hr width="95%" align="center"/>
+							</>
+						))}
+							
+						{/* total number of contacts */}
+						<div className="total">
+							<p>{customers && customers.length} contact(s).</p>
+						</div>
+						<br/>
+						</Box>   
 					</div>
-					</Box>   
 				</div>
 			</div>
 	  </div>
