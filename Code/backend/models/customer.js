@@ -14,7 +14,10 @@ var customerSchema = new mongoose.Schema({
     phoneNumber: String,
     gender: String,
     companyInfo: {type: mongoose.Schema.Types.ObjectId, ref: 'company'},
-    // companyInfo: String, 
+    meeting: {
+        date: String, 
+        time: String
+    },
     priority: {
         type: String,
         enum: ['High', 'Medium', 'Low',]

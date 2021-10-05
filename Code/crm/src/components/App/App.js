@@ -14,6 +14,7 @@ import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
 import EditInfo from '../Edit/EditInfo';
 import AddContact from '../MainPageComponents/AddContact'; 
+import P from '../Profile/P';
 
 function App() {
     const { token, setToken } = useToken(); 
@@ -28,7 +29,7 @@ function App() {
                 {/* User Home Page Route */}
                 <Route exact path="/" component={UserHome}/>
                 {/* User Profile Route */}
-                <Route path="/profile/:id" component={Profile}/>
+                <Route exact path="/user/profile/:id" component={Profile}/>
                 {/* Edit user information */}
                 <Route path="/edit_information" component={EditInfo}/>
                 {/* Add Contact Route  */}

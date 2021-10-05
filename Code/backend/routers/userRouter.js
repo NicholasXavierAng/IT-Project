@@ -138,7 +138,7 @@ userRouter.post('/filter', async (req, res) => {
 })
 
 userRouter.post('/profile/:id', async (req, res) => {
-    var customer = await Customer.findById(req.params.id).lean(); 
+    var customer = await Customer.findById(req.params.id).lean();  
     var company = await Company.findById(customer.companyId);
     res.json({"customer": customer, "company": company});
 })
@@ -174,6 +174,14 @@ userRouter.post('/addCustomer', async (req, res) => {
 
   await customer.save(); 
   res.json({status:true});
+})
+
+userRouter.post('/meeting/:id', async (req, res) => {
+	var customer = await Customer.findById(req.params.id);
+	// customer.nextMeeting.date = req.params.date; 
+	// customer.nextMeeting.time = req.params.time; 
+	// await customer.save(); 
+	console.log("Done");
 })
 
 module.exports = userRouter; 
