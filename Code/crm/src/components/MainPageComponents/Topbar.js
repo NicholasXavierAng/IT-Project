@@ -37,8 +37,8 @@ function Topbar () {
     }
 
     const editInfo = async (e) => {
-    e.preventDefault();
-    window.location.href = '/edit_information';
+        e.preventDefault();
+        window.location.href = '/edit_information';
     }
     return (
         <section className = 'topbar' >

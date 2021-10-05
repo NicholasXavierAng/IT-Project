@@ -39,7 +39,7 @@ async function editPassword(password) {
 }
 
 export default function EditInfo() {
-    const cancel = async (e) => {
+    const homepage = async (e) => {
         e.preventDefault();
         window.location.href = '/';
     }
@@ -86,33 +86,36 @@ export default function EditInfo() {
         <section className="editInfo-wrapper">
             <section className="topBar">
                 <AppBar position="Fixed" color="white" boxShadow={4}>
-                    <
-                        img class="header"
-                        src="/logo.png"
-                        alt="logo"
-                        width="207"
-                        height="55"
-                        style={{ alignSelf: "center" }}
-                    />
+                    <Toolbar>
+                        <Button
+                            type="homepage"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "85px", minHeight:"35px"}}
+                            onClick={homepage}>
+                            Home Page
+                        </Button>
+                        <Box 
+                        flexGrow={0.8}>
+                        </Box>
+                        <Box flexGrow={1}>
+                        <
+                            img class="header"
+                            src="/logo.png"
+                            alt="logo"
+                            width="207"
+                            height="55"
+                        />
+                        </Box>
+                    </Toolbar>
                 </AppBar>
             </section>
             
             <section className="editInfo">
                 <section className="editInfo-header">
-                    <h2>Edit Information</h2>
+                    <h3>Edit Information</h3>
                 </section>
-                
-                <Button
-                    type="cancel"
-                    variant="contained"
-                    color="secondary"
-                    style={{minWidth: "85px", minHeight:"35px"}}
-                    onClick={cancel}>
-                    Cancel
-                </Button>
                 <form onSubmit={submitInformation}>
-                    <br/>
-                    <br/>
                     <section className="information">
                         <TextField
                             required
@@ -241,6 +244,10 @@ export default function EditInfo() {
                     </section> 
                 </form>
             </section>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         </section>
         )
 }
