@@ -23,12 +23,10 @@ import { IconButton } from '@material-ui/core';
 function UserHome() {
 	const config = require('../Configuration/config.json');
 	const link =  config.API_URL; 
-	// console.log(process.env.REACT_APP_BASE_URL); 
 	const [customers, setCustomers] = useState();
 	// For search
 	const [search, setSearch] = useState(false);  
 	const [words, setSearchWord] = useState();
-	const [number, setNumber] = useState(false);
 	// For progress
 	const [newCustomer, setNew] = useState(false);
 	const [invite, setInvite] = useState(false);
@@ -41,69 +39,51 @@ function UserHome() {
 	const [low, setLow] = useState(false);
 
 	// If we detect a change in the search property then this is run.
-	useEffect(()=> {
+	useEffect(() => {
 		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
 		if (!search && !filter) {
-			// console.log("NS"); 
 			getCustomers();
-		}
-		else if (filter){
-			var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-			const req = {"words":words, "filters": filters, "search": search}; 
-			axios.post(link + 'user/filter', req).then(res => {
-			var data = res.data.customers; 
-			var cust = data; 
-			setCustomers(cust);
-		})
 		}
 	}, [search]); 
 
-	const getSearchAndFilter = () => {
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-		axios.post(link + 'user/search', filters).then(res => {
-			var data = res.data.customers;
-			setCustomers(data);
+	const getSearchAndFilter = (w) => {
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
+		const req = {"words":w, "filters": filters, "search": search, "filter": filter}; 
+		axios.post(link + 'user/searchFilter', req).then(res => {
+			var data = res.data.customers; 
+			var cust = data; 
+			setCustomers(cust);
 		})
 	}
 
 	// If we detect a change in the filter then this is run.
 	useEffect(()=> { 
-	  var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
-	//   console.log(newCustomer); 
-	var a = !filter && !search; 
-	console.log("A +", a); 
-	  if (!filter && !search) {
-		getCustomers(); 
-	  }
-	  else if (search && filter)  {
-		// const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-		// axios.post(link + 'user/filter', filters).then(res => {
-		// 	var data = res.data.customers;
-		// 	setCustomers(data);
-		// }) 
-		console.log("F A S"); 
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-		const req = {"words":words, "filters": filters, "search": search, "filter":filter}; 
-		axios.post(link + 'user/filter', req).then(res => {
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;  
+		if (!filter && !search) {
+				getCustomers(); 
+		}
+		else if (filter && search) {
+			getSearchAndFilter(words); 
+		}
+		else if (search) {
+			const req = {"words":words}; 
+			axios.post('http://localhost:5000/user/search', req).then(res => {
 			var data = res.data.customers; 
+			setSearch(true);
 			var cust = data; 
 			setCustomers(cust);
-		})
-	  } 
-	  else {
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-		const req = {"words":words, "filters": filters, "search": search}; 
-		axios.post(link + 'user/filter', req).then(res => {
-			var data = res.data.customers; 
-			var cust = data; 
-			setCustomers(cust);
-		})
-	  }
+		  })
+		}
+		else {
+			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
+			const req = {"filters": filters}; 
+			axios.post('http://localhost:5000/user/filter', req).then(res => {
+			var data = res.data.customers;
+			setCustomers(data);
+			}) 
+		}
 
-	  // PIT A LAST ELSE 
 	}, [newCustomer, invite, met, negotiation, conclude, high, medium, low]); 
 
 	const getCustomers = () => {
@@ -115,42 +95,42 @@ function UserHome() {
 	}
 	
 	const searchWord = (e) => {
-	  // e.preventDefault(); 
-	//   console.log(e); 
-	  if (e == "") {
-		setSearch(false); 
-	  }
-	  else {
-		// Its a name
-		setSearchWord(e); 
+		// Search will be true here.
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
+		if (e == "") {
+			setSearch(false); 
+			// Check if filters are on otherwise get all custoemrs.
+		}
+		else if (filter) {
+			setSearchWord(e);
+			getSearchAndFilter(e); 
+		}
+		else {
+			// Its a name
+			setSearchWord(e); 
+			const req = {"words":e}; 
+			axios.post('http://localhost:5000/user/search', req).then(res => {
+			var data = res.data.customers; 
+			setSearch(true);
+			var cust = data; 
+			setCustomers(cust);
+		  })
+		}
+	}
+
+
+	const doSearch = async (e) => {
+		// e.preventDefault(); 
+		setSearchWord(e);
 		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
 		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
 		const req = {"words":e, "filters": filters, "filter": filter}; 
 		axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
-			console.log(data); 
 			setSearch(true);
 			var cust = data; 
 			setCustomers(cust);
-		})
-		  
-		
-	  }
-	}
-	
-
-	const doSearch = async (e) => {
-		e.preventDefault(); 
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-		const req = {"words":words, "filters": filters, "filter": filter}; 
-		console.log(req); 
-		axios.post(link + 'user/search', req).then(res => {
-			var data = res.data.customers; 
-			setSearch(true);
-			var cust = data; 
-			setCustomers(cust);
-	  })
+		}) 
 	}
 
 

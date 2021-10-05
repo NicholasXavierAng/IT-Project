@@ -45,36 +45,41 @@ const searchAndFilter = async (filters, search) => {
 	}	
 	return customers; 
 }
-userRouter.post('/search', async (req, res) => {
+
+userRouter.post('/searchFilter', async (req, res) => {
     var search = req.body; 
 	var filters = search.filters;  
 	var customers = [] ; 
-	if (!search.filter) {
-		c = await Customer.find({
-			"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}});
-			addFiltered(customers, c); 
-		}
-	else {
-		customers = await searchAndFilter(filters, search); 		 
-	}
+	customers = await searchAndFilter(filters, search); 		  
 	customers = removeDuplicates(customers);  
     res.json({"customers": customers});
 })
 
+
+userRouter.post('/search', async (req, res) => {
+    var search = req.body;   
+	var customers = [] ; 
+	customers = await justSearch(search);
+	customers = removeDuplicates(customers);  
+    res.json({"customers": customers});
+})
+
+const justSearch = async (search) => {
+	customers = [] 
+	c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}});
+	addFiltered(customers, c); 
+	return customers;
+}
+
 userRouter.get('/customers', async (req, res) => {
     var customers = await Customer.find().lean(); 
-    // console.log(customers); 
     res.json({"customers": customers}); 
 })
 
-
-
 var addFiltered = (customers, c) => {
-	// console.log(customers.includes(c[0])); 
 	for (var i = 0 ; i < c.length; i++) {
 		if (!customers.includes(c[i])) {
 			customers.push(c[i]); 
-			// console.log(customers.includes(c[i]))
 		}	
   	} 
 }
@@ -85,54 +90,48 @@ const removeDuplicates = (arr) => [...new Set(
 )].map(e => JSON.parse(e));
 
 
+const justFilter = async (filters) => {
+	customers = [] 
+	if (filters.new) {
+		c = await Customer.find({"progress":"New"})
+		addFiltered(customers, c); 
+	}
+	if (filters.conclude) {
+		c = await Customer.find({"progress":"Conclude"})
+		addFiltered(customers, c);
+	}
+	if (filters.invited) {
+		c = await Customer.find({"progress":"Invited"})
+		addFiltered(customers, c);
+	}
+	if (filters.met) {
+		c = await Customer.find({"progress":"Met"})
+		addFiltered(customers, c);
+	}
+	if (filters.negotiation) {
+		c = await Customer.find({"progress":"Negotiation"})
+		addFiltered(customers, c);
+	}
+	if (filters.high) {
+		c = await Customer.find({"priority":"High"})
+		addFiltered(customers, c);
+	}
+	if (filters.medium) {
+		c = await Customer.find({"priority":"Medium"})
+		addFiltered(customers, c);
+	}
+	if (filters.low) {
+		c = await Customer.find({"priority":"Low"})
+		addFiltered(customers, c);
+	}
+	return customers; 
+}
+
 userRouter.post('/filter', async (req, res) => {
 	var search = req.body; 
 	var filters = search.filters;  
 	var customers = [] ; 
-	// console.log("AA"); 
-	// console.log(search); 
-	if (!search.search) {
-		if (filters.new) {
-			c = await Customer.find({"progress":"New"})
-			addFiltered(customers, c); 
-		}
-		if (filters.conclude) {
-			c = await Customer.find({"progress":"Conclude"})
-			addFiltered(customers, c);
-		}
-		if (filters.invited) {
-			c = await Customer.find({"progress":"Invited"})
-			addFiltered(customers, c);
-		}
-		if (filters.met) {
-			c = await Customer.find({"progress":"Met"})
-			addFiltered(customers, c);
-		}
-		if (filters.negotiation) {
-			c = await Customer.find({"progress":"Negotiation"})
-			addFiltered(customers, c);
-		}
-		if (filters.high) {
-			c = await Customer.find({"priority":"High"})
-			addFiltered(customers, c);
-		}
-		if (filters.medium) {
-			c = await Customer.find({"priority":"Medium"})
-			addFiltered(customers, c);
-		}
-		if (filters.low) {
-			c = await Customer.find({"priority":"Low"})
-			addFiltered(customers, c);
-		}
-	}
-	else if (search.search && search.filter){
-		customers = await searchAndFilter(filters, search); 
-	}
-	else {
-		c = await Customer.find({
-			"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}});
-			addFiltered(customers, c); 
-	}
+	customers = await justFilter(filters);
 	customers = removeDuplicates(customers); 
 	res.json({"customers":customers});  
 })
@@ -171,7 +170,6 @@ userRouter.post('/addCustomer', async (req, res) => {
     progress: company.status
   })
 
-  console.log(company.priority); 
 
   await customer.save(); 
   res.json({status:true});
