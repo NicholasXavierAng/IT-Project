@@ -5,21 +5,16 @@
 
 import React, { useState ,useEffect} from 'react';
 import Topbar from '../MainPageComponents/Topbar';
-import Button from '@material-ui/core/Button';
 import SearchBar from 'material-ui-search-bar';
 import axios from 'axios';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
-//import Grid from '@material-ui/core/Grid';
-
-// import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Sort from '@material-ui/icons/Sort';
 import Popup from 'reactjs-popup';
 import { IconButton } from '@material-ui/core';
 
-// WHEN SEARCHING CHECK IF FILTER IS ON TOO AND VICE VERSA
 function UserHome() {
 	const config = require('../Configuration/config.json');
 	const link =  config.API_URL; 
