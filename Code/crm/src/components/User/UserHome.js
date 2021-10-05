@@ -1,7 +1,7 @@
-//////////////////////////////
+///////////////////////////////
 // Author(s): Terry, Zakarya Butt, Rebecca Ye
 // Date Made: 09/09/2021
-//////////////////////////////
+///////////////////////////////
 
 import React, { useState ,useEffect} from 'react';
 import Topbar from '../MainPageComponents/Topbar';
