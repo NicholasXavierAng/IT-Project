@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useToken from '../App/useToken';
+import { IconButton, AppBar, Toolbar } from '@material-ui/core';
 
 const jwt = require('jsonwebtoken');
 const config = require('../Configuration/config.json');
@@ -83,151 +84,163 @@ export default function EditInfo() {
 
     return(
         <section className="editInfo-wrapper">
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <label>Edit Information</label>
-            <Button
-                type="cancel"
-                variant="contained"
-                color="secondary"
-                style={{minWidth: "85px", minHeight:"35px"}}
-                onClick={cancel}>
-                Cancel
-            </Button>
-            <form onSubmit={submitInformation}>
-                <br/>
-                <br/>
-                <section className="information">
-                    <TextField
-                        required
-                        id="username"
-                        label="Username"
-                        defaultValue={decode.username}
-                        variant="outlined"
-                        color="secondary"
-                        height="56px"
-                        width="232px"
-                        onChange={e => setUsername(e.target.value)}
+            <section className="topBar">
+                <AppBar position="Fixed" color="white" boxShadow={4}>
+                    <
+                        img class="header"
+                        src="/logo.png"
+                        alt="logo"
+                        width="207"
+                        height="55"
+                        style={{ alignSelf: "center" }}
                     />
-                    <br/>
-                    <br/>
-                
-                    <TextField
-                        required
-                        id="firstName"
-                        label="First Name"
-                        defaultValue={decode.firstName}
-                        variant="outlined"
-                        color="secondary"
-                        height="56px"
-                        width="232px"
-                        onChange={e => setFirstName(e.target.value)}
-                    />
-                    <br/>
-                    <br/>
-                
-                    <TextField
-                        required
-                        id="familyName"
-                        label="Family Name"
-                        defaultValue={decode.familyName}
-                        variant="outlined"
-                        color="secondary"
-                        height="56px"
-                        width="232px"
-                        onChange={e => setFamilyName(e.target.value)}
-                    />
-                    <br/>
-                    <br/>
-                
-                    <TextField
-                        required
-                        id="email"
-                        label="Email"
-                        defaultValue={decode.email}
-                        variant="outlined"
-                        color="secondary"
-                        height="56px"
-                        width="232px"
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <br/>
-                    <br/>
-                </section>
-                <section className="saveChanges">
-                    <Button
-                        type="save"
-                        variant="contained"
-                        color="secondary"
-                        style={{minWidth: "85px", minHeight:"35px"}}>
-                        Save changes
-                    </Button>
-                </section>
-            </form>
-            
-            <form onSubmit={submitPassword}>
-            <br/>
-            <br/>
-            <label>Edit Password</label>
-            <br/>
-            <br/>
-            <section className="password">
-                <TextField
-                    required
-                    id="oldpw"
-                    label="Old Password"
-                    type="oldPw"
-                    placeholder="At least 8 characters..."
-                    variant="outlined"
-                    color="secondary"
-                    height="56px"
-                    width="232px"
-                    onChange={e => setOldPw(e.target.value)}
-                />
-                <br/>
-                <br/>
-                <TextField
-                    required
-                    id="newpw"
-                    label="New Password"
-                    type="newPw"
-                    placeholder="At least 8 characters..."
-                    variant="outlined"
-                    color="secondary"
-                    height="56px"
-                    width="232px"
-                    onChange={e => setNewPw(e.target.value)}
-                />
-                <br/>
-                <br/>
-                <TextField
-                    required
-                    id="confirmPw"
-                    label="Confirm New Password"
-                    type="confirmPw"
-                    placeholder="At least 8 characters..."
-                    variant="outlined"
-                    color="secondary"
-                    height="56px"
-                    width="232px"
-                    onChange={e => setConfirmPw(e.target.value)}
-                />
-                <br/>
-                <br/>
+                </AppBar>
             </section>
-            <section className="changePassword">
-                    <Button
-                        type="save"
-                        variant="contained"
-                        color="secondary"
-                        style={{minWidth: "85px", minHeight:"35px"}}>
-                        Change Password
-                    </Button>
-                </section> 
-            </form>       
             
+            <section className="editInfo">
+                <section className="editInfo-header">
+                    <h2>Edit Information</h2>
+                </section>
+                
+                <Button
+                    type="cancel"
+                    variant="contained"
+                    color="secondary"
+                    style={{minWidth: "85px", minHeight:"35px"}}
+                    onClick={cancel}>
+                    Cancel
+                </Button>
+                <form onSubmit={submitInformation}>
+                    <br/>
+                    <br/>
+                    <section className="information">
+                        <TextField
+                            required
+                            id="username"
+                            label="Username"
+                            defaultValue={decode.username}
+                            variant="outlined"
+                            color="secondary"
+                            height="56px"
+                            width="232px"
+                            onChange={e => setUsername(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                    
+                        <TextField
+                            required
+                            id="firstName"
+                            label="First Name"
+                            defaultValue={decode.firstName}
+                            variant="outlined"
+                            color="secondary"
+                            height="56px"
+                            width="232px"
+                            onChange={e => setFirstName(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                    
+                        <TextField
+                            required
+                            id="familyName"
+                            label="Family Name"
+                            defaultValue={decode.familyName}
+                            variant="outlined"
+                            color="secondary"
+                            height="56px"
+                            width="232px"
+                            onChange={e => setFamilyName(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                        <TextField
+                            required
+                            id="email"
+                            label="Email"
+                            defaultValue={decode.email}
+                            variant="outlined"
+                            color="secondary"
+                            height="56px"
+                            width="232px"
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                        <br/>
+                        <br/>
+                    </section>
+                    <section className="saveChanges">
+                        <Button
+                            type="save"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "85px", minHeight:"35px"}}>
+                            Save changes
+                        </Button>
+                    </section>
+                </form>
+            </section>
+            
+            <section className="editPw">
+            <form onSubmit={submitPassword}>
+                <section className="editPw-header">
+                    <h1>Edit Password</h1>
+                </section>
+                <section className="password">
+                    <TextField
+                        required
+                        id="oldpw"
+                        label="Old Password"
+                        type="oldPw"
+                        placeholder="At least 8 characters..."
+                        variant="outlined"
+                        color="secondary"
+                        height="56px"
+                        width="232px"
+                        onChange={e => setOldPw(e.target.value)}
+                    />
+                    <br/>
+                    <br/>
+                    <TextField
+                        required
+                        id="newpw"
+                        label="New Password"
+                        type="newPw"
+                        placeholder="At least 8 characters..."
+                        variant="outlined"
+                        color="secondary"
+                        height="56px"
+                        width="232px"
+                        onChange={e => setNewPw(e.target.value)}
+                    />
+                    <br/>
+                    <br/>
+                    <TextField
+                        required
+                        id="confirmPw"
+                        label="Confirm New Password"
+                        type="confirmPw"
+                        placeholder="At least 8 characters..."
+                        variant="outlined"
+                        color="secondary"
+                        height="56px"
+                        width="232px"
+                        onChange={e => setConfirmPw(e.target.value)}
+                    />
+                    <br/>
+                    <br/>
+                </section>
+                <section className="changePassword">
+                        <Button
+                            type="save"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "85px", minHeight:"35px"}}>
+                            Change Password
+                        </Button>
+                    </section> 
+                </form>
+            </section>
         </section>
         )
 }
