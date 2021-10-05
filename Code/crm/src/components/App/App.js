@@ -3,7 +3,7 @@
 // Date Made: 08/09/2021
 //////////////////////////////
 
-import React, { useState } from 'react';
+import React from 'react';
 import {BrowserRouter as Router, BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';

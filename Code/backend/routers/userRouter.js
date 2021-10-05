@@ -73,6 +73,7 @@ const justSearch = async (search) => {
 
 userRouter.get('/customers', async (req, res) => {
     var customers = await Customer.find().lean(); 
+    // console.log(customers); 
     res.json({"customers": customers}); 
 })
 
