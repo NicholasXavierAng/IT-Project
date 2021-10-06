@@ -14,7 +14,6 @@ import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
 import EditInfo from '../Edit/EditInfo';
 import AddContact from '../MainPageComponents/AddContact'; 
-import P from '../Profile/P';
 
 function App() {
     const { token, setToken } = useToken(); 

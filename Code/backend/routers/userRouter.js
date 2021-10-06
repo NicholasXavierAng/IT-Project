@@ -178,10 +178,15 @@ userRouter.post('/addCustomer', async (req, res) => {
 
 userRouter.post('/meeting/:id', async (req, res) => {
 	var customer = await Customer.findById(req.params.id);
-	// customer.nextMeeting.date = req.params.date; 
-	// customer.nextMeeting.time = req.params.time; 
-	// await customer.save(); 
-	console.log("Done");
+	// console.log(customer);
+	// console.log(customer.meeting); 
+	// console.log(customer.gender); 
+	customer.meeting.date = req.body.date; 
+	customer.meeting.time = req.body.time; 
+	await customer.save(); 
+	console.log("DONE"); 
+	res.json({"status":true}); 
+	// console.log("Done");
 })
 
 module.exports = userRouter; 

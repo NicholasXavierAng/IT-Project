@@ -43,9 +43,8 @@ export default function Profile({props}) {
 
     useEffect( ()=> { 
         if (date && time) {
-            // var d  = JSON.stringify(date); 
-            var req = {"date":date, "time": time};
-            // console.log(req);
+            var d = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();  
+            var req = {"date":d, "time": time};
             axios.post('http://localhost:5000/user/meeting/' + id, req).then(res => {
                 var data = res.data.customers;
                 console.log(data);
@@ -162,7 +161,7 @@ export default function Profile({props}) {
                             <centre><h3><b>NEXT MEETING</b></h3></centre>
                         </Box>
                         <Box display="flex" justifyContent="space-between">
-                            <p><b>Date: </b> <span className="contactInfo"><Moment format="YYYY-mm-dd">{customer.nextMeeting}</Moment></span></p>
+                            <p><b>Date: </b> <span className="contactInfo">{customer.meeting.date}</span></p>
                             <Popup trigger={<IconButton><Pen/></IconButton>} position="bottom center">
                                 <div>
                                     <Calendar
@@ -172,7 +171,7 @@ export default function Profile({props}) {
                             </Popup>
                         </Box>
                         <Box display="flex" justifyContent="space-between">
-                            <p><b>Time:</b> 16:00</p>
+                            <p><b>Time:</b> {customer.meeting.time}</p>
                             <Popup trigger={<IconButton><Pen/></IconButton>} position="bottom center">
                                 <div>
                                 <TextField

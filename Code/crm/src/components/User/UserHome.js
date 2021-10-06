@@ -4,7 +4,8 @@
 ///////////////////////////////
 
 import React, { useState ,useEffect} from 'react';
-import Topbar from '../MainPageComponents/Topbar';
+import '../MainPageComponents/Components.css';
+// import Topbar from '../MainPageComponents/Topbar';
 import SearchBar from 'material-ui-search-bar';
 import axios from 'axios';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -13,12 +14,18 @@ import Box from '@material-ui/core/Box';
 import 'reactjs-popup/dist/index.css';
 import Sort from '@material-ui/icons/Sort';
 import Popup from 'reactjs-popup';
-import { IconButton } from '@material-ui/core';
+import { IconButton, AppBar, Toolbar } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import NotificationsIcon from '@material-ui/icons/Notifications'; 
+import MenuIcon from '@material-ui/icons/Menu';
 
 function UserHome() {
 	const config = require('../Configuration/config.json');
 	const link =  config.API_URL; 
 	const [customers, setCustomers] = useState();
+	const [meetings, setMeetings] = useState();
 	// For search
 	const [search, setSearch] = useState(false);  
 	const [words, setSearchWord] = useState();
@@ -32,6 +39,37 @@ function UserHome() {
 	const [high, setHigh] = useState(false);
 	const [medium, setMedium] = useState(false);
 	const [low, setLow] = useState(false);
+
+	const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorE2, setAnchorE2] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const open2 = Boolean(anchorE2);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleCloseMenu = () => {
+        setAnchorE2(null);
+    };
+
+    const handleMenu = (event) => {
+        setAnchorE2(event.currentTarget);
+    };
+
+    const logOut = async (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        window.location.href = '/';
+    }
+
+    const editInfo = async (e) => {
+        e.preventDefault();
+        window.location.href = '/edit_information';
+    }
+
 
 	// If we detect a change in the search property then this is run.
 	useEffect(() => {
@@ -86,6 +124,20 @@ function UserHome() {
 	  axios.get(link + 'user/customers').then(res => {
 		  var data = res.data.customers; 
 		  setCustomers(data); 
+		  var meetings = [];
+		  for (var i = 0; i < data.length; i++) {
+			  var customer = data[i];
+			  if (customer.meeting) {
+				var meeting = {
+					"name": customer.firstName + " " + customer.familyName, 
+					"date": customer.meeting.date, 
+					"time": customer.meeting.time
+				}
+				meetings.push(meeting);
+				}
+		  }
+		  console.log(meetings);
+		  setMeetings(meetings);
 	  }) 
 	}
 	
@@ -131,7 +183,91 @@ function UserHome() {
 
 	return (
 	  <div className="App">
-		  <Topbar/>
+		  <section className = 'topbar' >
+            <AppBar position="Fixed" color="white" boxShadow={4}>
+                <Toolbar>
+
+                <IconButton>
+                    <MenuIcon onClick = {handleMenu}/> 
+                </IconButton>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorE2}
+                    open={open2}
+                    onClose={handleCloseMenu}
+                    MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    <MenuItem onClick={handleClose}>
+                        <Button
+                            href="/addContact"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "254px", minHeight:"56px"}}>
+                                +  ADD CLIENT
+                        </Button>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                        <Button
+                            type="editInfo"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "254px", minHeight:"56px"}}
+                            onClick={editInfo}>
+                            Edit Information
+                        </Button>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        <Button
+                            type="logout"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "254px", minHeight:"56px"}}
+                            onClick={logOut}>
+                            Log out
+                        </Button>
+                    </MenuItem>
+
+                </Menu>
+                    
+                    <Box 
+                        flexGrow={1}>
+                    </Box>
+                    <Box flexGrow={1}>
+                        <img class="header" src="/logo.png" alt="logo" width="207" height="55" />
+                    </Box>
+                    <IconButton>
+                        <NotificationsIcon onClick = {handleClick}/> 
+                    </IconButton>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                        }}
+                        style = {{position: "fixed", top: "50px"}}
+                    >
+						{meetings && meetings.map(d => (
+							<>
+								<MenuItem onClick={handleClose}>
+									<div className = "notifications">
+										<div className = "timestamp">1 hour ago</div>
+										<div className = "content"> Meeting with {d.name}, {d.time}pm {d.date} today</div>
+										<div className="divider">
+											<div className="line" />
+										</div>
+									</div>
+								</MenuItem>
+							</>
+						 ))}
+                    </Menu>
+                </Toolbar>
+            </AppBar>
+        </section>
 		  <br/>
 		  <div className="content">
 			<div className = "searchbar">
