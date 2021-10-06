@@ -256,7 +256,7 @@ function UserHome() {
 								<MenuItem onClick={handleClose}>
 									<div className = "notifications">
 										<div className = "timestamp">1 hour ago</div>
-										<div className = "content"> Meeting with {d.name}, {d.time}pm {d.date} today</div>
+										<div className = "content"> Meeting with {d.name}, {d.time} on {d.date}</div>
 										<div className="divider">
 											<div className="line" />
 										</div>
@@ -280,7 +280,7 @@ function UserHome() {
 						value=""
 						onChange={e => searchWord(e)}
 						placeholder={"Search for contacts"}
-						style={{maxWidth: "70%", maxHeight:"25%"}}
+						style={{maxWidth: "1000px", maxHeight:"56px"}}
 						/>
 					</Box>
 				</form>
@@ -288,13 +288,11 @@ function UserHome() {
 			<div className ='line3'>
 				<section class="createContact"></section>
 				<div className="titles" style ={{fontWeight: 'bold'}}>
-				
-					<p className="n">Name</p> 
-					<p className="s">Progress</p>  
-					<p className="pro">Priority</p>
-				
-		
-					<Popup trigger={<IconButton style = {{position: "absolute",left: "87%", top: "13%"}}><Sort /></IconButton>} position="bottom center">
+					<p className="p">Name</p> 
+					<p className="p">Progress</p>  
+					<p className="p">Priority</p>
+
+					<Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
 								<div>
 									<div className= "p" style ={{textAlign: "left"}}>
 										Progress
@@ -350,14 +348,14 @@ function UserHome() {
 				
 		
 			</div>
-			<hr width="70%" align="center" style = {{position: "relative", left: "5%"}}/>
+			<hr width="80%" align="center"/>
 			<br/>
 			<div className = "lowerpart">
 					<div className = "sidebar"></div>
 					<div className = "clients" >
 						<Box
 						borderRadius={16}
-						width="70%"
+						width={1200}
 						height="100%"
 						boxShadow={6}
 						style = {{position: "relative", left: "20%"}}
