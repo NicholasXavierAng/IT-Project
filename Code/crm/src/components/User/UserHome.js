@@ -292,7 +292,7 @@ function UserHome() {
 					<p className="s">Progress</p>  
 					<p className="pro">Priority</p>
 
-					<Popup trigger={<IconButton style = {{position : "absolute", left : "114%"}}><Sort /></IconButton>} position="bottom center">
+					<Popup trigger={<IconButton style = {{position : "absolute", left : "113%"}}><Sort /></IconButton>} position="bottom center">
 								<div>
 									<div className= "p" style ={{textAlign: "left"}}>
 										Progress
@@ -348,7 +348,7 @@ function UserHome() {
 				
 		
 			</div>
-			<hr width = "70%" align="center" style = {{position: "relative", left: "5%"}}/>
+			<hr width = "70%" align="center" style = {{position: "absolute", left: "20%"}}/>
 			<br/>
 			<div className = "lowerpart">
 					<div className = "sidebar"></div>
