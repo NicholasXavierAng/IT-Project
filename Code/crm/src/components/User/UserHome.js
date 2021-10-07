@@ -280,7 +280,7 @@ function UserHome() {
 						value=""
 						onChange={e => searchWord(e)}
 						placeholder={"Search for contacts"}
-						style={{maxWidth: "1000px", maxHeight:"56px"}}
+						style={{maxWidth: "70%", maxHeight:"25%"}}
 						/>
 					</Box>
 				</form>
@@ -288,11 +288,11 @@ function UserHome() {
 			<div className ='line3'>
 				<section class="createContact"></section>
 				<div className="titles" style ={{fontWeight: 'bold'}}>
-					<p className="p">Name</p> 
-					<p className="p">Progress</p>  
-					<p className="p">Priority</p>
+					<p className="n">Name</p> 
+					<p className="s">Progress</p>  
+					<p className="pro">Priority</p>
 
-					<Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
+					<Popup trigger={<IconButton style = {{position : "absolute", left : "114%"}}><Sort /></IconButton>} position="bottom center">
 								<div>
 									<div className= "p" style ={{textAlign: "left"}}>
 										Progress
@@ -348,14 +348,14 @@ function UserHome() {
 				
 		
 			</div>
-			<hr width="80%" align="center"/>
+			<hr width = "70%" align="center" style = {{position: "relative", left: "5%"}}/>
 			<br/>
 			<div className = "lowerpart">
 					<div className = "sidebar"></div>
 					<div className = "clients" >
 						<Box
 						borderRadius={16}
-						width={1200}
+						width="70%"
 						height="100%"
 						boxShadow={6}
 						style = {{position: "relative", left: "20%"}}
