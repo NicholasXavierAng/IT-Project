@@ -200,6 +200,7 @@ function UserHome() {
                     MenuListProps={{
                     'aria-labelledby': 'basic-button',
                     }}
+					style = {{position: "absolute", top: "4%"}}
                 >
                     <MenuItem onClick={handleClose}>
                         <Button
@@ -251,7 +252,7 @@ function UserHome() {
                         MenuListProps={{
                         'aria-labelledby': 'basic-button',
                         }}
-                        style = {{position: "fixed", top: "50px"}}
+                        style = {{position: "absolute", top: "4%"}}
                     >
 						{meetings && meetings.map(d => (
 							<>

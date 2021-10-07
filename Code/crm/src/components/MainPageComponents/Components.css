@@ -47,8 +47,8 @@
   width: 70%;
   display: flex;
   font-size: 20px;
-  position: absolute;
-  top: 9%;
+  position: fixed;
+  top: 11%;
   left: 8%;
 }
 
