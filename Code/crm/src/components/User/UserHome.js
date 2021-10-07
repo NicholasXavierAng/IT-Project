@@ -20,6 +20,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import NotificationsIcon from '@material-ui/icons/Notifications'; 
 import MenuIcon from '@material-ui/icons/Menu';
+import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 
 function UserHome() {
 	const config = require('../Configuration/config.json');
@@ -39,6 +40,7 @@ function UserHome() {
 	const [high, setHigh] = useState(false);
 	const [medium, setMedium] = useState(false);
 	const [low, setLow] = useState(false);
+	const [alpha, setAlpha] = useState(false); 
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorE2, setAnchorE2] = React.useState(null);
@@ -73,15 +75,15 @@ function UserHome() {
 
 	// If we detect a change in the search property then this is run.
 	useEffect(() => {
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha; 
 		if (!search && !filter) {
 			getCustomers();
 		}
 	}, [search]); 
 
 	const getSearchAndFilter = (w) => {
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low, "alpha": alpha};  
 		const req = {"words":w, "filters": filters, "search": search, "filter": filter}; 
 		axios.post(link + 'user/searchFilter', req).then(res => {
 			var data = res.data.customers; 
@@ -92,7 +94,7 @@ function UserHome() {
 
 	// If we detect a change in the filter then this is run.
 	useEffect(()=> { 
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;  
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;  
 		if (!filter && !search) {
 				getCustomers(); 
 		}
@@ -109,15 +111,15 @@ function UserHome() {
 		  })
 		}
 		else {
-			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-			const req = {"filters": filters}; 
+			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low, "alpha": alpha}; 
+			const req = {"filters": filters, "filter": filter}; 
 			axios.post('http://localhost:5000/user/filter', req).then(res => {
 			var data = res.data.customers;
 			setCustomers(data);
 			}) 
 		}
 
-	}, [newCustomer, invite, met, negotiation, conclude, high, medium, low]); 
+	}, [newCustomer, invite, met, negotiation, conclude, high, medium, low, alpha]); 
 
 	const getCustomers = () => {
 	  // Sends a request to the backend to get all customers
@@ -143,7 +145,7 @@ function UserHome() {
 	
 	const searchWord = (e) => {
 		// Search will be true here.
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha; 
 		if (e == "") {
 			setSearch(false); 
 			// Check if filters are on otherwise get all custoemrs.
@@ -155,7 +157,7 @@ function UserHome() {
 		else {
 			// Its a name
 			setSearchWord(e); 
-			const req = {"words":e}; 
+			const req = {"words":e, "alpha": alpha}; 
 			axios.post('http://localhost:5000/user/search', req).then(res => {
 			var data = res.data.customers; 
 			setSearch(true);
@@ -169,7 +171,7 @@ function UserHome() {
 	const doSearch = async (e) => {
 		// e.preventDefault(); 
 		setSearchWord(e);
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;
 		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
 		const req = {"words":e, "filters": filters, "filter": filter}; 
 		axios.post(link + 'user/search', req).then(res => {
@@ -292,7 +294,7 @@ function UserHome() {
 					<p className="s">Progress</p>  
 					<p className="pro">Priority</p>
 
-					<Popup trigger={<IconButton style = {{position : "absolute", left : "113%"}}><Sort /></IconButton>} position="bottom center">
+					<Popup trigger={<IconButton style = {{position : "absolute", left : "110%"}}><Sort /></IconButton>} position="bottom center">
 								<div>
 									<div className= "p" style ={{textAlign: "left"}}>
 										Progress
@@ -343,7 +345,9 @@ function UserHome() {
 								</div>
 
 								</div>
-					</Popup>
+						</Popup>
+
+						<IconButton onClick={() => setAlpha(!alpha)} style = {{position : "absolute", left : "113%"}}><SortByAlphaIcon /></IconButton>
 				</div>
 				
 		
