@@ -5,7 +5,6 @@
 
 import React, { useState ,useEffect} from 'react';
 import '../MainPageComponents/Components.css';
-// import Topbar from '../MainPageComponents/Topbar';
 import SearchBar from 'material-ui-search-bar';
 import axios from 'axios';
 import FormControlLabel from '@material-ui/core/FormControlLabel';

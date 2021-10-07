@@ -14,7 +14,6 @@ const searchAndFilter = async (filters, search) => {
 	sort = false; 
 	filter = filters.new || filters.conclude || filters.invite ||filters.met || filters.negotiation || filters.high || filters.medium || filters.low; 
 	if (filters.alpha) {
-		console.log("A")
 		if (!filter) {
 			c = await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}}).sort({firstName: 1})
 			addFiltered(customers, c);
@@ -77,15 +76,13 @@ userRouter.post('/search', async (req, res) => {
 
 const justSearch = async (search) => {
 	customers = [] 
-	console.log("S");
 	c = search.alpha ? await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}}): await Customer.find({"$expr": {"$regexMatch": {"input": { "$concat": ["$firstName", " ", "$familyName"] },"regex": search.words,  "options": "i"}}}).sort(); 
 	addFiltered(customers, c); 
 	return customers;
 }
 
 userRouter.get('/customers', async (req, res) => {
-    var customers = await Customer.find().lean(); 
-    // console.log(customers); 
+    var customers = await Customer.find().lean();  
     res.json({"customers": customers}); 
 })
 
@@ -124,9 +121,7 @@ const justFilter = async (filters) => {
 		addFiltered(customers, c);
 	}
 	if (filters.invite) {
-		console.log("i")
 		c = sort == false ? await Customer.find({"progress":"Invited"}) : await Customer.find({"progress":"Invited"}).sort({firstName: 1}); 
-		console.log(c)
 		addFiltered(customers, c);
 	}
 	if (filters.met) {
