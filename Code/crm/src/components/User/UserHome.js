@@ -1,5 +1,5 @@
 ///////////////////////////////
-// Author(s): Terry, Zakarya Butt, Rebecca Ye
+// Author(s): Terry Tran, Zakarya Butt, Rebecca Ye
 // Date Made: 09/09/2021
 ///////////////////////////////
 
