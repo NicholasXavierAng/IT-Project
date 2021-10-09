@@ -19,7 +19,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import NotificationsIcon from '@material-ui/icons/Notifications'; 
 import MenuIcon from '@material-ui/icons/Menu';
-import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
+import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 
 function UserHome() {
 	const config = require('../Configuration/config.json');
