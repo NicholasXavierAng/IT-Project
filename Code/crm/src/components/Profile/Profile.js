@@ -29,7 +29,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
 
 export default function Profile({props}) {
-
+    const config = require('../Configuration/config.json');
+    const link =  config.API_URL; 
     var [customer, setCustomer] = useState(); 
     var [company, setCompany] = useState(); 
     var [progress, setProgress] = useState();
@@ -53,7 +54,7 @@ export default function Profile({props}) {
         if (date && time) {
             var d = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();  
             var req = {"date":d, "time": time};
-            axios.post('http://localhost:5000/user/meeting/' + id, req).then(res => {
+            axios.post(link + 'user/meeting/' + id, req).then(res => {
                 var data = res.data.customers;
                 // console.log(data);
 			})
@@ -64,7 +65,7 @@ export default function Profile({props}) {
      
     // Gets data for the specific customer from the db. 
     async function getCustomer(){
-        var req = await fetch('http://localhost:5000/user/profile/' + id, {
+        var req = await fetch(link + 'user/profile/' + id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -89,17 +90,15 @@ export default function Profile({props}) {
     }
 
     async function changeProgress(progress) {
-        // console.log("AA");
         var req = {"progress": progress}
         setProgress(progress);
-        axios.post('http://localhost:5000/user/progress/' + id, req)
+        axios.post(link + 'user/progress/' + id, req)
     } 
 
     async function changePriority(priority) {
-        // console.log("AA");
         var req = {"priority": priority}
         setPriority(priority);
-        axios.post('http://localhost:5000/user/priority/' + id, req)
+        axios.post(link + 'user/priority/' + id, req)
     } 
 
     return(
