@@ -204,16 +204,13 @@ userRouter.post('/meeting/:id', async (req, res) => {
 })
 
 userRouter.post('/progress/:id', async (req, res) => {
-	console.log("A");
 	var customer = await Customer.findById(req.params.id);
-	console.log(req.body.progress); 
 	customer.progress =  req.body.progress; 
 	await customer.save(); 
 	res.sendStatus(200); 
 })
 
 userRouter.post('/priority/:id', async (req, res) => {
-	console.log("A");
 	var customer = await Customer.findById(req.params.id);
 	customer.priority =  req.body.priority; 
 	await customer.save(); 
