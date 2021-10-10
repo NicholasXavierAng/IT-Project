@@ -95,6 +95,13 @@ export default function Profile({props}) {
         axios.post('http://localhost:5000/user/progress/' + id, req)
     } 
 
+    async function changePriority(priority) {
+        // console.log("AA");
+        var req = {"priority": priority}
+        setPriority(priority);
+        axios.post('http://localhost:5000/user/priority/' + id, req)
+    } 
+
     return(
         <>
         <AppBar position="fixed" color="white" boxShadow={4}>
@@ -209,7 +216,33 @@ export default function Profile({props}) {
                 </Grid>
 
                 <Grid item spacing={4}>
-                    <Box 
+                <InputLabel
+            ref={ref => {
+            //   this.InputLabelRef = ref;
+            }}
+            htmlFor="outlined-age-native-simple"
+          >
+            Priority
+          </InputLabel>
+          <Select
+            native
+            value="POP"
+            onChange={event => changePriority(event.target.value)}
+            input={
+              <OutlinedInput
+                name="age"
+                labelWidth= "haha"
+                // labelWidth={this.state.labelWidth}
+                id="outlined-age-native-simple"
+              />
+            }
+          >
+            <option value={0}>{priority}</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </Select>
+                    {/* <Box 
                         boxShadow={4}
                         borderRadius={5}
                         style={{ padding: "15px", margin: "8px" }}>
@@ -218,7 +251,7 @@ export default function Profile({props}) {
                         <p><b>Priority: </b> <span className="contactInfo">{customer.priority}</span></p>
                         </>
                         }     
-                    </Box>
+                    </Box> */}
                 </Grid>
 
                 <Grid item spacing={4}>
