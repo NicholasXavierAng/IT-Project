@@ -20,6 +20,14 @@ import Popup from 'reactjs-popup';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Select from '@material-ui/core/Select';
+
 export default function Profile({props}) {
 
     var [customer, setCustomer] = useState(); 
@@ -47,7 +55,7 @@ export default function Profile({props}) {
             var req = {"date":d, "time": time};
             axios.post('http://localhost:5000/user/meeting/' + id, req).then(res => {
                 var data = res.data.customers;
-                console.log(data);
+                // console.log(data);
 			})
         }
 
@@ -65,18 +73,27 @@ export default function Profile({props}) {
 
         var data = await req.json(); 
         var cust = data.customer; 
+        // console.log(cust.progress); 
         var comp = data.company; 
-        var progress = data.progress
-        var priority = data.priority
-        var lastContact = data.lastContact;
-        var nextMeeting = data.nextMeeting;
+        var prog = cust.progress;
+        var priority = cust.priority;
+        var lastContact = cust.lastContact;
+        var nextMeeting = cust.nextMeeting;
         setCustomer(cust); 
         setCompany(comp); 
-        setProgress(progress);
+        setProgress(prog);
         setPriority(priority);
         setLastContact(lastContact);
         setNextMeeting(nextMeeting);
+        // console.log(progress); 
     }
+
+    async function changeProgress(progress) {
+        // console.log("AA");
+        var req = {"progress": progress}
+        setProgress(progress);
+        axios.post('http://localhost:5000/user/progress/' + id, req)
+    } 
 
     return(
         <>
@@ -149,7 +166,37 @@ export default function Profile({props}) {
                 alignItems="center"
             >
                 <Grid item spacing={4}>
-                    <Box 
+                <FormControl variant="outlined" >
+          <InputLabel
+            ref={ref => {
+            //   this.InputLabelRef = ref;
+            }}
+            htmlFor="outlined-age-native-simple"
+          >
+            Progress
+          </InputLabel>
+          <Select
+            native
+            value="POP"
+            onChange={event => changeProgress(event.target.value)}
+            input={
+              <OutlinedInput
+                name="age"
+                labelWidth= "haha"
+                // labelWidth={this.state.labelWidth}
+                id="outlined-age-native-simple"
+              />
+            }
+          >
+            <option value={0}>{progress && progress}</option>
+            <option value="New">New</option>
+            <option value="Invited">Invited</option>
+            <option value="Met">Met</option>
+            <option value="Negotiation">Negotiation</option>
+            <option value="Conclude">Conclude</option>
+          </Select>
+        </FormControl>
+                    {/* <Box 
                         boxShadow={4}
                         borderRadius={5}
                         style={{ padding: "15px", margin: "8px" }}>
@@ -158,7 +205,7 @@ export default function Profile({props}) {
                         <p><b>Progress: </b> <span className="contactInfo">{customer.progress}</span></p>
                         </>
                         }     
-                    </Box>
+                    </Box> */}
                 </Grid>
 
                 <Grid item spacing={4}>
@@ -205,7 +252,7 @@ export default function Profile({props}) {
                             <centre><h3><b>NEXT MEETING</b></h3></centre>
                         </Box>
                         <Box display="flex" justifyContent="space-between">
-                            <p><b>Date: </b> <span className="contactInfo">{customer.meeting.date}</span></p>
+                            <p><b>Date: </b> <span className="contactInfo">{customer.meeting && customer.meeting.date}</span></p>
                             <Popup trigger={<IconButton><Pen/></IconButton>} position="bottom center">
                                 <div>
                                     <Calendar
@@ -215,7 +262,7 @@ export default function Profile({props}) {
                             </Popup>
                         </Box>
                         <Box display="flex" justifyContent="space-between">
-                            <p><b>Time:</b> {customer.meeting.time}</p>
+                            <p><b>Time:</b> {customer.meeting && customer.meeting.time}</p>
                             <Popup trigger={<IconButton><Pen/></IconButton>} position="bottom center">
                                 <div>
                                 <TextField

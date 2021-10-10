@@ -203,5 +203,14 @@ userRouter.post('/meeting/:id', async (req, res) => {
 	res.json({"status":true}); 
 })
 
+userRouter.post('/progress/:id', async (req, res) => {
+	console.log("A");
+	var customer = await Customer.findById(req.params.id);
+	console.log(req.body.progress); 
+	customer.progress =  req.body.progress; 
+	await customer.save(); 
+	res.sendStatus(200); 
+})
+
 module.exports = userRouter; 
 
