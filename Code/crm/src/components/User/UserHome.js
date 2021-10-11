@@ -1,34 +1,34 @@
-//////////////////////////////
-// Author(s): Terry, Zakarya Butt, Rebecca Ye
+///////////////////////////////
+// Author(s): Terry Tran, Zakarya Butt, Rebecca Ye
 // Date Made: 09/09/2021
-//////////////////////////////
+///////////////////////////////
 
 import React, { useState ,useEffect} from 'react';
-import Topbar from '../MainPageComponents/Topbar';
-import Button from '@material-ui/core/Button';
+import '../MainPageComponents/Components.css';
 import SearchBar from 'material-ui-search-bar';
 import axios from 'axios';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
-//import Grid from '@material-ui/core/Grid';
-
-// import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Sort from '@material-ui/icons/Sort';
 import Popup from 'reactjs-popup';
-import { IconButton } from '@material-ui/core';
+import { IconButton, AppBar, Toolbar } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import NotificationsIcon from '@material-ui/icons/Notifications'; 
+import MenuIcon from '@material-ui/icons/Menu';
+import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 
-// WHEN SEARCHING CHECK IF FILTER IS ON TOO AND VICE VERSA
 function UserHome() {
 	const config = require('../Configuration/config.json');
 	const link =  config.API_URL; 
-	// console.log(process.env.REACT_APP_BASE_URL); 
 	const [customers, setCustomers] = useState();
+	const [meetings, setMeetings] = useState();
 	// For search
 	const [search, setSearch] = useState(false);  
 	const [words, setSearchWord] = useState();
-	const [number, setNumber] = useState(false);
 	// For progress
 	const [newCustomer, setNew] = useState(false);
 	const [invite, setInvite] = useState(false);
@@ -39,124 +39,237 @@ function UserHome() {
 	const [high, setHigh] = useState(false);
 	const [medium, setMedium] = useState(false);
 	const [low, setLow] = useState(false);
+	const [alpha, setAlpha] = useState(false); 
+
+	const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorE2, setAnchorE2] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const open2 = Boolean(anchorE2);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleCloseMenu = () => {
+        setAnchorE2(null);
+    };
+
+    const handleMenu = (event) => {
+        setAnchorE2(event.currentTarget);
+    };
+
+    const logOut = async (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        window.location.href = '/';
+    }
+
+    const editInfo = async (e) => {
+        e.preventDefault();
+        window.location.href = '/edit_information';
+    }
+
 
 	// If we detect a change in the search property then this is run.
-	useEffect(()=> {
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
+	useEffect(() => {
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha; 
 		if (!search && !filter) {
-			// console.log("NS"); 
 			getCustomers();
-		}
-		else if (filter){
-			var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-			const req = {"words":words, "filters": filters, "search": search}; 
-			axios.post(link + 'user/filter', req).then(res => {
-			var data = res.data.customers; 
-			var cust = data; 
-			setCustomers(cust);
-		})
 		}
 	}, [search]); 
 
-	const getSearchAndFilter = () => {
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-		axios.post(link + 'user/search', filters).then(res => {
-			var data = res.data.customers;
-			setCustomers(data);
+	const getSearchAndFilter = (w) => {
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;
+		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low, "alpha": alpha};  
+		const req = {"words":w, "filters": filters, "search": search, "filter": filter}; 
+		axios.post(link + 'user/searchFilter', req).then(res => {
+			var data = res.data.customers; 
+			var cust = data; 
+			setCustomers(cust);
 		})
 	}
 
 	// If we detect a change in the filter then this is run.
 	useEffect(()=> { 
-	  var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low; 
-	//   console.log(newCustomer); 
-	var a = !filter && !search; 
-	console.log("A +", a); 
-	  if (!filter && !search) {
-		getCustomers(); 
-	  }
-	  else if (search && filter)  {
-		// const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low}; 
-		// axios.post(link + 'user/filter', filters).then(res => {
-		// 	var data = res.data.customers;
-		// 	setCustomers(data);
-		// }) 
-		console.log("F A S"); 
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-		const req = {"words":words, "filters": filters, "search": search, "filter":filter}; 
-		axios.post(link + 'user/filter', req).then(res => {
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;  
+		if (!filter && !search) {
+				getCustomers(); 
+		}
+		else if (filter && search) {
+			getSearchAndFilter(words); 
+		}
+		else if (search) {
+			const req = {"words":words}; 
+			axios.post('http://localhost:5000/user/search', req).then(res => {
 			var data = res.data.customers; 
+			setSearch(true);
 			var cust = data; 
 			setCustomers(cust);
-		})
-	  } 
-	  else {
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-		const req = {"words":words, "filters": filters, "search": search}; 
-		axios.post(link + 'user/filter', req).then(res => {
-			var data = res.data.customers; 
-			var cust = data; 
-			setCustomers(cust);
-		})
-	  }
+		  })
+		}
+		else {
+			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low, "alpha": alpha}; 
+			const req = {"filters": filters, "filter": filter}; 
+			axios.post('http://localhost:5000/user/filter', req).then(res => {
+			var data = res.data.customers;
+			setCustomers(data);
+			}) 
+		}
 
-	  // PIT A LAST ELSE 
-	}, [newCustomer, invite, met, negotiation, conclude, high, medium, low]); 
+	}, [newCustomer, invite, met, negotiation, conclude, high, medium, low, alpha]); 
 
 	const getCustomers = () => {
 	  // Sends a request to the backend to get all customers
 	  axios.get(link + 'user/customers').then(res => {
 		  var data = res.data.customers; 
 		  setCustomers(data); 
+		  var meetings = [];
+		  for (var i = 0; i < data.length; i++) {
+			  var customer = data[i];
+			  if (customer.meeting) {
+				var meeting = {
+					"name": customer.firstName + " " + customer.familyName, 
+					"date": customer.meeting.date, 
+					"time": customer.meeting.time
+				}
+				meetings.push(meeting);
+				}
+		  }
+		  console.log(meetings);
+		  setMeetings(meetings);
 	  }) 
 	}
 	
 	const searchWord = (e) => {
-	  // e.preventDefault(); 
-	//   console.log(e); 
-	  if (e == "") {
-		setSearch(false); 
-	  }
-	  else {
-		// Its a name
-		setSearchWord(e); 
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
+		// Search will be true here.
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha; 
+		if (e == "") {
+			setSearch(false); 
+			// Check if filters are on otherwise get all custoemrs.
+		}
+		else if (filter) {
+			setSearchWord(e);
+			getSearchAndFilter(e); 
+		}
+		else {
+			// Its a name
+			setSearchWord(e); 
+			const req = {"words":e, "alpha": alpha}; 
+			axios.post('http://localhost:5000/user/search', req).then(res => {
+			var data = res.data.customers; 
+			setSearch(true);
+			var cust = data; 
+			setCustomers(cust);
+		  })
+		}
+	}
+
+
+	const doSearch = async (e) => {
+		// e.preventDefault(); 
+		setSearchWord(e);
+		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;
 		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
 		const req = {"words":e, "filters": filters, "filter": filter}; 
 		axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
-			console.log(data); 
 			setSearch(true);
 			var cust = data; 
 			setCustomers(cust);
-		})
-		  
-		
-	  }
-	}
-	
-
-	const doSearch = async (e) => {
-		e.preventDefault(); 
-		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-		const req = {"words":words, "filters": filters, "filter": filter}; 
-		console.log(req); 
-		axios.post(link + 'user/search', req).then(res => {
-			var data = res.data.customers; 
-			setSearch(true);
-			var cust = data; 
-			setCustomers(cust);
-	  })
+		}) 
 	}
 
 
 	return (
 	  <div className="App">
-		  <Topbar/>
+		  <section className = 'topbar' >
+            <AppBar position="Fixed" color="white" boxShadow={4}>
+                <Toolbar>
+
+                <IconButton>
+                    <MenuIcon onClick = {handleMenu}/> 
+                </IconButton>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorE2}
+                    open={open2}
+                    onClose={handleCloseMenu}
+                    MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                    }}
+					style = {{position: "absolute", top: "4%"}}
+                >
+                    <MenuItem onClick={handleClose}>
+                        <Button
+                            href="/addContact"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "254px", minHeight:"56px"}}>
+                                +  ADD CLIENT
+                        </Button>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                        <Button
+                            type="editInfo"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "254px", minHeight:"56px"}}
+                            onClick={editInfo}>
+                            Edit Information
+                        </Button>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        <Button
+                            type="logout"
+                            variant="contained"
+                            color="secondary"
+                            style={{minWidth: "254px", minHeight:"56px"}}
+                            onClick={logOut}>
+                            Log out
+                        </Button>
+                    </MenuItem>
+
+                </Menu>
+                    
+                    <Box 
+                        flexGrow={1}>
+                    </Box>
+                    <Box flexGrow={1}>
+                        <img class="header" src="/logo.png" alt="logo" width="207" height="55" />
+                    </Box>
+                    <IconButton>
+                        <NotificationsIcon onClick = {handleClick}/> 
+                    </IconButton>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                        }}
+                        style = {{position: "absolute", top: "4%"}}
+                    >
+						{meetings && meetings.map(d => (
+							<>
+								<MenuItem onClick={handleClose}>
+									<div className = "notifications">
+										<div className = "timestamp">1 hour ago</div>
+										<div className = "content"> Meeting with {d.name}, {d.time} on {d.date}</div>
+										<div className="divider">
+											<div className="line" />
+										</div>
+									</div>
+								</MenuItem>
+							</>
+						 ))}
+                    </Menu>
+                </Toolbar>
+            </AppBar>
+        </section>
 		  <br/>
 		  <div className="content">
 			<div className = "searchbar">
@@ -169,7 +282,7 @@ function UserHome() {
 						value=""
 						onChange={e => searchWord(e)}
 						placeholder={"Search for contacts"}
-						style={{maxWidth: "1000px", maxHeight:"56px"}}
+						style={{maxWidth: "70%", maxHeight:"25%"}}
 						/>
 					</Box>
 				</form>
@@ -177,77 +290,76 @@ function UserHome() {
 			<div className ='line3'>
 				<section class="createContact"></section>
 				<div className="titles" style ={{fontWeight: 'bold'}}>
-					<p className="p">Name</p> 
-					<p className="p">Progress</p>  
-					<p className="p">Priority</p>
+					<p className="n">Name</p> 
+					<p className="s">Progress</p>  
+					<p className="pro">Priority</p>
 
-					<div>
-						
-						<Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
-									<div>
-										<div className= "p" style ={{textAlign: "left"}}>
-											Progress
-										</div>
-										<div style ={{paddingLeft: "10px"}}>
-										<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-										<FormControlLabel
-											label="New"
-											control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
-										/>
-										<FormControlLabel
-											label="Invited"
-											control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
-										/>
-										<FormControlLabel
-											label="Met"
-											control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
-										/>
-										<FormControlLabel
-											label="Negotiation"
-											control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
-										/>
-										<FormControlLabel
-											label="Conclude"
-											control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
-										/>
-										</Box>
-									</div>
+					<Popup trigger={<IconButton style = {{position : "absolute", left : "110%"}}><Sort /></IconButton>} position="bottom center">
+								<div>
 									<div className= "p" style ={{textAlign: "left"}}>
-										Priority
+										Progress
 									</div>
 									<div style ={{paddingLeft: "10px"}}>
-										{/* {childrenPriority} */}
-										<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-										<FormControlLabel
-											label="High"
-											control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
-										/>
-										<FormControlLabel
-											label="Medium"
-											control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
-										/>
-										<FormControlLabel
-											label="Low"
-											control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
-										/>
-										</Box>
-									</div>
+									<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+									<FormControlLabel
+										label="New"
+										control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
+									/>
+									<FormControlLabel
+										label="Invited"
+										control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
+									/>
+									<FormControlLabel
+										label="Met"
+										control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
+									/>
+									<FormControlLabel
+										label="Negotiation"
+										control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
+									/>
+									<FormControlLabel
+										label="Conclude"
+										control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
+									/>
+									</Box>
+								</div>
+								<div className= "p" style ={{textAlign: "left"}}>
+									Priority
+								</div>
+								<div style ={{paddingLeft: "10px"}}>
+									{/* {childrenPriority} */}
+									<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+									<FormControlLabel
+										label="High"
+										control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
+									/>
+									<FormControlLabel
+										label="Medium"
+										control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
+									/>
+									<FormControlLabel
+										label="Low"
+										control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
+									/>
+									</Box>
+								</div>
 
-									</div>
+								</div>
 						</Popup>
-					</div>
+
+						<IconButton onClick={() => setAlpha(!alpha)} style = {{position : "absolute", left : "113%"}}><SortByAlphaIcon /></IconButton>
 				</div>
 				
 		
 			</div>
-			<hr width="80%" align="center"/>
+			<hr width = "70%" align="center" style = {{position: "absolute", left: "20%"}}/>
 			<br/>
 			<div className = "lowerpart">
 					<div className = "sidebar"></div>
 					<div className = "clients" >
 						<Box
 						borderRadius={16}
-						width={1200}
+						width="70%"
 						height="100%"
 						boxShadow={6}
 						style = {{position: "relative", left: "20%"}}

@@ -98,14 +98,13 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ username: username });
 
     if(!user) {
-        return res.json({ msg: `No account with this username found` });
+        return res.sendStatus(401);
     }
     const passwordMatch = bcrypt.compareSync(password, user.password);
     if(!passwordMatch) {
+        res.sendStatus(403)
         console.log("wrong password\n");
-        return res.json({ msg: `Passwords did not match` });
     }
-    console.log(user);
     if (user && passwordMatch) {
         user.password = undefined;
         jwt.sign({ firstName: user.firstName, familyName: user.familyName, username: user.username, email: user.email}, process.env.SECRET_KEY, {expiresIn: '24h'}, (err, token) => {
@@ -115,6 +114,7 @@ app.post('/login', async (req, res) => {
             })
         })
     }
+    console.log(user);
 })
 
 app.use('/user', userRouter);
