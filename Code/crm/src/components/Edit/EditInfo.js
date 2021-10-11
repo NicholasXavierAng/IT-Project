@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useToken from '../App/useToken';
-import { IconButton, AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 
 const jwt = require('jsonwebtoken');
 const config = require('../Configuration/config.json');
