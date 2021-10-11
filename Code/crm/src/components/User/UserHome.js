@@ -181,58 +181,61 @@ function UserHome() {
 					<p className="p">Progress</p>  
 					<p className="p">Priority</p>
 
-					<Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
-								<div>
+					<div>
+						
+						<Popup trigger={<IconButton><Sort /></IconButton>} position="bottom center">
+									<div>
+										<div className= "p" style ={{textAlign: "left"}}>
+											Progress
+										</div>
+										<div style ={{paddingLeft: "10px"}}>
+										<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+										<FormControlLabel
+											label="New"
+											control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
+										/>
+										<FormControlLabel
+											label="Invited"
+											control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
+										/>
+										<FormControlLabel
+											label="Met"
+											control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
+										/>
+										<FormControlLabel
+											label="Negotiation"
+											control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
+										/>
+										<FormControlLabel
+											label="Conclude"
+											control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
+										/>
+										</Box>
+									</div>
 									<div className= "p" style ={{textAlign: "left"}}>
-										Progress
+										Priority
 									</div>
 									<div style ={{paddingLeft: "10px"}}>
-									<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-									<FormControlLabel
-										label="New"
-										control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
-									/>
-									<FormControlLabel
-										label="Invited"
-										control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
-									/>
-									<FormControlLabel
-										label="Met"
-										control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
-									/>
-									<FormControlLabel
-										label="Negotiation"
-										control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
-									/>
-									<FormControlLabel
-										label="Conclude"
-										control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
-									/>
-									</Box>
-								</div>
-								<div className= "p" style ={{textAlign: "left"}}>
-									Priority
-								</div>
-								<div style ={{paddingLeft: "10px"}}>
-									{/* {childrenPriority} */}
-									<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-									<FormControlLabel
-										label="High"
-										control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
-									/>
-									<FormControlLabel
-										label="Medium"
-										control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
-									/>
-									<FormControlLabel
-										label="Low"
-										control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
-									/>
-									</Box>
-								</div>
+										{/* {childrenPriority} */}
+										<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+										<FormControlLabel
+											label="High"
+											control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
+										/>
+										<FormControlLabel
+											label="Medium"
+											control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
+										/>
+										<FormControlLabel
+											label="Low"
+											control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
+										/>
+										</Box>
+									</div>
 
-								</div>
-					</Popup>
+									</div>
+						</Popup>
+					</div>
 				</div>
 				
 		

@@ -1,14 +1,16 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Nicholas, Rebecca
+// Author(s): Zakarya Butt, Nicholas, Rebecca Ye
 // Date Made: 07/09/2021
 //////////////////////////////
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css'; 
 import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+
 
 const config = require('../Configuration/config.json');
 const API_URL =  config.API_URL; 
@@ -63,7 +65,7 @@ export default function Login({ setToken }) {
                 boxShadow={4}
                 position="absolute"
                 top={70}>
-                    <h2>LOGIN</h2>
+                    <h2>LOGIN</h2> 
                 </Box>
             </section>
             <section className="credentialsBox">
@@ -103,7 +105,7 @@ export default function Login({ setToken }) {
                         <Button
                             type="submit"
                             variant="contained"
-                            color="secondary"
+                            color= "secondary"
                             style={{minWidth: "85px", minHeight:"35px"}}>
                             Sign in
                         </Button>
