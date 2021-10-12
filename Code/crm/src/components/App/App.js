@@ -18,7 +18,6 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './Theme';
 
 function App() {
-
     const { token, setToken } = useToken(); 
     
     if(!token) {
