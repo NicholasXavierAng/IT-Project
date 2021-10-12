@@ -5,11 +5,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css'; 
-import {useHistory} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@mui/material/Snackbar';
+import AlertMessage from '../AlertMessage/AlertMessage';
 
 const config = require('../Configuration/config.json');
 const API_URL =  config.API_URL; 
@@ -28,8 +27,8 @@ async function loginUser(credentials) {
 export default function Login({ setToken }) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
-    let history = useHistory(); 
-
+    const [loginStatus, setLoginStatus] = useState();
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Fetch sends the username and password 
@@ -40,18 +39,21 @@ export default function Login({ setToken }) {
             password
         })
         if (res.status == 401 || res.status == 403) {
-            
+            setLoginStatus({ msg: "Incorrect login details.", key: Math.random(), severity: "error" });
         }
         else {
             setToken(res);
+            setLoginStatus({ msg: "Login successful.", key: Math.random(), severity: "success" });
             window.location.href = "/";
         }
     }
+
 
     return(
         <section className="login-wrapper">
             <img src="/logo.png" alt="logo" width="207" height="55"/>
             <form onSubmit={handleSubmit}>
+            {loginStatus ? <AlertMessage key={loginStatus.key} message={loginStatus.msg} severity={loginStatus.severity} /> : null}
             <br/>
 
             {/* need to change colour/set up theme */}
