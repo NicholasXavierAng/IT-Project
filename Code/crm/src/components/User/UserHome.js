@@ -157,7 +157,7 @@ function UserHome() {
 			// Its a name
 			setSearchWord(e); 
 			const req = {"words":e, "alpha": alpha}; 
-			axios.post('http://localhost:5000/user/search', req).then(res => {
+			axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
 			setSearch(true);
 			var cust = data; 
@@ -167,18 +167,24 @@ function UserHome() {
 	}
 
 
-	const doSearch = async (e) => {
-		// e.preventDefault(); 
-		setSearchWord(e);
+	const doSearch =  (event) => {
+		event.preventDefault(); 
 		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;
-		const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low};  
-		const req = {"words":e, "filters": filters, "filter": filter}; 
-		axios.post(link + 'user/search', req).then(res => {
+		var e = words;  
+		if (filter) {
+			getSearchAndFilter(e); 
+		}
+		else {
+			// Its a name
+			setSearchWord(e); 
+			const req = {"words":e, "alpha": alpha}; 
+			axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
 			setSearch(true);
 			var cust = data; 
 			setCustomers(cust);
-		}) 
+		  })
+		}
 	}
 
 
@@ -257,7 +263,7 @@ function UserHome() {
 							<>
 								<MenuItem onClick={handleClose}>
 									<div className = "notifications">
-										<div className = "timestamp">1 hour ago</div>
+										{/* <div className = "timestamp">1 hour ago</div> */}
 										<div className = "content"> Meeting with {d.name}, {d.time} on {d.date}</div>
 										<div className="divider">
 											<div className="line" />
@@ -273,7 +279,7 @@ function UserHome() {
 		  <br/>
 		  <div className="content">
 			<div className = "searchbar">
-				<form onSubmit={doSearch}>        
+				<form onSubmit={(doSearch)}>        
 					{/* can handle searches */}
 					<Box
 					style = {{position: "relative", left: "20%"}}
