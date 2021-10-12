@@ -145,7 +145,7 @@ function UserHome() {
 	const searchWord = (e) => {
 		// Search will be true here.
 		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha; 
-		if (e == "") {
+		if (e === "") {
 			setSearch(false); 
 			// Check if filters are on otherwise get all custoemrs.
 		}
