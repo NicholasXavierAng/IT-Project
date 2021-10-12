@@ -35,7 +35,7 @@ function App() {
                     {/* User Home Page Route */}
                     <Route exact path="/" component={UserHome}/>
                     {/* User Profile Route */}
-                    <Route path="/profile/:id" component={Profile}/>
+                    <Route exact path="/user/profile/:id" component={Profile}/>
                     {/* Edit user information */}
                     <Route path="/edit_information" component={EditInfo}/>
                     {/* Add Contact Route  */}

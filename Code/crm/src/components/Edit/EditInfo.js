@@ -9,8 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import useToken from '../App/useToken';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { IconButton, AppBar, Toolbar } from '@material-ui/core';
 import AlertMessage from '../AlertMessage/AlertMessage';
+import BackButton from '@material-ui/icons/ArrowBack'; 
 
 const jwt = require('jsonwebtoken');
 const config = require('../Configuration/config.json');
@@ -106,25 +107,17 @@ export default function EditInfo() {
             <section className="topBar">
                 <AppBar position="Fixed" color="white" boxShadow={4}>
                     <Toolbar>
-                        <Button
-                            type="homepage"
-                            variant="contained"
-                            color="secondary"
-                            style={{minWidth: "85px", minHeight:"35px"}}
-                            onClick={homepage}>
-                            Home Page
-                        </Button>
                         <Box 
-                        flexGrow={0.8}>
+                            flexGrow={0.95}>
+                            <IconButton edge="start" marginLeft="auto">
+                                <BackButton
+                                    onClick={homepage}>
+                                </BackButton>    
+                            </IconButton>
                         </Box>
+                        
                         <Box flexGrow={1}>
-                        <
-                            img class="header"
-                            src="/logo.png"
-                            alt="logo"
-                            width="207"
-                            height="55"
-                        />
+                            <img class="header" src="/logo.png" alt="logo" width="207" height="55" />
                         </Box>
                     </Toolbar>
                 </AppBar>
