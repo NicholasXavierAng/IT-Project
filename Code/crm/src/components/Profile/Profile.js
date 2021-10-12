@@ -65,28 +65,27 @@ export default function Profile({props}) {
      
     // Gets data for the specific customer from the db. 
     async function getCustomer(){
-        var req = await fetch(link + 'user/profile/' + id, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
 
-        var data = await req.json(); 
-        var cust = data.customer; 
-        // console.log(cust.progress); 
-        var comp = data.company; 
-        var prog = cust.progress;
-        var priority = cust.priority;
-        var lastContact = cust.lastContact;
-        var nextMeeting = cust.nextMeeting;
-        setCustomer(cust); 
-        setCompany(comp); 
-        setProgress(prog);
-        setPriority(priority);
-        setLastContact(lastContact);
-        setNextMeeting(nextMeeting);
-        // console.log(progress); 
+        axios.post(link + 'user/profile/' + id)
+        .then(res => {
+            var data = res.data; 
+            var cust = data.customer; 
+            var comp = data.company; 
+            var prog = cust.progress;
+            var priority = cust.priority;
+            var lastContact = cust.lastContact;
+            var nextMeeting = cust.nextMeeting;
+            setCustomer(cust); 
+            setCompany(comp); 
+            setProgress(prog);
+            setPriority(priority);
+            setLastContact(lastContact);
+            setNextMeeting(nextMeeting);
+		  })
+          .catch(err => {
+              throw new Error(err); 
+          })
+
     }
 
     async function changeProgress(progress) {
@@ -183,13 +182,12 @@ export default function Profile({props}) {
           </InputLabel>
           <Select
             native
-            value="POP"
+            value={customer && customer.progress}
             onChange={event => changeProgress(event.target.value)}
             input={
               <OutlinedInput
-                name="age"
-                labelWidth= "haha"
-                // labelWidth={this.state.labelWidth}
+                name="progress"
+                labelWidth={0}
                 id="outlined-age-native-simple"
               />
             }
