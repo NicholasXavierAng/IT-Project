@@ -46,7 +46,7 @@ export default function EditInfo() {
         window.location.href = '/';
     }
 
-    const { token, getToken, setToken } = useToken();
+    const { token, /*getToken,*/ setToken } = useToken();
     const decode = jwt.decode(token);
 
     var [username, setUsername] = useState();

@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import './AddContact.css'; 
 import Button from '@material-ui/core/Button';
-import React, { useState ,useEffect} from 'react';
+import React, { useState /*, useEffect*/} from 'react';
 import axios from 'axios';
 
 const config = require('../Configuration/config.json');
