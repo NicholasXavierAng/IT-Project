@@ -137,7 +137,6 @@ function UserHome() {
 				meetings.push(meeting);
 				}
 		  }
-		  console.log(meetings);
 		  setMeetings(meetings);
 	  }) 
 	}

@@ -21,9 +21,6 @@ import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 
 import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
@@ -42,8 +39,6 @@ export default function Profile({props}) {
     const [date, setDate] = useState(false); 
     const [time, setTime] = useState(false);
 
-    const [value, onChange] = useState(new Date());
-
     const homepage = async (e) => {
         e.preventDefault();
         window.location.href = '/';
@@ -51,6 +46,31 @@ export default function Profile({props}) {
 
     // Called as soon as the page is loaded.
     useEffect(() => {
+        // Gets data for the specific customer from the db. 
+        async function getCustomer(){
+
+            axios.post(link + 'user/profile/' + id)
+            .then(res => {
+                var data = res.data; 
+                var cust = data.customer; 
+                var comp = data.company; 
+                var prog = cust.progress;
+                var priority = cust.priority;
+                var lastContact = cust.lastContact;
+                var nextMeeting = cust.nextMeeting;
+                setCustomer(cust); 
+                setCompany(comp); 
+                setProgress(prog);
+                setPriority(priority);
+                setLastContact(lastContact);
+                setNextMeeting(nextMeeting);
+            })
+            .catch(err => {
+                throw new Error(err); 
+            })
+
+        }
+
         getCustomer();  
     })
 
@@ -58,39 +78,11 @@ export default function Profile({props}) {
         if (date && time) {
             var d = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();  
             var req = {"date":d, "time": time};
-            axios.post(link + 'user/meeting/' + id, req).then(res => {
-                var data = res.data.customers;
-                // console.log(data);
-			})
+            axios.post(link + 'user/meeting/' + id, req); 
         }
 
     }, [date, time]); 
 
-     
-    // Gets data for the specific customer from the db. 
-    async function getCustomer(){
-
-        axios.post(link + 'user/profile/' + id)
-        .then(res => {
-            var data = res.data; 
-            var cust = data.customer; 
-            var comp = data.company; 
-            var prog = cust.progress;
-            var priority = cust.priority;
-            var lastContact = cust.lastContact;
-            var nextMeeting = cust.nextMeeting;
-            setCustomer(cust); 
-            setCompany(comp); 
-            setProgress(prog);
-            setPriority(priority);
-            setLastContact(lastContact);
-            setNextMeeting(nextMeeting);
-		  })
-          .catch(err => {
-              throw new Error(err); 
-          })
-
-    }
 
     async function changeProgress(progress) {
         var req = {"progress": progress}
