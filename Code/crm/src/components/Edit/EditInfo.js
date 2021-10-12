@@ -2,6 +2,7 @@
 // Author(s): Nicholas
 // Date Made: 26/09/2021
 //////////////////////////////
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './EditInfo.css'; 
@@ -68,7 +69,7 @@ export default function EditInfo() {
             familyName,
             email
         })
-        if (res.status == 500) {
+        if (res.status === 500) {
             setEditInfoStatus({ msg: "Username already in use.", key: Math.random(), severity: "error" });
         }
         else {
@@ -86,13 +87,13 @@ export default function EditInfo() {
             newPw,
             confirmPw
         })
-        if (res.status == 401) {
+        if (res.status === 401) {
             setEditPwStatus({ msg: "Error.", key: Math.random(), severity: "error" });
         }
-        else if (res.status == 500) {
+        else if (res.status === 500) {
             setEditPwStatus({ msg: "Wrong password.", key: Math.random(), severity: "error" });
         }
-        else if (res.status == 412) {
+        else if (res.status === 412) {
             setEditPwStatus({ msg: "Passwords did not match.", key: Math.random(), severity: "error" });
         }
         else {

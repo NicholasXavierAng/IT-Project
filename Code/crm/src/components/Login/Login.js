@@ -2,6 +2,7 @@
 // Author(s): Zakarya Butt, Nicholas, Rebecca
 // Date Made: 07/09/2021
 //////////////////////////////
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css'; 
@@ -38,7 +39,7 @@ export default function Login({ setToken }) {
             username,
             password
         })
-        if (res.status == 401 || res.status == 403) {
+        if (res.status === 401 || res.status === 403) {
             setLoginStatus({ msg: "Incorrect login details.", key: Math.random(), severity: "error" });
         }
         else {
