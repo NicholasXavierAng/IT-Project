@@ -44,7 +44,11 @@ export default function Profile({props}) {
 
     const [value, onChange] = useState(new Date());
 
-    
+    const homepage = async (e) => {
+        e.preventDefault();
+        window.location.href = '/';
+    }
+
     // Called as soon as the page is loaded.
     useEffect(() => {
         getCustomer();  
@@ -107,7 +111,9 @@ export default function Profile({props}) {
                 <Box 
                     flexGrow={1}>
                     <IconButton edge="start" marginLeft="auto">
-                        <BackButton />
+                        <BackButton
+                            onClick={homepage}>
+                        </BackButton>    
                     </IconButton>
                 </Box>
                 <Box flexGrow={1}>

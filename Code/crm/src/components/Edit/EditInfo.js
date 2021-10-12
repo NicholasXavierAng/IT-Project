@@ -8,9 +8,10 @@ import './EditInfo.css';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import useToken from '../App/useToken';
 import { IconButton, AppBar, Toolbar } from '@material-ui/core';
+import AlertMessage from '../AlertMessage/AlertMessage';
+import BackButton from '@material-ui/icons/ArrowBack'; 
 
 const jwt = require('jsonwebtoken');
 const config = require('../Configuration/config.json');
@@ -54,6 +55,8 @@ export default function EditInfo() {
     var [oldPw, setOldPw] = useState();
     var [newPw, setNewPw] = useState();
     var [confirmPw, setConfirmPw] = useState();
+    var [editInfoStatus, setEditInfoStatus] = useState();
+    var [editPwStatus, setEditPwStatus] = useState();
 
     const oldUsername = decode.username;
     
@@ -66,8 +69,12 @@ export default function EditInfo() {
             familyName,
             email
         })
-        if (res.token) {
+        if (res.status == 500) {
+            setEditInfoStatus({ msg: "Username already in use.", key: Math.random(), severity: "error" });
+        }
+        else {
             setToken(res);
+            setEditInfoStatus({ msg: "Details successfully changed.", key: Math.random(), severity: "success" });
         }
     }
 
@@ -80,6 +87,19 @@ export default function EditInfo() {
             newPw,
             confirmPw
         })
+        if (res.status == 401) {
+            setEditPwStatus({ msg: "Error.", key: Math.random(), severity: "error" });
+        }
+        else if (res.status == 500) {
+            setEditPwStatus({ msg: "Wrong password.", key: Math.random(), severity: "error" });
+        }
+        else if (res.status == 412) {
+            setEditPwStatus({ msg: "Passwords did not match.", key: Math.random(), severity: "error" });
+        }
+        else {
+            setToken(res);
+            setEditPwStatus({ msg: "Password successfully changed.", key: Math.random(), severity: "success" });
+        }
     }
 
     return(
@@ -87,25 +107,17 @@ export default function EditInfo() {
             <section className="topBar">
                 <AppBar position="Fixed" color="white" boxShadow={4}>
                     <Toolbar>
-                        <Button
-                            type="homepage"
-                            variant="contained"
-                            color="secondary"
-                            style={{minWidth: "85px", minHeight:"35px"}}
-                            onClick={homepage}>
-                            Home Page
-                        </Button>
                         <Box 
-                        flexGrow={0.8}>
+                            flexGrow={0.95}>
+                            <IconButton edge="start" marginLeft="auto">
+                                <BackButton
+                                    onClick={homepage}>
+                                </BackButton>    
+                            </IconButton>
                         </Box>
+                        
                         <Box flexGrow={1}>
-                        <
-                            img class="header"
-                            src="/logo.png"
-                            alt="logo"
-                            width="207"
-                            height="55"
-                        />
+                            <img class="header" src="/logo.png" alt="logo" width="207" height="55" />
                         </Box>
                     </Toolbar>
                 </AppBar>
@@ -116,6 +128,7 @@ export default function EditInfo() {
                     <h3>Edit Information</h3>
                 </section>
                 <form onSubmit={submitInformation}>
+                    {editInfoStatus ? <AlertMessage key={editInfoStatus.key} message={editInfoStatus.msg} severity={editInfoStatus.severity} /> : null}
                     <section className="information">
                         <TextField
                             required
@@ -186,6 +199,7 @@ export default function EditInfo() {
             
             <section className="editPw">
             <form onSubmit={submitPassword}>
+                {editPwStatus ? <AlertMessage key={editPwStatus.key} message={editPwStatus.msg} severity={editPwStatus.severity} /> : null}
                 <section className="editPw-header">
                     <h1>Edit Password</h1>
                 </section>
