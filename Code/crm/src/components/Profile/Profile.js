@@ -54,26 +54,28 @@ export default function Profile({props}) {
     useEffect(() => {
         // Gets data for the specific customer from the db. 
         async function getCustomer(){
-
-            axios.post(link + 'user/profile/' + id)
-            .then(res => {
-                var data = res.data; 
-                var cust = data.customer; 
-                var comp = data.company; 
-                var prog = cust.progress;
-                var priority = cust.priority;
-                var lastContact = cust.lastContact;
-                var nextMeeting = cust.nextMeeting;
-                setCustomer(cust); 
-                setCompany(comp); 
-                setProgress(prog);
-                setPriority(priority);
-                setLastContact(lastContact);
-                setNextMeeting(nextMeeting);
-            })
-            .catch(err => {
-                throw new Error(err); 
-            })
+            try {
+                axios.post(link + 'user/profile/' + id)
+                .then(res => {
+                    var data = res.data; 
+                    var cust = data.customer; 
+                    var comp = data.company; 
+                    var prog = cust.progress;
+                    var priority = cust.priority;
+                    var lastContact = cust.lastContact;
+                    var nextMeeting = cust.nextMeeting;
+                    setCustomer(cust); 
+                    setCompany(comp); 
+                    setProgress(prog);
+                    setPriority(priority);
+                    setLastContact(lastContact);
+                    setNextMeeting(nextMeeting);
+                })
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
 
         }
 
@@ -84,7 +86,13 @@ export default function Profile({props}) {
         if (date && time) {
             var d = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();  
             var req = {"date":d, "time": time};
-            axios.post(link + 'user/meeting/' + id, req); 
+            try {
+                axios.post(link + 'user/meeting/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
         }
 
     }, [date, time]); 
@@ -93,19 +101,37 @@ export default function Profile({props}) {
     async function changeProgress(progress) {
         var req = {"progress": progress}
         setProgress(progress);
-        axios.post(link + 'user/progress/' + id, req)
+        try {
+            axios.post(link + 'user/progress/' + id, req)
+        }
+        catch (err) {
+            if ((err)) return alert('check your connection');
+            throw err;
+        }
     } 
 
     async function changePriority(priority) {
         var req = {"priority": priority}
         setPriority(priority);
-        axios.post(link + 'user/priority/' + id, req)
+        try {
+            axios.post(link + 'user/priority/' + id, req)
+        }
+        catch (err) {
+            if ((err)) return alert('check your connection');
+            throw err;
+        }
     } 
 
     async function changeLastContact(lastContact) {
         var req = {"lastContact": lastContact}
         setLastContact(lastContact);
-        axios.post(link + 'user/priority/' + id, req)
+        try {
+            axios.post(link + 'user/priority/' + id, req)
+        }
+        catch (err) {
+            if ((err)) return alert('check your connection');
+            throw err;
+        }
     } 
 
     return(
