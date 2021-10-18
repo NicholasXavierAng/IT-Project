@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Nicholas, Rebecca
+// Author(s): Zakarya Butt, Nicholas, Rebecca Ye
 // Date Made: 07/09/2021
 //////////////////////////////
 

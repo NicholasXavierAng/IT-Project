@@ -1,20 +1,28 @@
 //////////////////////////////
-// Author(s): Zakarya Butt
+// Author(s): Zakarya Butt, Rebecca Ye
 // Date Made: 26/09/2021
 //////////////////////////////
 
-import Topbar from '../MainPageComponents/Topbar';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import './AddContact.css'; 
 import Button from '@material-ui/core/Button';
 import React, { useState /*, useEffect*/} from 'react';
 import axios from 'axios';
+import BackButton from '@material-ui/icons/ArrowBack'; 
+import { IconButton, AppBar, Toolbar } from '@material-ui/core';
+
 
 const config = require('../Configuration/config.json');
 const API_URL =  config.API_URL; 
 
 export default function EditInfo() {
+
+    const homepage = async (e) => {
+        e.preventDefault();
+        window.location.href = '/';
+    }
+    
     // Client information
     const [firstName, setFirst] = useState(); 
     const [familyName, setFamily] = useState(); 
@@ -50,7 +58,23 @@ export default function EditInfo() {
 
     return (
         <>
-            <Topbar />
+            <section className="topBar">
+                <AppBar position="Fixed" color="white" boxShadow={4}>
+                    <Toolbar>
+                        <Box 
+                            flexGrow={0.95}>
+                            <IconButton edge="start" marginLeft="auto">
+                                <BackButton
+                                    onClick={homepage}>
+                                </BackButton>    
+                            </IconButton>
+                        </Box>
+                        <Box flexGrow={1}>
+                            <img class="header" src="/logo.png" alt="logo" width="207" height="55" />
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+            </section>
             <h1 className="clientHeading">Create Client</h1>
             <section className="boxes">
                 <Box
@@ -60,7 +84,6 @@ export default function EditInfo() {
                 boxShadow={0}
                 paddingLeft={5}
                 paddingRight={5}
-                
                 >
                     <br/>
                     <h4>Client Information</h4>
