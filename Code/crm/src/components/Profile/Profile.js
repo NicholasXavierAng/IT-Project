@@ -41,6 +41,13 @@ export default function Profile({props}) {
     var [lastContact, setLastContact] = useState();
     var [nextMeeting, setNextMeeting] = useState();
     var [notes, setNotes] = useState();
+    var [number, setNumber] = useState();
+    var [email, setEmail] = useState();
+
+    var [name, setName] = useState();
+    var [location, setLocation] = useState();
+    var [position, setPosition] = useState();
+    var [department, setDepartment] = useState();
     var [description, setDescription] = useState();
     var [timeline, setTimeline] = useState();
     let {id} = useParams();
@@ -131,9 +138,69 @@ export default function Profile({props}) {
                 throw err;
             }
         }
+        if (number) {
+            try {
+                var req = {"number":number}; 
+                axios.post(link + 'user/number/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+        if (email) {
+            try {
+                var req = {"email":email}; 
+                axios.post(link + 'user/email/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+        if (name) {
+            try {
+                var req = {"name":name}; 
+                axios.post(link + 'user/name/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+        if (location) {
+            try {
+                var req = {"location":location}; 
+                axios.post(link + 'user/location/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+        if (position) {
+            try {
+                var req = {"position":position}; 
+                axios.post(link + 'user/position/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+        if (department) {
+            try {
+                var req = {"department":department}; 
+                axios.post(link + 'user/department/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
         
 
-    }, [notes, description, timeline]); 
+    }, [notes, description, timeline, number, email, name, location, position, department]); 
 
 
     async function changeProgress(progress) {
@@ -382,9 +449,34 @@ export default function Profile({props}) {
                         style={{ padding: "15px", margin: "10px", width:"25em", marginTop:"2em"}}>
                         <Box display="flex" justifyContent="space-between">
                             <h3>Contact</h3>
-                            <IconButton>
-                                <Pen/>
-                            </IconButton>
+                            <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                <div>
+                                    <p>Edit Mobile</p>
+                                    <TextField
+                                    id="newnotes"
+                                    label="Edit Mobile"
+                                    placeholder="Write new number here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setNumber(e.target.value)}
+                                    />
+                                    
+                                    <p>Edit Email</p>
+                                     <TextField
+                                    id="newnotes"
+                                    label="New Email"
+                                    placeholder="Write new email here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setEmail(e.target.value)}
+                                    />
+                                </div>
+
+                            </Popup>
                         </Box>
                         {customer &&
                         <>
@@ -408,9 +500,56 @@ export default function Profile({props}) {
                         style={{ padding: "15px", margin: "8px", width:"25em", marginRight:"7.5em", height:"15em"}}>
                         <Box display="flex" justifyContent="space-between">
                             <h3>Company Information</h3>
-                            <IconButton>
-                                <Pen/>
-                            </IconButton>
+                            <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                <div>
+                                    <p>Edit Name</p>
+                                <TextField
+                                    id="newnotes"
+                                    label="New Name"
+                                    placeholder="Write new name here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setName(e.target.value)}
+                                    />
+                                    
+                                    <p>Edit Location</p>
+                                     <TextField
+                                    id="newnotes"
+                                    label="New Location"
+                                    placeholder="Write new location here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setLocation(e.target.value)}
+                                    />
+                                    <p>Edit Position</p>
+                                     <TextField
+                                    id="newnotes"
+                                    label="New Position"
+                                    placeholder="Write new position here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setPosition(e.target.value)}
+                                    />
+                                    <p>Edit Department</p>
+                                     <TextField
+                                    id="newnotes"
+                                    label="New Department"
+                                    placeholder="Write new department here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setDepartment(e.target.value)}
+                                    />
+                                </div>
+
+                            </Popup>
                         </Box>
                         {company &&
                         <>
