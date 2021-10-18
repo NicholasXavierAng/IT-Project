@@ -20,6 +20,10 @@
     left: 60%;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 /* .box {
     width: 20px;
     background-color: yellow;
