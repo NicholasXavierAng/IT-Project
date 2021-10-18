@@ -216,5 +216,12 @@ userRouter.post('/priority/:id', async (req, res) => {
 	res.sendStatus(200); 
 })
 
+userRouter.post('/notes/:id', async (req, res) => {
+	var customer = await Customer.findById(req.params.id);
+	customer.notes =  req.body.notes; 
+	await customer.save(); 
+	res.sendStatus(200); 
+})
+
 module.exports = userRouter; 
 

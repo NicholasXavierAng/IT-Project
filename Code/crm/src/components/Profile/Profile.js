@@ -40,6 +40,7 @@ export default function Profile({props}) {
     var [priority, setPriority] = useState();
     var [lastContact, setLastContact] = useState();
     var [nextMeeting, setNextMeeting] = useState();
+    var [notes, setNotes] = useState();
     let {id} = useParams();
 
     const [date, setDate] = useState(false); 
@@ -96,6 +97,20 @@ export default function Profile({props}) {
         }
 
     }, [date, time]); 
+
+    useEffect( ()=> { 
+        if (notes) {
+            try {
+                var req = {"notes":notes}; 
+                axios.post(link + 'user/notes/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+
+    }, [notes]); 
 
 
     async function changeProgress(progress) {
@@ -244,7 +259,6 @@ export default function Profile({props}) {
                         <OutlinedInput
                             name="age"
                             labelWidth= "haha"
-                            // labelWidth={this.state.labelWidth}
                             id="outlined-age-native-simple"
                         />
                     }
@@ -414,19 +428,32 @@ export default function Profile({props}) {
                         style={{ padding: "15px", margin: "8px" , width:"60em", height:"10em", marginTop:"2em"}}>
                         <Box display="flex" justifyContent="space-between">
                             <h3>Notes</h3>
-                            <IconButton>
-                                <Pen/>
-                            </IconButton>
+                            <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                <div>
+                                <TextField
+                                    id="newnotes"
+                                    label="Editing notes"
+                                    placeholder="Write new notes here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setNotes(e.target.value)}
+                                    />
+                                </div>
+
+                            </Popup>
                         </Box>
                     <section class="notes">
                         <TextField
                         id="notes"
-                        label="Editing notes"
+                        // label="Editing notes"
                         placeholder="Write notes here"
                         multiline
                         variant="outlined"
                         color="secondary"
                         fullWidth 
+                        value={customer && customer.notes}
                         />
                     </section>
                     </Box>
