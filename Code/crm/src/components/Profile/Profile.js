@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Rebecca Ye, Tiana Litchfield, Terry Tran
+// Author(s): Zakarya Butt, Rebecca Ye, Tiana Litchfield, Terry Tran, Nicholas Ang
 // Date Made: 12/09/2021
 //////////////////////////////
 
@@ -68,7 +68,7 @@ export default function Profile({props}) {
                 setCompany(comp); 
                 setProgress(prog);
                 setPriority(priority);
-                setLastContact(new Date(lastContact));
+                setLastContact(lastContact);
                 setNextMeeting(nextMeeting);
             })
             .catch(err => {
@@ -102,6 +102,12 @@ export default function Profile({props}) {
         axios.post(link + 'user/priority/' + id, req)
     } 
 
+    async function changeLastContact(lastContact) {
+        var req = {"lastContact": lastContact}
+        setLastContact(lastContact);
+        axios.post(link + 'user/priority/' + id, req)
+    } 
+
     return(
         <>
         <AppBar position="fixed" color="white" boxShadow={4}>
@@ -122,7 +128,8 @@ export default function Profile({props}) {
                 </IconButton>
             </Toolbar>
         </AppBar>
-
+        <Toolbar/>
+        <br/>
         <div className="rectangle"></div>
         <div className="profilePicContainer">
             
@@ -175,85 +182,54 @@ export default function Profile({props}) {
                 alignItems="center"
             >
                 <Grid item spacing={4}>
-                <FormControl variant="outlined" >
-          <InputLabel
-            ref={ref => {
-            //   this.InputLabelRef = ref;
-            }}
-            htmlFor="outlined-age-native-simple"
-          >
-            Progress
-          </InputLabel>
-          <Select
-            native
-            value={customer && customer.progress}
-            onChange={event => changeProgress(event.target.value)}
-            input={
-              <OutlinedInput
-                name="progress"
-                labelWidth={0}
-                id="outlined-age-native-simple"
-              />
-            }
-          >
-            <option value={0}>{progress && progress}</option>
-            <option value="New">New</option>
-            <option value="Invited">Invited</option>
-            <option value="Met">Met</option>
-            <option value="Negotiation">Negotiation</option>
-            <option value="Conclude">Conclude</option>
-          </Select>
-        </FormControl>
-                    {/* <Box 
-                        boxShadow={4}
-                        borderRadius={5}
-                        style={{ padding: "15px", margin: "8px" }}>
-                        {customer &&
-                        <>
-                        <p><b>Progress: </b> <span className="contactInfo">{customer.progress}</span></p>
-                        </>
-                        }     
-                    </Box> */}
-                </Grid>
+                
+                <InputLabel>Progress</InputLabel>
+                <br/>
+                <Select
+                    native
+                    defaultValue={customer && customer.progress}
+                    onChange={event => changeProgress(event.target.value)}
+                    input={
+                    <OutlinedInput
+                        name="progress"
+                        labelWidth={0}
+                        id="outlined-age-native-simple"
+                    />
+                    }
+                >
+                    <option value="New">New</option>
+                    <option value="Invited">Invited</option>
+                    <option value="Met">Met</option>
+                    <option value="Negotiation">Negotiation</option>
+                    <option value="Conclude">Conclude</option>
+                </Select>
+                <br/>
+                <br/>
+            </Grid>
 
-                <Grid item spacing={4}>
-                <InputLabel
-            ref={ref => {
-            //   this.InputLabelRef = ref;
-            }}
-            htmlFor="outlined-age-native-simple"
-          >
-            Priority
-          </InputLabel>
-          <Select
-            native
-            value="POP"
-            onChange={event => changePriority(event.target.value)}
-            input={
-              <OutlinedInput
-                name="age"
-                labelWidth= "haha"
-                // labelWidth={this.state.labelWidth}
-                id="outlined-age-native-simple"
-              />
-            }
-          >
-            <option value={0}>{priority}</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </Select>
-                    {/* <Box 
-                        boxShadow={4}
-                        borderRadius={5}
-                        style={{ padding: "15px", margin: "8px" }}>
-                        {customer &&
-                        <>
-                        <p><b>Priority: </b> <span className="contactInfo">{customer.priority}</span></p>
-                        </>
-                        }     
-                    </Box> */}
-                </Grid>
+            <Grid item spacing={4}>
+                <InputLabel>Priority</InputLabel>
+                <br/>
+                <Select
+                    native
+                    defaultValue={customer && customer.priority}
+                    onChange={event => changePriority(event.target.value)}
+                    input={
+                        <OutlinedInput
+                            name="age"
+                            labelWidth= "haha"
+                            // labelWidth={this.state.labelWidth}
+                            id="outlined-age-native-simple"
+                        />
+                    }
+                    >
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </Select>
+                <br/>
+                <br/>
+            </Grid>
 
                 <Grid item spacing={4}>
                     <Box 
@@ -267,8 +243,8 @@ export default function Profile({props}) {
                             ampm={true}
                             label="Last Contact"
                             inputVariant="outlined"
-                            value={lastContact}
-                            onChange={(value) => setLastContact(new Date(value))}
+                            defaultValue={lastContact}
+                            onChange={event => changeLastContact(event)}
                             format="dd/MM/yyyy hh:mm a"
                             />
                         </MuiPickersUtilsProvider>
@@ -332,7 +308,6 @@ export default function Profile({props}) {
                     {customer  && 
                         <>
                         <h1>{customer.firstName} {customer.familyName}</h1>
-                        <p><b>Age: </b> {customer.age}</p>
                         <p><b>Gender: </b> {customer.gender}</p>
                         </>
                     }

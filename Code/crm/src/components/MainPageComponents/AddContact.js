@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Rebecca Ye
+// Author(s): Zakarya Butt, Rebecca Ye, Nicholas Ang
 // Date Made: 26/09/2021
 //////////////////////////////
 
@@ -7,11 +7,16 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import './AddContact.css'; 
 import Button from '@material-ui/core/Button';
-import React, { useState /*, useEffect*/} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import BackButton from '@material-ui/icons/ArrowBack'; 
 import { IconButton, AppBar, Toolbar } from '@material-ui/core';
 
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import AlertMessage from '../AlertMessage/AlertMessage';
 
 const config = require('../Configuration/config.json');
 const API_URL =  config.API_URL; 
@@ -39,6 +44,7 @@ export default function EditInfo() {
     const [priority, setPriority] = useState(); 
     const [status, setStatus] = useState(); 
 
+    const [addClientStatus, setAddClientStatus] = useState();
 
     const makeCustomer = () => {
         // Sends a request to the backend to make a new customer
@@ -48,13 +54,10 @@ export default function EditInfo() {
         }
         console.log(req);
         axios.post(API_URL + 'user/addCustomer', req).then(res => {
-            var data = res.data.customers; 
-            console.log(data); 
-        }) 
-      }
+            setAddClientStatus({ msg: "Client successfully added.", key: Math.random(), severity: "success" });
+        })
+    }
   
-
-
 
     return (
         <>
@@ -234,30 +237,42 @@ export default function EditInfo() {
                         />
                         <br/>
                         <br/>
-                        <TextField
-                            required
-                            id="priority"
-                            label="Priority"
-                            placeholder="High, Medium or Low"
-                            variant="outlined"
-                            color="secondary"
-                            height="56px"
-                            width="232px"
-                            onChange={e => setPriority(e.target.value)}
-                        />
+                        <Box sx={{ width: 200 }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="priority">Priority</InputLabel>
+                                <Select
+                                labelId="priority"
+                                id="priority"
+                                label="Priority"
+                                onChange={e => setPriority(e.target.value)}
+                                >
+                                <MenuItem value={"Low"}>Low</MenuItem>
+                                <MenuItem value={"Medium"}>Medium</MenuItem>
+                                <MenuItem value={"High"}>High</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
                         <br/>
                         <br/>
-                        <TextField
-                            required
-                            id="status"
-                            label="Status"
-                            placeholder="e.g. New"
-                            variant="outlined"
-                            color="secondary"
-                            height="56px"
-                            width="232px"
-                            onChange={e => setStatus(e.target.value)}
-                        />
+                        <Box sx={{ width: 200 }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="progress">Progress</InputLabel>
+                                <Select
+                                labelId="progress"
+                                id="progress"
+                                label="Progress"
+                                onChange={e => setStatus(e.target.value)}
+                                >
+                                <MenuItem value={"New"}>New</MenuItem>
+                                <MenuItem value={"Invited"}>Invited</MenuItem>
+                                <MenuItem value={"Met"}>Met</MenuItem>
+                                <MenuItem value={"Negotiation"}>Negotiation</MenuItem>
+                                <MenuItem value={"Conclude"}>Conclude</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <br/>
+                        <br/>
                     </section> 
     
                 </Box>
@@ -274,6 +289,9 @@ export default function EditInfo() {
                     style={{minWidth: "85px", minHeight:"35px"}}>
                     Add Contact
                 </Button>
+                {addClientStatus ? <AlertMessage key={addClientStatus.key} message={addClientStatus.msg} severity={addClientStatus.severity} /> : null}
+                <br/>
+                <br/>
             </section>
         </>
     )

@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 var customerSchema = new mongoose.Schema({
     familyName: String, 
     firstName: String, 
-    age: Number, 
     email: String, 
     status: String, 
     phoneNumber: String,
