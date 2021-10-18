@@ -11,7 +11,7 @@ import Pen from '@material-ui/icons/Create';
 import { IconButton, AppBar, Toolbar, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import Moment from 'react-moment';
 import Calendar from 'react-calendar'
 // import 'moment-timezone';
@@ -24,6 +24,12 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
+
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDateTimePicker
+} from '@material-ui/pickers';
 
 export default function Profile({props}) {
     const config = require('../Configuration/config.json');
@@ -62,7 +68,7 @@ export default function Profile({props}) {
                 setCompany(comp); 
                 setProgress(prog);
                 setPriority(priority);
-                setLastContact(lastContact);
+                setLastContact(new Date(lastContact));
                 setNextMeeting(nextMeeting);
             })
             .catch(err => {
@@ -256,14 +262,16 @@ export default function Profile({props}) {
                         style={{ padding: "15px", margin: "8px" }}>
                         {customer &&
                         <>
-                        <Box display="flex" justifyContent="space-between">
-                            <centre><h3>LAST CONTACT</h3></centre>
-                            <IconButton>
-                                <Pen/>
-                            </IconButton>
-                        </Box>
-                        <p><b>Date: </b> <span className="contactInfo"><Moment format="YYYY-mm-dd">{customer.lastContact}</Moment>)</span></p>
-                        <p><b>Time:</b> 10:00</p>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDateTimePicker
+                            ampm={true}
+                            label="Last Contact"
+                            inputVariant="outlined"
+                            value={lastContact}
+                            onChange={(value) => setLastContact(new Date(value))}
+                            format="dd/MM/yyyy hh:mm a"
+                            />
+                        </MuiPickersUtilsProvider>
                         </>
                         }     
                     </Box>
