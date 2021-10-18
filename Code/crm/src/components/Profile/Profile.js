@@ -41,6 +41,8 @@ export default function Profile({props}) {
     var [lastContact, setLastContact] = useState();
     var [nextMeeting, setNextMeeting] = useState();
     var [notes, setNotes] = useState();
+    var [description, setDescription] = useState();
+    var [timeline, setTimeline] = useState();
     let {id} = useParams();
 
     const [date, setDate] = useState(false); 
@@ -109,8 +111,29 @@ export default function Profile({props}) {
                 throw err;
             }
         }
+        if (description) {
+            try {
+                var req = {"description":description}; 
+                axios.post(link + 'user/description/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+        if (timeline) {
+            try {
+                var req = {"timeline":timeline}; 
+                axios.post(link + 'user/timeline/' + id, req); 
+            }
+            catch (err) {
+                if ((err)) return alert('check your connection');
+                throw err;
+            }
+        }
+        
 
-    }, [notes]); 
+    }, [notes, description, timeline]); 
 
 
     async function changeProgress(progress) {
@@ -406,12 +429,37 @@ export default function Profile({props}) {
                         style={{ padding: "15px", width:"25em", height:"15em"}}>
                         <Box display="flex" justifyContent="space-between">
                             <h3>Task Information</h3>
-                            <IconButton>
-                                <Pen/>
-                            </IconButton>
+                            <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                <div>
+                                    <p>Edit Description</p>
+                                <TextField
+                                    id="newnotes"
+                                    label="New Description"
+                                    placeholder="Write new description here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setDescription(e.target.value)}
+                                    />
+                                    
+                                    <p>Edit Timeline</p>
+                                     <TextField
+                                    id="newnotes"
+                                    label="New Timeline"
+                                    placeholder="Write new timeline here"
+                                    multiline
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth 
+                                    onChange={e => setTimeline(e.target.value)}
+                                    />
+                                </div>
+
+                            </Popup>
                         </Box>
-                    <p><b>High level description: </b> <span className="contactInfo">...</span></p>
-                    <p><b>Timeline: </b> <span className="contactInfo">...</span></p>
+                    <p><b>High level description: </b> <span className="contactInfo">{customer && customer.description}</span></p>
+                    <p><b>Timeline: </b> <span className="contactInfo">{customer && customer.timeline}</span></p>
                     </Box>
                 </Grid>
             </Grid>

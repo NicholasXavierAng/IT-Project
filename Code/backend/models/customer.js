@@ -25,7 +25,9 @@ var customerSchema = new mongoose.Schema({
         type: String,
         enum: ['New', 'Invited', 'Met', 'Negotiation', 'Conclude']
     },
-    notes : String 
+    notes : String, 
+    description: String, 
+    timeline: String
 })
 
 const Customer = mongoose.model("customer", customerSchema); 

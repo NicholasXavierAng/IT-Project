@@ -223,5 +223,19 @@ userRouter.post('/notes/:id', async (req, res) => {
 	res.sendStatus(200); 
 })
 
+userRouter.post('/description/:id', async (req, res) => {
+	var customer = await Customer.findById(req.params.id);
+	customer.description =  req.body.description; 
+	await customer.save(); 
+	res.sendStatus(200); 
+})
+
+userRouter.post('/timeline/:id', async (req, res) => {
+	var customer = await Customer.findById(req.params.id);
+	customer.timeline =  req.body.timeline; 
+	await customer.save(); 
+	res.sendStatus(200); 
+})
+
 module.exports = userRouter; 
 
