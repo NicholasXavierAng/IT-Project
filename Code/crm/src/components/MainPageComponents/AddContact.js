@@ -286,7 +286,7 @@ export default function EditInfo() {
                     type="submit"
                     variant="contained"
                     color="secondary"
-                    style={{minWidth: "85px", minHeight:"35px"}}>
+                    style={{minWidth: "85px", maxWidth: "150px", minHeight:"35px"}}>
                     Add Contact
                 </Button>
                 {addClientStatus ? <AlertMessage key={addClientStatus.key} message={addClientStatus.msg} severity={addClientStatus.severity} /> : null}
