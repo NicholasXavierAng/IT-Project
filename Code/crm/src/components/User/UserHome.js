@@ -367,9 +367,9 @@ function UserHome() {
 						<>
 							{/* A loop to handle customers directly from the database  */}
 							<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
-							<p className = "name">{d.firstName} {d.familyName}</p>
-							<p className = "status">{d.progress}</p>
-							<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
+								<p className = "name">{d.firstName} {d.familyName}</p>
+								<p className = "status">{d.progress}</p>
+								<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
 							</button>
 							<hr width="95%" align="center"/>
 						</>

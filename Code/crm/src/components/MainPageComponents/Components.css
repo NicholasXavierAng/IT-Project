@@ -69,13 +69,19 @@
 
 .client {
   height: 55px;
-  width: 70%;
+  width: 100%;
   font-size: 20px;
   display: flex;
   border: none;
   justify-content: space-between;
   padding-left: 80px;
   background: transparent;
+  transition-duration: 0.4s;
+}
+
+.client:hover {
+  background-color: #af534c; /* Green */
+  color: white;
 }
 
 .name {
