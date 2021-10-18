@@ -277,7 +277,7 @@ export default function Profile({props}) {
                         {customer &&
                         <>
                         <Box display="flex" justifyContent="space-between">
-                            <centre><h3><b>NEXT MEETING</b></h3></centre>
+                            <centre><h3>NEXT MEETING</h3></centre>
                         </Box>
                         <Box display="flex" justifyContent="space-between">
                             <p><b>Date: </b> <span className="contactInfo">{customer.meeting && customer.meeting.date}</span></p>
