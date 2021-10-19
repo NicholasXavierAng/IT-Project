@@ -78,7 +78,7 @@ export default function EditInfo() {
                     </Toolbar>
                 </AppBar>
             </section>
-            <h1 className="clientHeading">Create Client</h1>
+            <h1 className="clientHeading">Add Contact</h1>
             <section className="boxes">
                 <Box
                 borderRadius={16}
