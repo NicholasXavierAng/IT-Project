@@ -259,9 +259,9 @@ export default function Profile({props}) {
                 </IconButton>
             </Toolbar>
         </AppBar>
-        <Toolbar/>
-        <br/>
         <div className="rectangle"></div>
+        
+        
         <div className="profilePicContainer">
             
             <div className="pic">
