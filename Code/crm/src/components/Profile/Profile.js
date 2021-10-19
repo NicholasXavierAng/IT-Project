@@ -260,9 +260,9 @@ export default function Profile({props}) {
                 </IconButton>
             </Toolbar>
         </AppBar>
-        <Toolbar/>
-        <br/>
         <div className="rectangle"></div>
+        
+        
         <div className="profilePicContainer">
            {/* <img class = "avatar" src={avatar}/>*/}
             <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
