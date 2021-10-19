@@ -6,7 +6,6 @@
 import './Profile.css'; 
 import TextField from '@material-ui/core/TextField';
 import BackButton from '@material-ui/icons/ArrowBack'; 
-import Bell from '@material-ui/icons/Notifications'; 
 import Pen from '@material-ui/icons/Create'; 
 import { IconButton, AppBar, Toolbar, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -245,7 +244,7 @@ export default function Profile({props}) {
         <AppBar position="fixed" color="white" boxShadow={4}>
             <Toolbar>
                 <Box 
-                    flexGrow={1}>
+                    flexGrow={0.98}>
                     <IconButton edge="start" marginLeft="auto">
                         <BackButton
                             onClick={homepage}>
@@ -255,9 +254,6 @@ export default function Profile({props}) {
                 <Box flexGrow={1}>
                     <img class="header" src="/logo.png" alt="logo" width="207" height="55" />
                 </Box>
-                <IconButton>
-                    <Bell />
-                </IconButton>
             </Toolbar>
         </AppBar>
         <div className="rectangle"></div>
@@ -444,7 +440,7 @@ export default function Profile({props}) {
                         </>
                     }
                 </div>
-                <Grid item spacing={4}>
+                <Grid item spacing={4} style = {{position: "relative", right: "2.25%"}}>
                     <Box 
                         boxShadow={4}
                         borderRadius={5}
