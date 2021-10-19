@@ -320,6 +320,7 @@ export default function Profile({props}) {
                     native
                     defaultValue={customer && customer.progress}
                     onChange={event => changeProgress(event.target.value)}
+                    style={{width:300}}
                     input={
                     <OutlinedInput
                         name="progress"
@@ -339,12 +340,14 @@ export default function Profile({props}) {
             </Grid>
 
             <Grid item spacing={4}>
+            <FormControl sx={{ m: 1, minWidth: 200 }}>
                 <InputLabel>Priority</InputLabel>
                 <br/>
                 <Select
                     native
                     defaultValue={customer && customer.priority}
                     onChange={event => changePriority(event.target.value)}
+                    style={{width:300}}
                     input={
                         <OutlinedInput
                             name="age"
@@ -357,6 +360,7 @@ export default function Profile({props}) {
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
                 </Select>
+                </FormControl>
                 <br/>
                 <br/>
             </Grid>
