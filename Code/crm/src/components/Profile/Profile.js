@@ -56,6 +56,7 @@ export default function Profile({props}) {
     const [time, setTime] = useState(false);
 
     const [lastContact, setLastContact] = useState(new Date());
+    const [nMeeting, setNMeeting] = useState(new Date());
 
     const homepage = async (e) => {
         e.preventDefault();
@@ -384,6 +385,26 @@ export default function Profile({props}) {
                         boxShadow={4}
                         borderRadius={5}
                         style={{ padding: "15px", margin: "8px" }}>
+                        <>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDateTimePicker
+                            ampm={true}
+                            label="Next Meeting"
+                            inputVariant="outlined"
+                            value={nMeeting}
+                            onChange={setNMeeting}
+                            format="dd/MM/yyyy hh:mm a"
+                            />
+                        </MuiPickersUtilsProvider>
+                        </>   
+                    </Box>
+                </Grid>
+            </Grid>
+                {/* <Grid item spacing={4}>
+                    <Box 
+                        boxShadow={4}
+                        borderRadius={5}
+                        style={{ padding: "15px", margin: "8px" }}>
                         {customer &&
                         <>
                         <Box display="flex" justifyContent="space-between">
@@ -421,7 +442,7 @@ export default function Profile({props}) {
                         }     
                     </Box>
                 </Grid>
-            </Grid>
+            </Grid> */}
         </div>
 
         <div className="rightContainer">
