@@ -80,8 +80,7 @@
 }
 
 .client:hover {
-  background-color: #af534c; /* Green */
-  color: white;
+  background-color: #d3d3d3; /* Green */
 }
 
 .name {
