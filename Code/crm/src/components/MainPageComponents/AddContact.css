@@ -11,17 +11,13 @@
     position: relative;
     left: 42%;
     margin-top: 100px;
-    color: #814B4B;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .add-contact {
     position: relative;
     top: 10px;
     left: 60%;
-}
-
-body {
-    overflow-x: hidden;
 }
 
 /* .box {
