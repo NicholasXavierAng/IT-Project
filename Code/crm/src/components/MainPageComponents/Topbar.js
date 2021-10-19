@@ -64,7 +64,7 @@ function Topbar () {
                             variant="contained"
                             color="secondary"
                             style={{minWidth: "254px", minHeight:"56px"}}>
-                                +  ADD CLIENT
+                                +  ADD CONTACT
                         </Button>
                     </MenuItem>
 
