@@ -300,7 +300,7 @@ export default function Profile({props}) {
             </svg>
 
         </div>
-        <div className="leftContainer">
+        <div className="leftContainer" >
             <Grid container
                 direction="column"
                 justifyContent="space-between"
@@ -333,7 +333,7 @@ export default function Profile({props}) {
                 <br/>
             </Grid>
 
-            <Grid item spacing={4}>
+            <Grid item spacing={4} >
             <FormControl sx={{ m: 1, minWidth: 200 }}>
                 <InputLabel>Priority</InputLabel>
                 <br/>
