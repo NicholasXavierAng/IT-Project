@@ -25,6 +25,7 @@ var customerSchema = new mongoose.Schema({
         type: String,
         enum: ['New', 'Invited', 'Met', 'Negotiation', 'Conclude']
     },
+    lastContact: String,
     notes : String, 
     description: String, 
     timeline: String

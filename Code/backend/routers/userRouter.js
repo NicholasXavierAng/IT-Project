@@ -202,6 +202,14 @@ userRouter.post('/meeting/:id', async (req, res) => {
 	res.json({"status":true}); 
 })
 
+userRouter.post('/lastContact/:id', async (req, res) => {
+	var customer = await Customer.findById(req.params.id);
+	customer.lastContact = req.body.lastContact; 
+	await customer.save(); 
+	res.json({"status":true}); 
+	console.log(req.body.lastContact);
+})
+
 userRouter.post('/progress/:id', async (req, res) => {
 	var customer = await Customer.findById(req.params.id);
 	customer.progress =  req.body.progress; 

@@ -38,7 +38,7 @@ export default function Profile({props}) {
     var [company, setCompany] = useState(); 
     var [progress, setProgress] = useState();
     var [priority, setPriority] = useState();
-    var [lastContact, setLastContact] = useState();
+    
     var [nextMeeting, setNextMeeting] = useState();
     var [notes, setNotes] = useState();
     var [number, setNumber] = useState();
@@ -54,6 +54,8 @@ export default function Profile({props}) {
 
     const [date, setDate] = useState(false); 
     const [time, setTime] = useState(false);
+
+    const [lastContact, setLastContact] = useState(new Date());
 
     const homepage = async (e) => {
         e.preventDefault();
@@ -72,13 +74,12 @@ export default function Profile({props}) {
                     var comp = data.company; 
                     var prog = cust.progress;
                     var priority = cust.priority;
-                    var lastContact = cust.lastContact;
+                    var lastCont = cust.lastContact;
                     var nextMeeting = cust.nextMeeting;
                     setCustomer(cust); 
                     setCompany(comp); 
                     setProgress(prog);
                     setPriority(priority);
-                    setLastContact(lastContact);
                     setNextMeeting(nextMeeting);
                 })
             }
@@ -198,9 +199,20 @@ export default function Profile({props}) {
                 throw err;
             }
         }
+
+        // if (lastContact) {
+        //     try {
+        //         var req = {"lastContact": lastContact};
+        //         axios.post(link + 'user/lastContact/' + id, req)
+        //     }
+        //     catch (err) {
+        //         if ((err)) return alert('check your connection');
+        //         throw err;
+        //     }
+        // }
         
 
-    }, [notes, description, timeline, number, email, name, location, position, department]); 
+    }, [notes, description, timeline, number, email, name, location, position, department, lastContact]); 
 
 
     async function changeProgress(progress) {
@@ -218,18 +230,6 @@ export default function Profile({props}) {
     async function changePriority(priority) {
         var req = {"priority": priority}
         setPriority(priority);
-        try {
-            axios.post(link + 'user/priority/' + id, req)
-        }
-        catch (err) {
-            if ((err)) return alert('check your connection');
-            throw err;
-        }
-    } 
-
-    async function changeLastContact(lastContact) {
-        var req = {"lastContact": lastContact}
-        setLastContact(lastContact);
         try {
             axios.post(link + 'user/priority/' + id, req)
         }
@@ -364,20 +364,18 @@ export default function Profile({props}) {
                         boxShadow={4}
                         borderRadius={5}
                         style={{ padding: "15px", margin: "8px" }}>
-                        {customer &&
                         <>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDateTimePicker
                             ampm={true}
                             label="Last Contact"
                             inputVariant="outlined"
-                            defaultValue={lastContact}
-                            onChange={event => changeLastContact(event)}
+                            value={lastContact}
+                            onChange={setLastContact}
                             format="dd/MM/yyyy hh:mm a"
                             />
                         </MuiPickersUtilsProvider>
-                        </>
-                        }     
+                        </>   
                     </Box>
                 </Grid>
 
