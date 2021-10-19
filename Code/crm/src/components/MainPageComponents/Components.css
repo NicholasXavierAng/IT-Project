@@ -54,7 +54,7 @@
 
 .n {
   position: absolute;
-  left: 20%;
+  left: 25%;
 }
 
 .s {
@@ -86,6 +86,7 @@
 
 .name {
   position: absolute;
+  left: 8%;
 }
 
 .status {
