@@ -60,11 +60,17 @@
 }
 
 .profilePicContainer {
-  height: 300px;
-  width: 300px;
-  background-color: #bbb;
+  height: 20%;
+  width: 12%;
+
   border-radius: 50%;
   position: absolute;
   left: 17%;
   display: inline-block;
+}
+
+.avatar {
+  border: 50%;
+  height: 70%;
+  width: 70%;
 }
