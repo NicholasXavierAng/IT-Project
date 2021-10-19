@@ -318,7 +318,7 @@ export default function Profile({props}) {
                     native
                     defaultValue={customer && customer.progress}
                     onChange={event => changeProgress(event.target.value)}
-                    style={{width:300}}
+                    style={{width:130}}
                     input={
                     <OutlinedInput
                         name="progress"
@@ -345,7 +345,7 @@ export default function Profile({props}) {
                     native
                     defaultValue={customer && customer.priority}
                     onChange={event => changePriority(event.target.value)}
-                    style={{width:300}}
+                    style={{width:130}}
                     input={
                         <OutlinedInput
                             name="age"
