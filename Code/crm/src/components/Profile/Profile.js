@@ -440,7 +440,7 @@ export default function Profile({props}) {
                         </>
                     }
                 </div>
-                <Grid item spacing={4}>
+                <Grid item spacing={4} style = {{position: "relative", right: "2.25%"}}>
                     <Box 
                         boxShadow={4}
                         borderRadius={5}
