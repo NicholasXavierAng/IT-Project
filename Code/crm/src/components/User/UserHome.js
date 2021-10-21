@@ -214,7 +214,7 @@ function UserHome() {
 							variant="contained"
 							color="secondary"
 							style={{minWidth: "254px", minHeight:"56px"}}>
-								+  ADD CONTACT
+								+  Add Contact
 						</Button>
 					</MenuItem>
 					<MenuItem onClick={handleClose}>
@@ -261,7 +261,6 @@ function UserHome() {
 							<>
 								<MenuItem onClick={handleClose}>
 									<div className = "notifications">
-										{/* <div className = "timestamp">1 hour ago</div> */}
 										<div className = "content"> Meeting with {d.name}, {d.time} on {d.date}</div>
 										<div className = "divider">
 											<div className = "line" />

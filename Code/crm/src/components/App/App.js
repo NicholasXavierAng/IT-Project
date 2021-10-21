@@ -1,15 +1,14 @@
-//////////////////////////////
+////////////////////////////////////////////////////////////
 // Author(s): Nicholas, Zakarya Butt, Rebecca Ye
 // Date Made: 08/09/2021
-//////////////////////////////
+////////////////////////////////////////////////////////////
 
-import React /*, { useState }*/ from 'react';
+import React  from 'react';
 import {BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import UserHome from '../User/UserHome';
 import Login from '../Login/Login';
-//import Register from '../Register/Register';
 import useToken from './useToken';
 import Profile from '../Profile/Profile'; 
 import EditInfo from '../Edit/EditInfo';
