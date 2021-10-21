@@ -328,12 +328,12 @@ export default function Profile({props}) {
                             <>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDateTimePicker
-                                ampm={true}
+                                ampm={false}
                                 label="Last Contact"
                                 inputVariant="outlined"
                                 value={customer && customer.lastContact}
                                 onChange={e => changeLastContact(e)}
-                                format="dd/MM/yyyy hh:mm a"
+                                format="dd/MM/yyyy hh:mm"
                                 />
                             </MuiPickersUtilsProvider>
                             </>   
@@ -348,12 +348,12 @@ export default function Profile({props}) {
                             <>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDateTimePicker
-                                ampm={true}
+                                ampm={false}
                                 label="Next Meeting"
                                 inputVariant="outlined"
-                                value={customer && customer.nextMeeting}
+                                value={customer && customer.meeting}
                                 onChange={e => changeNextMeeting(e)}
-                                format="dd/MM/yyyy hh:mm a"
+                                format="dd/MM/yyyy hh:mm"
                                 />
                             </MuiPickersUtilsProvider>
                             </>   
