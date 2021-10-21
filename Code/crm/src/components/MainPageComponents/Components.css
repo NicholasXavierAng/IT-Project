@@ -5,10 +5,7 @@
 
 .searchbar {
 	height: 41px;
-	width: 70%;
-	display: inline;
-	justify-content: space-between;
-	align-items: center;
+	margin: 0 auto;
 }
 
 .p {
@@ -33,7 +30,7 @@
 	display: flex;
 	font-size: 20px;
 	position: relative;
-	padding-left: 80px;
+	/*padding-left: 80px;*/
 	top: auto;
 	justify-content: space-between;
 	align-items: center;
@@ -42,6 +39,7 @@
 .n {
 	position: relative;
 	left: 15vw;
+	padding-left: 80px;
 }
 
 .s {

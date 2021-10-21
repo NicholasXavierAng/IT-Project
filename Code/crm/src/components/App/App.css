@@ -3,6 +3,10 @@
   overflow-x: hidden;
 }
 
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
 /* for testing
 body {
   overflow-x: hidden;

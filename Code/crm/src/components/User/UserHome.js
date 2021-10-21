@@ -284,7 +284,7 @@ function UserHome() {
 						value=""
 						onChange={e => searchWord(e)}
 						placeholder={"Search for contacts"}
-						style={{maxWidth: "73%", maxHeight:"25%"}}
+						style={{maxWidth: "100%", maxHeight:"25%"}}
 						/>
 					</Box>
 				</form>
@@ -383,7 +383,6 @@ function UserHome() {
 					<br/>	
 				</Box>   
 			</div>
-			
 		</div>
 	</div>
 	);
