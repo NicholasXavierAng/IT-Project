@@ -32,7 +32,7 @@ import {
     KeyboardDateTimePicker
 } from '@material-ui/pickers';
 
-import Avatar from "/Users/terrytran/Documents/GitHub/it_project/Code/crm/src/components/Profile/pngegg.png";
+import Avatar from "./pngegg.png";
 
 export default function Profile({props}) {
     const config = require('../Configuration/config.json');
