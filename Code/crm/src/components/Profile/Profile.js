@@ -39,8 +39,6 @@ export default function Profile({props}) {
     const link =  config.API_URL; 
     var [customer, setCustomer] = useState(); 
     var [company, setCompany] = useState(); 
-    var [progress, setProgress] = useState();
-    var [priority, setPriority] = useState();
     
     var [notes, setNotes] = useState();
     var [number, setNumber] = useState();
@@ -53,9 +51,6 @@ export default function Profile({props}) {
     var [description, setDescription] = useState();
     var [timeline, setTimeline] = useState();
     let {id} = useParams();
-
-    const [lastContact, setLastContact] = useState(new Date());
-    const [nextMeeting, setNextMeeting] = useState(new Date());
 
     const homepage = async (e) => {
         e.preventDefault();
@@ -72,12 +67,8 @@ export default function Profile({props}) {
                     var data = res.data; 
                     var cust = data.customer; 
                     var comp = data.company; 
-                    var prog = cust.progress;
-                    var priority = cust.priority;
                     setCustomer(cust); 
-                    setCompany(comp); 
-                    setProgress(prog);
-                    setPriority(priority);
+                    setCompany(comp);
                 })
             }
             catch (err) {
@@ -188,7 +179,6 @@ export default function Profile({props}) {
 
     async function changeProgress(progress) {
         var req = {"progress": progress}
-        setProgress(progress);
         try {
             axios.post(link + 'user/progress/' + id, req)
         }
@@ -200,7 +190,6 @@ export default function Profile({props}) {
 
     async function changePriority(priority) {
         var req = {"priority": priority}
-        setPriority(priority);
         try {
             axios.post(link + 'user/priority/' + id, req)
         }
@@ -212,7 +201,6 @@ export default function Profile({props}) {
 
     async function changeLastContact(lcDate) {
         var req = {"lastContact": lcDate}
-        setLastContact(lcDate);
         try {
             axios.post(link + 'user/lastContact/' + id, req)
         }
@@ -224,7 +212,6 @@ export default function Profile({props}) {
 
     async function changeNextMeeting(nmDate) {
         var req = {"meeting": nmDate}
-        setNextMeeting(nmDate);
         try {
             axios.post(link + 'user/meeting/' + id, req)
         }
@@ -332,7 +319,7 @@ export default function Profile({props}) {
                                 label="Last Contact"
                                 inputVariant="outlined"
                                 value={customer && customer.lastContact}
-                                onChange={e => changeLastContact(e)}
+                                onChange={changeLastContact}
                                 format="dd/MM/yyyy hh:mm"
                                 />
                             </MuiPickersUtilsProvider>
@@ -352,7 +339,7 @@ export default function Profile({props}) {
                                 label="Next Meeting"
                                 inputVariant="outlined"
                                 value={customer && customer.meeting}
-                                onChange={e => changeNextMeeting(e)}
+                                onChange={changeNextMeeting}
                                 format="dd/MM/yyyy hh:mm"
                                 />
                             </MuiPickersUtilsProvider>

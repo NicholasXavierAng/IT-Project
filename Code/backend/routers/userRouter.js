@@ -157,7 +157,7 @@ userRouter.post('/filter', async (req, res) => {
 })
 
 userRouter.post('/profile/:id', async (req, res) => {
-    var customer = await Customer.findById(req.params.id).lean();  
+	var customer = await Customer.findById(req.params.id).lean();  
     var company = await Company.findById(customer.companyInfo);
     res.json({"customer": customer, "company": company});
 })
@@ -195,12 +195,14 @@ userRouter.post('/addCustomer', async (req, res) => {
 })
 
 userRouter.post('/meeting/:id', async (req, res) => {
-	await Customer.findByIdAndUpdate(req.params.id, {"meeting": req.body.meeting});
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"meeting": req.body.meeting}}, {new: true});
+	console.log(req.body.meeting)
 	res.json({"status":true}); 
 })
 
 userRouter.post('/lastContact/:id', async (req, res) => {
-	await Customer.findByIdAndUpdate(req.params.id, {"lastContact": req.body.lastContact});
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"lastContact": req.body.lastContact}}, {new: true});
+	console.log(req.body.lastContact);
 	res.json({"status":true}); 
 })
 
@@ -220,7 +222,7 @@ userRouter.post('/priority/:id', async (req, res) => {
 
 userRouter.post('/notes/:id', async (req, res) => {
 	var customer = await Customer.findById(req.params.id);
-	customer.notes =  req.body.notes; 
+	customer.notes =  req.body.notes;
 	await customer.save(); 
 	res.sendStatus(200); 
 })
