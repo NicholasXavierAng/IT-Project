@@ -278,7 +278,7 @@ function UserHome() {
 				<form onSubmit={(doSearch)}>        
 					{/* can handle searches */}
 					<Box
-					style = {{position: "relative"}}
+					style = {{position: "relative", left:"15%"}}
 					>
 						<SearchBar
 						value=""
