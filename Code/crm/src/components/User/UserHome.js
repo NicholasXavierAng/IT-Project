@@ -1,7 +1,7 @@
-///////////////////////////////
+//////////////////////////////////////////////////////////////
 // Author(s): Terry Tran, Zakarya Butt, Rebecca Ye
 // Date Made: 09/09/2021
-///////////////////////////////
+//////////////////////////////////////////////////////////////
 
 import React, { useState ,useEffect} from 'react';
 import '../MainPageComponents/Components.css';
@@ -24,6 +24,7 @@ import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 function UserHome() {
 	const config = require('../Configuration/config.json');
 	const link =  config.API_URL; 
+	// For storing customers and notificaions for meetings. 
 	const [customers, setCustomers] = useState();
 	const [meetings, setMeetings] = useState();
 	// For search
@@ -39,6 +40,7 @@ function UserHome() {
 	const [high, setHigh] = useState(false);
 	const [medium, setMedium] = useState(false);
 	const [low, setLow] = useState(false);
+	// For sorting alphabetically
 	const [alpha, setAlpha] = useState(false); 
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -96,13 +98,14 @@ function UserHome() {
 		var filter = newCustomer || invite || met || negotiation || conclude || high || medium || low || alpha;  
 		if (!filter && !search) {
 				getCustomers(); 
+				
 		}
 		else if (filter && search) {
 			getSearchAndFilter(words); 
 		}
 		else if (search) {
 			const req = {"words":words}; 
-			axios.post('http://localhost:5000/user/search', req).then(res => {
+			axios.post(link + 'user/search', req).then(res => {
 			var data = res.data.customers; 
 			setSearch(true);
 			var cust = data; 
@@ -112,7 +115,7 @@ function UserHome() {
 		else {
 			const filters = {"new":newCustomer, "invite": invite, "met": met, "negotiation":negotiation, "conclude":conclude, "high":high, "medium":medium, "low":low, "alpha": alpha}; 
 			const req = {"filters": filters, "filter": filter}; 
-			axios.post('http://localhost:5000/user/filter', req).then(res => {
+			axios.post(link + 'user/filter', req).then(res => {
 			var data = res.data.customers;
 			setCustomers(data);
 			}) 
@@ -211,7 +214,7 @@ function UserHome() {
 							variant="contained"
 							color="secondary"
 							style={{minWidth: "254px", minHeight:"56px"}}>
-								+  ADD CONTACT
+								+  Add Contact
 						</Button>
 					</MenuItem>
 					<MenuItem onClick={handleClose}>
@@ -258,7 +261,6 @@ function UserHome() {
 							<>
 								<MenuItem onClick={handleClose}>
 									<div className = "notifications">
-										{/* <div className = "timestamp">1 hour ago</div> */}
 										<div className = "content"> Meeting with {d.name}, {d.time} on {d.date}</div>
 										<div className = "divider">
 											<div className = "line" />

@@ -42,7 +42,6 @@ export default function Profile({props}) {
     var [progress, setProgress] = useState();
     var [priority, setPriority] = useState();
     
-    var [nextMeeting, setNextMeeting] = useState();
     var [notes, setNotes] = useState();
     var [number, setNumber] = useState();
     var [email, setEmail] = useState();
@@ -55,11 +54,8 @@ export default function Profile({props}) {
     var [timeline, setTimeline] = useState();
     let {id} = useParams();
 
-    const [date, setDate] = useState(false); 
-    const [time, setTime] = useState(false);
-
     const [lastContact, setLastContact] = useState(new Date());
-    const [nMeeting, setNMeeting] = useState(new Date());
+    const [nextMeeting, setNextMeeting] = useState(new Date());
 
     const homepage = async (e) => {
         e.preventDefault();
@@ -78,13 +74,10 @@ export default function Profile({props}) {
                     var comp = data.company; 
                     var prog = cust.progress;
                     var priority = cust.priority;
-                    var lastCont = cust.lastContact;
-                    var nextMeeting = cust.nextMeeting;
                     setCustomer(cust); 
                     setCompany(comp); 
                     setProgress(prog);
                     setPriority(priority);
-                    setNextMeeting(nextMeeting);
                 })
             }
             catch (err) {
@@ -96,21 +89,6 @@ export default function Profile({props}) {
 
         getCustomer();  
     })
-
-    useEffect( ()=> { 
-        if (date && time) {
-            var d = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();  
-            var req = {"date":d, "time": time};
-            try {
-                axios.post(link + 'user/meeting/' + id, req); 
-            }
-            catch (err) {
-                if ((err)) return alert('check your connection');
-                throw err;
-            }
-        }
-
-    }, [date, time]); 
 
     useEffect( ()=> { 
         if (notes) {
@@ -203,20 +181,9 @@ export default function Profile({props}) {
                 throw err;
             }
         }
-
-        // if (lastContact) {
-        //     try {
-        //         var req = {"lastContact": lastContact};
-        //         axios.post(link + 'user/lastContact/' + id, req)
-        //     }
-        //     catch (err) {
-        //         if ((err)) return alert('check your connection');
-        //         throw err;
-        //     }
-        // }
         
 
-    }, [notes, description, timeline, number, email, name, location, position, department, lastContact]); 
+    }, [notes, description, timeline, number, email, name, location, position, department]); 
 
 
     async function changeProgress(progress) {
@@ -229,7 +196,7 @@ export default function Profile({props}) {
             if ((err)) return alert('check your connection');
             throw err;
         }
-    } 
+    }
 
     async function changePriority(priority) {
         var req = {"priority": priority}
@@ -242,6 +209,30 @@ export default function Profile({props}) {
             throw err;
         }
     } 
+
+    async function changeLastContact(lcDate) {
+        var req = {"lastContact": lcDate}
+        setLastContact(lcDate);
+        try {
+            axios.post(link + 'user/lastContact/' + id, req)
+        }
+        catch (err) {
+            if ((err)) return alert('check your connection');
+            throw err;
+        }
+    }
+
+    async function changeNextMeeting(nmDate) {
+        var req = {"meeting": nmDate}
+        setNextMeeting(nmDate);
+        try {
+            axios.post(link + 'user/meeting/' + id, req)
+        }
+        catch (err) {
+            if ((err)) return alert('check your connection');
+            throw err;
+        }
+    }
 
     return(
         <>
@@ -260,10 +251,11 @@ export default function Profile({props}) {
                 </Box>
             </Toolbar>
         </AppBar>
-        <div className="rectangle"></div>
+        
         
         
         <div className = "container">
+            <div className="rectangle"></div>
             <div className="leftContainer" >
                 
                 <img class = "avatar" src={Avatar}/>
@@ -336,12 +328,12 @@ export default function Profile({props}) {
                             <>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDateTimePicker
-                                ampm={true}
+                                ampm={false}
                                 label="Last Contact"
                                 inputVariant="outlined"
-                                value={lastContact}
-                                onChange={setLastContact}
-                                format="dd/MM/yyyy hh:mm a"
+                                value={customer && customer.lastContact}
+                                onChange={e => changeLastContact(e)}
+                                format="dd/MM/yyyy hh:mm"
                                 />
                             </MuiPickersUtilsProvider>
                             </>   
@@ -356,61 +348,18 @@ export default function Profile({props}) {
                             <>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDateTimePicker
-                                ampm={true}
+                                ampm={false}
                                 label="Next Meeting"
                                 inputVariant="outlined"
-                                value={nMeeting}
-                                onChange={setNMeeting}
-                                format="dd/MM/yyyy hh:mm a"
+                                value={customer && customer.meeting}
+                                onChange={e => changeNextMeeting(e)}
+                                format="dd/MM/yyyy hh:mm"
                                 />
                             </MuiPickersUtilsProvider>
                             </>   
                         </Box>
                     </Grid>
                 </Grid>
-                    {/* <Grid item spacing={4}>
-                        <Box 
-                            boxShadow={4}
-                            borderRadius={5}
-                            style={{ padding: "15px", margin: "8px" }}>
-                            {customer &&
-                            <>
-                            <Box display="flex" justifyContent="space-between">
-                                <centre><h3>NEXT MEETING</h3></centre>
-                            </Box>
-                            <Box display="flex" justifyContent="space-between">
-                                <p><b>Date: </b> <span className="contactInfo">{customer.meeting && customer.meeting.date}</span></p>
-                                <Popup trigger={<IconButton><Pen/></IconButton>} position="bottom center">
-                                    <div>
-                                        <Calendar
-                                            onChange={(value) => setDate(value)}
-                                        />
-                                    </div>
-                                </Popup>
-                            </Box>
-                            <Box display="flex" justifyContent="space-between">
-                                <p><b>Time:</b> {customer.meeting && customer.meeting.time}</p>
-                                <Popup trigger={<IconButton><Pen/></IconButton>} position="bottom center">
-                                    <div>
-                                    <TextField
-                                        id="time"
-                                        label="Time"
-                                        placeholder="16:00"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={(e) => setTime(e.target.value)}
-                                        />
-                                    </div>
-                                </Popup>
-                            </Box>
-                            
-                            </>
-                            }     
-                        </Box>
-                    </Grid>
-                </Grid> */}
             </div>
 
             <div className="rightContainer">

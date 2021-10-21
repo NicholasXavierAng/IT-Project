@@ -173,9 +173,8 @@ userRouter.post('/addCustomer', async (req, res) => {
 	})
 	
 	await newCompany.save(); 
-	//position: company.positon
-	var comp = await Company.findOne({name:company.name, department: company.department,location: company.location})
-	console.log(comp); 
+
+	var comp = await Company.findOne({name:company.name, department: company.department,location: company.location, position: company.position});
 	var compId = comp._id; 
 	var customer = await Customer.create({
 		firstName: client.firstName, 
@@ -189,7 +188,6 @@ userRouter.post('/addCustomer', async (req, res) => {
 		progress: company.status
 	})
 
-	console.log(customer); 
 
 
 	await customer.save(); 
@@ -197,19 +195,13 @@ userRouter.post('/addCustomer', async (req, res) => {
 })
 
 userRouter.post('/meeting/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.meeting.date = req.body.date; 
-	customer.meeting.time = req.body.time; 
-	await customer.save(); 
+	await Customer.findByIdAndUpdate(req.params.id, {"meeting": req.body.meeting});
 	res.json({"status":true}); 
 })
 
 userRouter.post('/lastContact/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.lastContact = req.body.lastContact; 
-	await customer.save(); 
+	await Customer.findByIdAndUpdate(req.params.id, {"lastContact": req.body.lastContact});
 	res.json({"status":true}); 
-	console.log(req.body.lastContact);
 })
 
 userRouter.post('/progress/:id', async (req, res) => {
