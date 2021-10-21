@@ -296,7 +296,7 @@ function UserHome() {
 					<p className="s">Progress</p>  
 					<p className="pro">Priority</p>
 
-					<Popup trigger={<IconButton style = {{position : "absolute", left : "110%"}}><Sort /></IconButton>} position="bottom center">
+					<Popup trigger={<IconButton style = {{position : "absolute", left : "74%"}}><Sort /></IconButton>} position="bottom center">
 						<div>
 							<div className= "p" style ={{textAlign: "left"}}>
 								Progress
@@ -349,7 +349,7 @@ function UserHome() {
 						</div>
 					</Popup>
 
-					<IconButton onClick={() => setAlpha(!alpha)} style = {{position : "absolute", left : "113%"}}><SortByAlphaIcon /></IconButton>
+					<IconButton onClick={() => setAlpha(!alpha)} style = {{position : "absolute", left : "77%"}}><SortByAlphaIcon /></IconButton>
 				</div>
 			</div>
 			<hr width = "73%" align="center" style = {{position: "absolute", left: "15%"}}/>
