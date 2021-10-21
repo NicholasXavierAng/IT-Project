@@ -260,8 +260,8 @@ function UserHome() {
 									<div className = "notifications">
 										{/* <div className = "timestamp">1 hour ago</div> */}
 										<div className = "content"> Meeting with {d.name}, {d.time} on {d.date}</div>
-										<div className="divider">
-											<div className="line" />
+										<div className = "divider">
+											<div className = "line" />
 										</div>
 									</div>
 								</MenuItem>
@@ -278,13 +278,13 @@ function UserHome() {
 				<form onSubmit={(doSearch)}>        
 					{/* can handle searches */}
 					<Box
-					style = {{position: "relative", left: "20%"}}
+					style = {{position: "relative", left: "15%"}}
 					>
 						<SearchBar
 						value=""
 						onChange={e => searchWord(e)}
 						placeholder={"Search for contacts"}
-						style={{maxWidth: "70%", maxHeight:"25%"}}
+						style={{maxWidth: "73%", maxHeight:"25%"}}
 						/>
 					</Box>
 				</form>
@@ -352,35 +352,35 @@ function UserHome() {
 					<IconButton onClick={() => setAlpha(!alpha)} style = {{position : "absolute", left : "113%"}}><SortByAlphaIcon /></IconButton>
 				</div>
 			</div>
-			<hr width = "70%" align="center" style = {{position: "absolute", left: "20%"}}/>
+			<hr width = "73%" align="center" style = {{position: "absolute", left: "15%"}}/>
 			<br/>
 			<div className = "lowerpart">
 				<div className = "clients" >
 					<Box
-					borderRadius={16}
-					width="70%"
-					height="100%"
-					boxShadow={6}
-					style = {{position: "relative", left: "20%"}}
-					>
-					{customers && customers.map(d => (
-						<>
-							{/* A loop to handle customers directly from the database  */}
-							<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
-								<p className = "name">{d.firstName} {d.familyName}</p>
-								<p className = "status">{d.progress}</p>
-								<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
-							</button>
-							<hr width="95%" align="center"/>
-						</>
-					))}
-						
-					{/* total number of contacts */}
-					<div className="total">
-						<p>{customers && customers.length} contact(s).</p>
-					</div>
-					<br/>
-						</Box>   
+						borderRadius={16}
+						width="73%"
+						height="100%"
+						boxShadow={6}
+						style = {{position: "relative", left: "15%"}}
+						>
+						{customers && customers.map(d => (
+							<>
+								{/* A loop to handle customers directly from the database  */}
+								<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
+									<p className = "name">{d.firstName} {d.familyName}</p>
+									<p className = "status">{d.progress}</p>
+									<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
+								</button>
+								<hr width="95%" align="center"/>
+							</>
+						))}
+							
+						{/* total number of contacts */}
+						<div className="total">
+							<p>{customers && customers.length} contact(s).</p>
+						</div>
+						<br/>	
+					</Box>   
 				</div>
 			</div>
 		</div>

@@ -44,12 +44,12 @@
 }
 
 .titles {
-  width: 70%;
+  width: 73%;
   display: flex;
   font-size: 20px;
   position: absolute;
-  top: 12.5%;
-  left: 8%;
+  top: 10.5%;
+  left: 1.75%;
 }
 
 .n {
@@ -59,12 +59,12 @@
 
 .s {
   position: absolute;
-  left: 57%;
+  left: 58%;
 }
 
 .pro {
   position: absolute;
-  left: 87%;
+  left: 88%;
 }
 
 .client {
@@ -121,16 +121,14 @@ hr {
 
 .line {
   position: relative;
-  top: 20px;
-  height: 0px;
+  top: 80%;
   width: 100%;
+  right: 10%;
   border: 1px solid #e0e0e0;
 }
 
 .notifications {
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 4px 12px;
-  gap: 8px;
+  justify-content: space-between;
+  min-width: 120%;
 }
