@@ -169,12 +169,12 @@ userRouter.post('/addCustomer', async (req, res) => {
 		name:company.name,
 		department: company.department,
 		location: company.location,
-		position: company.positon
+		position: company.position
 	})
 	
 	await newCompany.save(); 
-
-	var comp = await Company.findOne({name:company.name, department: company.department,location: company.location,position: company.positon})
+	//position: company.positon
+	var comp = await Company.findOne({name:company.name, department: company.department,location: company.location})
 	console.log(comp); 
 	var compId = comp._id; 
 	var customer = await Customer.create({
