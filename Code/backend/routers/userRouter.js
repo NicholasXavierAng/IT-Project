@@ -196,13 +196,33 @@ userRouter.post('/addCustomer', async (req, res) => {
 
 userRouter.post('/meeting/:id', async (req, res) => {
 	await Customer.findByIdAndUpdate(req.params.id, {$set: {"meeting": req.body.meeting}}, {new: true});
-	console.log(req.body.meeting)
 	res.json({"status":true}); 
 })
 
 userRouter.post('/lastContact/:id', async (req, res) => {
 	await Customer.findByIdAndUpdate(req.params.id, {$set: {"lastContact": req.body.lastContact}}, {new: true});
-	console.log(req.body.lastContact);
+	res.json({"status":true}); 
+})
+
+userRouter.post('/changeContact/:id', async (req, res) => {
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"phoneNumber": req.body.phoneNumber, "email": req.body.email }}, {new: true});
+	res.json({"status":true}); 
+})
+
+userRouter.post('/changeCompInfo/:id', async (req, res) => {
+	var customer = await Customer.findById(req.params.id).lean();
+	await Company.findByIdAndUpdate(customer.companyInfo, {$set: {"name": req.body.name, "location": req.body.location,
+										"position": req.body.position, "department": req.body.department }}, {new: true});
+	res.json({"status":true}); 
+})
+
+userRouter.post('/changeTaskInfo/:id', async (req, res) => {
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"description": req.body.description, "timeline": req.body.timeline }}, {new: true});
+	res.json({"status":true}); 
+})
+
+userRouter.post('/changeNotes/:id', async (req, res) => {
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"notes": req.body.notes }}, {new: true});
 	res.json({"status":true}); 
 })
 
@@ -220,74 +240,74 @@ userRouter.post('/priority/:id', async (req, res) => {
 	res.sendStatus(200); 
 })
 
-userRouter.post('/notes/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.notes =  req.body.notes;
-	await customer.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/notes/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id);
+// 	customer.notes =  req.body.notes;
+// 	await customer.save(); 
+// 	res.sendStatus(200); 
+// })
 
-userRouter.post('/description/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.description =  req.body.description; 
-	await customer.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/description/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id);
+// 	customer.description =  req.body.description; 
+// 	await customer.save(); 
+// 	res.sendStatus(200); 
+// })
 
-userRouter.post('/timeline/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.timeline =  req.body.timeline; 
-	await customer.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/timeline/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id);
+// 	customer.timeline =  req.body.timeline; 
+// 	await customer.save(); 
+// 	res.sendStatus(200); 
+// })
 
-userRouter.post('/number/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.phoneNumber =  req.body.number; 
-	await customer.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/number/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id);
+// 	customer.phoneNumber =  req.body.number; 
+// 	await customer.save(); 
+// 	res.sendStatus(200); 
+// })
 
-userRouter.post('/email/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.email =  req.body.email; 
-	await customer.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/email/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id);
+// 	customer.email =  req.body.email; 
+// 	await customer.save(); 
+// 	res.sendStatus(200); 
+// })
 
-userRouter.post('/name/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id).lean();
-	var company = await Company.findById(customer.companyId);
-	company.name =  req.body.name; 
-	await company.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/name/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id).lean();
+// 	var company = await Company.findById(customer.companyId);
+// 	company.name =  req.body.name; 
+// 	await company.save(); 
+// 	res.sendStatus(200); 
+// })
 
-userRouter.post('/location/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id).lean();
-	var company = await Company.findById(customer.companyId);
-	company.location =  req.body.location; 
-	await company.save(); 
-	res.sendStatus(200); 
-})
-
-
-userRouter.post('/position/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id).lean();
-	var company = await Company.findById(customer.companyId);
-	company.position =  req.body.position; 
-	await company.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/location/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id).lean();
+// 	var company = await Company.findById(customer.companyId);
+// 	company.location =  req.body.location; 
+// 	await company.save(); 
+// 	res.sendStatus(200); 
+// })
 
 
-userRouter.post('/department/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id).lean();
-	var company = await Company.findById(customer.companyId);
-	company.department =  req.body.department; 
-	await company.save(); 
-	res.sendStatus(200); 
-})
+// userRouter.post('/position/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id).lean();
+// 	var company = await Company.findById(customer.companyId);
+// 	company.position =  req.body.position; 
+// 	await company.save(); 
+// 	res.sendStatus(200); 
+// })
+
+
+// userRouter.post('/department/:id', async (req, res) => {
+// 	var customer = await Customer.findById(req.params.id).lean();
+// 	var company = await Company.findById(customer.companyId);
+// 	company.department =  req.body.department; 
+// 	await company.save(); 
+// 	res.sendStatus(200); 
+// })
 
 module.exports = userRouter; 
 
