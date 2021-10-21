@@ -79,18 +79,11 @@ export default function EditInfo() {
                 </AppBar>
             </section>
             <h1 className="clientHeading">Add Contact</h1>
+            
             <section className="boxes">
-                <Box
-                borderRadius={16}
-                width={300}
-                height={600}
-                boxShadow={0}
-                paddingLeft={5}
-                paddingRight={5}
-                >
                     <br/>
+                    <section className="client-info">
                     <h4>Client Information</h4>
-                    <section className="">
                         <TextField
                             required
                             id="firstname"
@@ -169,21 +162,10 @@ export default function EditInfo() {
                             onChange={e => setEmail(e.target.value)}
                         />
                     </section> 
-    
-                </Box>
 
-                <Box
-                borderRadius={16}
-                width={300}
-                height={600}
-                boxShadow={0}
-                paddingLeft={5}
-                paddingRight={5}
-                
-                >
                     <br/>
+                    <section className="company-info">
                     <h4>Company Information</h4>
-                    <section className="">
                         <TextField
                             required
                             id="companyName"
@@ -274,8 +256,6 @@ export default function EditInfo() {
                         <br/>
                         <br/>
                     </section> 
-    
-                </Box>
 
                 
             </section>
@@ -290,8 +270,6 @@ export default function EditInfo() {
                     Add Contact
                 </Button>
                 {addClientStatus ? <AlertMessage key={addClientStatus.key} message={addClientStatus.msg} severity={addClientStatus.severity} /> : null}
-                <br/>
-                <br/>
             </section>
         </>
     )
