@@ -197,19 +197,13 @@ userRouter.post('/addCustomer', async (req, res) => {
 })
 
 userRouter.post('/meeting/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.meeting.date = req.body.date; 
-	customer.meeting.time = req.body.time; 
-	await customer.save(); 
+	await Customer.findByIdAndUpdate(req.params.id, {"meeting": req.body.meeting});
 	res.json({"status":true}); 
 })
 
 userRouter.post('/lastContact/:id', async (req, res) => {
-	var customer = await Customer.findById(req.params.id);
-	customer.lastContact = req.body.lastContact; 
-	await customer.save(); 
+	await Customer.findByIdAndUpdate(req.params.id, {"lastContact": req.body.lastContact});
 	res.json({"status":true}); 
-	console.log(req.body.lastContact);
 })
 
 userRouter.post('/progress/:id', async (req, res) => {
