@@ -1,7 +1,7 @@
-//////////////////////////////
+////////////////////////////////////////////////////////////
 // Author(s): Zakarya Butt, Rebecca Ye, Nicholas Ang
 // Date Made: 26/09/2021
-//////////////////////////////
+////////////////////////////////////////////////////////////
 
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
@@ -48,14 +48,21 @@ export default function EditInfo() {
 
     const makeCustomer = () => {
         // Sends a request to the backend to make a new customer
+        var clientFields =  firstName || familyName || dob || gender || number || email || priority || status || companyName || location | position | department; 
+
         var req = {
             client : {"firstName":firstName, "familyName": familyName, "dob": dob, "gender":gender, "number":number, "email":email}, 
             company : {"name":companyName, "location":location, "position":position, "department":department, "priority": priority, "status": status}
         }
-        console.log(req);
-        axios.post(API_URL + 'user/addCustomer', req).then(res => {
-            setAddClientStatus({ msg: "Client successfully added.", key: Math.random(), severity: "success" });
-        })
+
+        if (!clientFields) {
+            setAddClientStatus({ msg: "Please fill in all fields!", key: Math.random(), severity: 'warning' });
+        }
+        else {
+            axios.post(API_URL + 'user/addCustomer', req).then(res => {
+                setAddClientStatus({ msg: "Client successfully added.", key: Math.random(), severity: "success" });
+            })
+        }
     }
   
 
@@ -101,7 +108,6 @@ export default function EditInfo() {
                             required
                             id="familyName"
                             label="Family Name"
-                            // type="password"
                             placeholder="e.g. Doe"
                             variant="outlined"
                             color="secondary"
