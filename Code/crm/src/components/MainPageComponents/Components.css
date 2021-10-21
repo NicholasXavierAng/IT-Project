@@ -25,21 +25,20 @@
 }
 
 .titles {
-	width: 100%;
 	height: 56px;
 	display: flex;
 	font-size: 20px;
 	position: relative;
-	/*padding-left: 80px;*/
 	top: auto;
 	justify-content: space-between;
 	align-items: center;
+	width: calc(100% - 80px);
+	padding-left: 80px;
 }
 
 .n {
 	position: relative;
 	left: 15vw;
-	padding-left: 80px;
 }
 
 .s {
@@ -49,7 +48,7 @@
 
 .pro {
 	position: relative;
-	left: 11vw;
+	left: 12vw;
 }
 
 .clients {
