@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Nicholas, Rebecca Ye
+// Author(s): Nicholas Ang, Rebecca Ye
 // Date Made: 26/09/2021
 //////////////////////////////
 
@@ -97,9 +97,11 @@ export default function EditInfo() {
         else if (res.status === 412) {
             setEditPwStatus({ msg: "Passwords did not match.", key: Math.random(), severity: "error" });
         }
-        else {
-            setToken(res);
+        else if (res.status === 200) {
             setEditPwStatus({ msg: "Password successfully changed.", key: Math.random(), severity: "success" });
+        }
+        else {
+            setEditPwStatus({ msg: "Error in changing password.", key: Math.random(), severity: "error" });
         }
     }
 

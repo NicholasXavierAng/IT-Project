@@ -1,5 +1,5 @@
 //////////////////////////////
-// Author(s): Zakarya Butt, Nicholas
+// Author(s): Zakarya Butt, Nicholas Ang
 // Date Made: 07/09/2021
 //////////////////////////////
 const express = require("express")
@@ -91,12 +91,12 @@ app.put('/edit_password', async (req, res) => {
     }
     if (user && passwordMatch) {
         if (req.body.newPw != req.body.confirmPw) return res.json({ status: 412 })
-        User.findOneAndUpdate({username: user.usernamePw}, {$set: { password: bcrypt.hashSync(req.body.newPw, bcrypt.genSaltSync())}}, {new: true}, (err, result) => {
+        User.findOneAndUpdate({username: user.username}, {$set: { password: bcrypt.hashSync(req.body.newPw, bcrypt.genSaltSync())}}, {new: true}, (err, result) => {
             console.log(result);
-        })
-        return res.json({
-            status: 200
-        })
+            return res.json({
+                status: 200
+            })
+        })        
     }
 })
 
