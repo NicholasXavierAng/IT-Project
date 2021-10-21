@@ -1,132 +1,132 @@
-* {
-  font-family: "Open Sans", sans-serif;
-}
-
 .topbar {
-  height: 56px;
-  width: "100%";
+	height: 56px;
+	width: "100%";
 }
 
 .searchbar {
-  height: 41px;
-  width: 70%;
-  display: inline;
-  justify-content: space-between;
-  align-items: center;
+	height: 41px;
+	width: 70%;
+	display: inline;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .p {
-  text-align: center;
-  vertical-align: top;
-  font-size: 20px;
-  letter-spacing: 10%;
-  line-height: auto;
-  color: #000;
+	text-align: center;
+	vertical-align: top;
+	font-size: 20px;
+	letter-spacing: 10%;
+	line-height: auto;
+	color: #000;
 }
 
 .searchbar {
-  width: 70%;
-  height: 41px;
-  justify-content: space-between;
-  padding-top: 10px;
+	width: 70%;
+	height: 41px;
+	justify-content: space-between;
+	padding-top: 10px;
 }
 
 .titles {
-  width: 100%;
-  height: 56px;
-  display: flex;
-  font-size: 20px;
-  position: relative;
-  padding-left: 80px;
-  top: auto;
-  justify-content: space-between;
-  align-items: center;
+	width: 100%;
+	height: 56px;
+	display: flex;
+	font-size: 20px;
+	position: relative;
+	padding-left: 80px;
+	top: auto;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .n {
-  position: relative;
-  left: 15vw;
+	position: relative;
+	left: 15vw;
 }
 
 .s {
-  position: relative;
-  left: 15vw;
+	position: relative;
+	left: 15vw;
 }
 
 .pro {
-  position: relative;
-  left: 11vw;
+	position: relative;
+	left: 11vw;
 }
 
 .clients {
-  position: relative;
-  width: 100%;
+	position: relative;
+	width: 100%;
 
-  top: 0.5vw;
+	top: 0.5vw;
 }
 
 .client {
-  height: 55px;
-  width: 100%;
-  font-size: 20px;
-  display: flex;
-  border: none;
-  justify-content: space-between;
-  padding-left: 80px;
-  background: transparent;
-  transition-duration: 0.4s;
+	height: 55px;
+	width: 100%;
+	font-size: 20px;
+	display: flex;
+	border: none;
+	justify-content: space-between;
+	padding-left: 80px;
+	background: transparent;
+	transition-duration: 0.4s;
 }
 
 .client:hover {
-  background-color: #d3d3d3;
+	background-color: #d3d3d3;
 }
 
 .name {
-  position: relative;
+	position: relative;
 }
 
 .status {
-  position: absolute;
-  left: 28vw;
+	position: absolute;
+	left: 28vw;
 }
 
 .progress {
-  position: absolute;
-  left: 50vw;
+	position: absolute;
+	left: 50vw;
 }
 
 .total {
-  text-align: center;
-  color: grey;
+	text-align: center;
+	color: grey;
 }
 
 hr {
-  border: 1px solid lightgrey;
+	border: 1px solid lightgrey;
 }
 
 .filterBar {
-  padding-left: 30px;
+	padding-left: 30px;
 }
 
 .timestamp {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .divider {
-  height: 24px;
-  width: 100%;
+	height: 24px;
+	width: 100%;
 }
 
 .line {
-  position: relative;
-  top: 80%;
-  width: 100%;
-  right: 10%;
-  border: 1px solid #e0e0e0;
+	position: relative;
+	top: 80%;
+	width: 100%;
+	right: 10%;
+	border: 1px solid #e0e0e0;
 }
 
 .notifications {
-  flex-direction: row;
-  justify-content: space-between;
-  min-width: 120%;
+	flex-direction: row;
+	justify-content: space-between;
+	min-width: 120%;
+}
+
+.content {
+	align-items: center;
 }
