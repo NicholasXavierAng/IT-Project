@@ -158,7 +158,7 @@ userRouter.post('/filter', async (req, res) => {
 
 userRouter.post('/profile/:id', async (req, res) => {
     var customer = await Customer.findById(req.params.id).lean();  
-    var company = await Company.findById(customer.companyId);
+    var company = await Company.findById(customer.companyInfo);
     res.json({"customer": customer, "company": company});
 })
 
@@ -175,7 +175,7 @@ userRouter.post('/addCustomer', async (req, res) => {
 	await newCompany.save(); 
 
 	var comp = await Company.findOne({name:company.name, department: company.department,location: company.location,position: company.positon})
-
+	console.log(comp); 
 	var compId = comp._id; 
 	var customer = await Customer.create({
 		firstName: client.firstName, 
@@ -188,6 +188,8 @@ userRouter.post('/addCustomer', async (req, res) => {
 		priority: company.priority,
 		progress: company.status
 	})
+
+	console.log(customer); 
 
 
 	await customer.save(); 
