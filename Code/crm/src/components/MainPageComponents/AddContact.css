@@ -1,33 +1,22 @@
 .boxes {
-  display: flex;
-  position: fixed;
-  top: 10%;
-  flex-direction: row;
-  left: auto;
-  height: 10%;
-  width: 100%;
-  justify-content: center;
-
-  /* padding: 10px; */
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+    justify-content: center;
+    /* padding: 10px; */
 }
 
 .clientHeading {
-  position: fixed;
-  display: flex;
-  width: 100%;
-  font-size: 40px;
-  justify-content: center;
-  font-family: "Times New Roman", Times, serif;
+    position: relative;
+    left: 42%;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .add-contact {
-  position: fixed;
-
-  width: 100%;
-  display: flex;
-  bottom: 35%;
-
-  justify-content: center;
+    position: relative;
+    top: 10px;
+    left: 60%;
 }
 
 /* .box {

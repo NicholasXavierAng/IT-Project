@@ -36,35 +36,35 @@
 }
 
 .line3 {
+  height: 56px;
+  width: 70%;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 56px;
-  width: 100%;
 }
 
 .titles {
-  width: 100%;
+  width: 73%;
   display: flex;
   font-size: 20px;
   position: absolute;
   top: 10.5%;
   left: 1.75%;
-  padding-left: 7%;
 }
 
 .n {
   position: absolute;
-  left: 17%;
+  left: 22.5%;
 }
 
 .s {
   position: absolute;
-  left: 39.5%;
+  left: 58%;
 }
 
 .pro {
   position: absolute;
-  left: 60%;
+  left: 88%;
 }
 
 .client {
@@ -74,7 +74,7 @@
   display: flex;
   border: none;
   justify-content: space-between;
-  padding-left: 7%;
+  padding-left: 80px;
   background: transparent;
   transition-duration: 0.4s;
 }

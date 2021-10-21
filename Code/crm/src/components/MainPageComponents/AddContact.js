@@ -82,7 +82,7 @@ export default function EditInfo() {
             <section className="boxes">
                 <Box
                 borderRadius={16}
-                width={225}
+                width={300}
                 height={600}
                 boxShadow={0}
                 paddingLeft={5}
@@ -174,7 +174,7 @@ export default function EditInfo() {
 
                 <Box
                 borderRadius={16}
-                width={225}
+                width={300}
                 height={600}
                 boxShadow={0}
                 paddingLeft={5}
