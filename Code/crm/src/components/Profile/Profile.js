@@ -363,179 +363,184 @@ export default function Profile({props}) {
             </div>
 
             <div className="rightContainer">
-                <Grid container
-                    direction="row"
-                    // justifyContent=""
-                    alignItems="center"
-                >
-                    <div className="infoContainer">
-                        {customer  && 
-                            <>
-                            <h1>{customer.firstName} {customer.familyName}</h1>
-                            <p><b>Gender: </b> {customer.gender}</p>
-                            </>
-                        }
-                    </div>
-                    <Grid item spacing={4} style = {{position: "relative", right: "2.25%"}}>
-                        <Box 
-                            boxShadow={4}
-                            borderRadius={5}
-                            style={{ padding: "15px", margin: "10px", width:"25em", marginTop:"2em"}}>
-                            <Box display="flex" justifyContent="space-between">
-                                <h3>Contact</h3>
-                                <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
-                                    <div>
-                                        <p>Edit Mobile</p>
-                                        <TextField
-                                        id="newnotes"
-                                        label="Edit Mobile"
-                                        placeholder="Write new number here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setNumber(e.target.value)}
-                                        />
-                                        
-                                        <p>Edit Email</p>
-                                        <TextField
-                                        id="newnotes"
-                                        label="New Email"
-                                        placeholder="Write new email here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setEmail(e.target.value)}
-                                        />
-                                    </div>
-
-                                </Popup>
-                            </Box>
-                            {customer &&
-                            <>
-                            <p><b>Mobile: </b> <span className="contactInfo">{customer.phoneNumber}</span></p>
-                            <p><b>Email: </b> <span className="contactInfo">{customer.email}</span></p> 
-                            </>
-                            }     
-                        </Box>
-                    </Grid>
-                </Grid>
-
-                <Grid container
-                    direction="row"
-                    // justifyContent="space-between"
-                    alignItems="center"
-                >
-                    <Grid item spacing={5}>
-                        <Box 
-                            boxShadow={4}
-                            borderRadius={5}
-                            style={{ padding: "15px", margin: "8px", width:"25em", marginRight:"7.5em", height:"15em"}}>
-                            <Box display="flex" justifyContent="space-between">
-                                <h3>Company Information</h3>
-                                <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
-                                    <div>
-                                        <p>Edit Name</p>
-                                    <TextField
-                                        id="newnotes"
-                                        label="New Name"
-                                        placeholder="Write new name here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setName(e.target.value)}
-                                        />
-                                        
-                                        <p>Edit Location</p>
-                                        <TextField
-                                        id="newnotes"
-                                        label="New Location"
-                                        placeholder="Write new location here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setLocation(e.target.value)}
-                                        />
-                                        <p>Edit Position</p>
-                                        <TextField
-                                        id="newnotes"
-                                        label="New Position"
-                                        placeholder="Write new position here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setPosition(e.target.value)}
-                                        />
-                                        <p>Edit Department</p>
-                                        <TextField
-                                        id="newnotes"
-                                        label="New Department"
-                                        placeholder="Write new department here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setDepartment(e.target.value)}
-                                        />
-                                    </div>
-
-                                </Popup>
-                            </Box>
-                            {company &&
-                            <>
-                                <p><b>Name: </b> <span className="contactInfo">{company.name}</span></p>
-                                <p><b>Location: </b> <span className="contactInfo">{company.location}</span></p>
-                                <p><b>Position: </b> <span className="contactInfo">{company.position}</span></p>
-                                <p><b>Department: </b> <span className="contactInfo">{company.department}</span></p>
-                            </>
+                <div style = {{backgroundColor: "orange", padding: "15px", margin: "8px" , width:"50vw"}}>
+                    <Grid container
+                        direction="row"
+                        // justifyContent=""
+                        alignItems="center"
+                    >
+                        <div className="infoContainer">
+                            {customer  && 
+                                <>
+                                <h1>{customer.firstName} {customer.familyName}</h1>
+                                <p><b>Gender: </b> {customer.gender}</p>
+                                </>
                             }
-                        </Box>
-                    </Grid>
-                    <Grid item spacing={5}>
-                        <Box 
-                            boxShadow={4}
-                            borderRadius={5}
-                            style={{ padding: "15px", width:"25em", height:"15em"}}>
-                            <Box display="flex" justifyContent="space-between">
-                                <h3>Task Information</h3>
-                                <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
-                                    <div>
-                                        <p>Edit Description</p>
-                                    <TextField
-                                        id="newnotes"
-                                        label="New Description"
-                                        placeholder="Write new description here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setDescription(e.target.value)}
-                                        />
-                                        
-                                        <p>Edit Timeline</p>
-                                        <TextField
-                                        id="newnotes"
-                                        label="New Timeline"
-                                        placeholder="Write new timeline here"
-                                        multiline
-                                        variant="outlined"
-                                        color="secondary"
-                                        fullWidth 
-                                        onChange={e => setTimeline(e.target.value)}
-                                        />
-                                    </div>
+                        </div>
+                        <Grid item spacing={4} style = {{position: "relative"}}>
+                            <Box 
+                                boxShadow={4}
+                                borderRadius={5}
+                                style={{ padding: "15px", margin: "10px", width:"25em", marginTop:"2em"}}>
+                                <Box display="flex" justifyContent="space-between">
+                                    <h3>Contact</h3>
+                                    <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                        <div>
+                                            <p>Edit Mobile</p>
+                                            <TextField
+                                            id="newnotes"
+                                            label="Edit Mobile"
+                                            placeholder="Write new number here"
+                                            multiline
+                                            variant="outlined"
+                                            color="secondary"
+                                            fullWidth 
+                                            onChange={e => setNumber(e.target.value)}
+                                            />
+                                            
+                                            <p>Edit Email</p>
+                                            <TextField
+                                            id="newnotes"
+                                            label="New Email"
+                                            placeholder="Write new email here"
+                                            multiline
+                                            variant="outlined"
+                                            color="secondary"
+                                            fullWidth 
+                                            onChange={e => setEmail(e.target.value)}
+                                            />
+                                        </div>
 
-                                </Popup>
+                                    </Popup>
+                                </Box>
+                                {customer &&
+                                <>
+                                <p><b>Mobile: </b> <span className="contactInfo">{customer.phoneNumber}</span></p>
+                                <p><b>Email: </b> <span className="contactInfo">{customer.email}</span></p> 
+                                </>
+                                }     
                             </Box>
-                        <p><b>High level description: </b> <span className="contactInfo">{customer && customer.description}</span></p>
-                        <p><b>Timeline: </b> <span className="contactInfo">{customer && customer.timeline}</span></p>
-                        </Box>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </div>
+                <div style = {{backgroundColor: "yellow", padding: "15px", margin: "8px" , width:"50vw"}}>          
+                    <Grid container
+                        direction="row"
+                        // justifyContent="space-between"
+                        alignItems="center"
+                    >
+                        
+                            <Grid item spacing={5} style = {{position: "relative"}}>
+                                <Box 
+                                    boxShadow={4}
+                                    borderRadius={5}
+                                    style={{ padding: "15px", margin: "8px", width:"25em", marginRight:"7.5em", height:"15em"}}>
+                                    <Box display="flex" justifyContent="space-between">
+                                        <h3>Company Information</h3>
+                                        <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                            <div>
+                                                <p>Edit Name</p>
+                                            <TextField
+                                                id="newnotes"
+                                                label="New Name"
+                                                placeholder="Write new name here"
+                                                multiline
+                                                variant="outlined"
+                                                color="secondary"
+                                                fullWidth 
+                                                onChange={e => setName(e.target.value)}
+                                                />
+                                                
+                                                <p>Edit Location</p>
+                                                <TextField
+                                                id="newnotes"
+                                                label="New Location"
+                                                placeholder="Write new location here"
+                                                multiline
+                                                variant="outlined"
+                                                color="secondary"
+                                                fullWidth 
+                                                onChange={e => setLocation(e.target.value)}
+                                                />
+                                                <p>Edit Position</p>
+                                                <TextField
+                                                id="newnotes"
+                                                label="New Position"
+                                                placeholder="Write new position here"
+                                                multiline
+                                                variant="outlined"
+                                                color="secondary"
+                                                fullWidth 
+                                                onChange={e => setPosition(e.target.value)}
+                                                />
+                                                <p>Edit Department</p>
+                                                <TextField
+                                                id="newnotes"
+                                                label="New Department"
+                                                placeholder="Write new department here"
+                                                multiline
+                                                variant="outlined"
+                                                color="secondary"
+                                                fullWidth 
+                                                onChange={e => setDepartment(e.target.value)}
+                                                />
+                                            </div>
+
+                                        </Popup>
+                                    </Box>
+                                    {company &&
+                                    <>
+                                        <p><b>Name: </b> <span className="contactInfo">{company.name}</span></p>
+                                        <p><b>Location: </b> <span className="contactInfo">{company.location}</span></p>
+                                        <p><b>Position: </b> <span className="contactInfo">{company.position}</span></p>
+                                        <p><b>Department: </b> <span className="contactInfo">{company.department}</span></p>
+                                    </>
+                                    }
+                                </Box>
+                            </Grid>
+                        
+                        <Grid item spacing={5} style = {{position: "relative"}}>
+                            <Box 
+                                boxShadow={4}
+                                borderRadius={5}
+                                style={{ padding: "15px", width:"25em", height:"15em"}}>
+                                <Box display="flex" justifyContent="space-between">
+                                    <h3>Task Information</h3>
+                                    <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                        <div>
+                                            <p>Edit Description</p>
+                                        <TextField
+                                            id="newnotes"
+                                            label="New Description"
+                                            placeholder="Write new description here"
+                                            multiline
+                                            variant="outlined"
+                                            color="secondary"
+                                            fullWidth 
+                                            onChange={e => setDescription(e.target.value)}
+                                            />
+                                            
+                                            <p>Edit Timeline</p>
+                                            <TextField
+                                            id="newnotes"
+                                            label="New Timeline"
+                                            placeholder="Write new timeline here"
+                                            multiline
+                                            variant="outlined"
+                                            color="secondary"
+                                            fullWidth 
+                                            onChange={e => setTimeline(e.target.value)}
+                                            />
+                                        </div>
+
+                                    </Popup>
+                                </Box>
+                            <p><b>High level description: </b> <span className="contactInfo">{customer && customer.description}</span></p>
+                            <p><b>Timeline: </b> <span className="contactInfo">{customer && customer.timeline}</span></p>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </div>
                 <Grid container
                     direction="row"
                     justifyContent="space-between"
