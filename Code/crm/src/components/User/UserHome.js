@@ -289,100 +289,101 @@ function UserHome() {
 					</Box>
 				</form>
 			</div>
-			<div className ='line3'>
-				<section class="createContact"></section>
-				<div className="titles" style ={{fontWeight: 'bold'}}>
-					<p className="n">Name</p> 
-					<p className="s">Progress</p>  
-					<p className="pro">Priority</p>
 
-					<Popup trigger={<IconButton style = {{position : "absolute", left : "110%"}}><Sort /></IconButton>} position="bottom center">
-						<div>
-							<div className= "p" style ={{textAlign: "left"}}>
-								Progress
-							</div>
-							<div style ={{paddingLeft: "10px"}}>
-							<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-							<FormControlLabel
-								label="New"
-								control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
-							/>
-							<FormControlLabel
-								label="Invited"
-								control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
-							/>
-							<FormControlLabel
-								label="Met"
-								control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
-							/>
-							<FormControlLabel
-								label="Negotiation"
-								control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
-							/>
-							<FormControlLabel
-								label="Conclude"
-								control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
-							/>
-							</Box>
-						</div>
+			<section class="createContact"></section>
+			<div className="titles" style ={{fontWeight: 'bold'}}>
+				<p className="n">Name</p> 
+				<p className="s">Progress</p>  
+				<p className="pro">Priority</p>
+
+				<Popup trigger={<IconButton style = {{position : "relative", left : "2vw"}}><Sort /></IconButton>} position="bottom center">
+					<div>
 						<div className= "p" style ={{textAlign: "left"}}>
-							Priority
+							Progress
 						</div>
 						<div style ={{paddingLeft: "10px"}}>
-							{/* {childrenPriority} */}
-							<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-							<FormControlLabel
-								label="High"
-								control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
-							/>
-							<FormControlLabel
-								label="Medium"
-								control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
-							/>
-							<FormControlLabel
-								label="Low"
-								control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
-							/>
-							</Box>
-						</div>
+						<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+						<FormControlLabel
+							label="New"
+							control={<Checkbox checked={newCustomer} onChange={() => setNew(!newCustomer)} />}
+						/>
+						<FormControlLabel
+							label="Invited"
+							control={<Checkbox checked={invite} onChange={() => setInvite(!invite)} />}
+						/>
+						<FormControlLabel
+							label="Met"
+							control={<Checkbox checked={met} onChange={() => setMet(!met)} />}
+						/>
+						<FormControlLabel
+							label="Negotiation"
+							control={<Checkbox checked={negotiation} onChange={() => setNegotiation(!negotiation)} />}
+						/>
+						<FormControlLabel
+							label="Conclude"
+							control={<Checkbox checked={conclude} onChange={() => setConclude(!conclude)} />}
+						/>
+						</Box>
+					</div>
+					<div className= "p" style ={{textAlign: "left"}}>
+						Priority
+					</div>
+					<div style ={{paddingLeft: "10px"}}>
+						{/* {childrenPriority} */}
+						<Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+						<FormControlLabel
+							label="High"
+							control={<Checkbox checked={high} onChange={() => setHigh(!high)} />}
+						/>
+						<FormControlLabel
+							label="Medium"
+							control={<Checkbox checked={medium} onChange={() => setMedium(!medium)} />}
+						/>
+						<FormControlLabel
+							label="Low"
+							control={<Checkbox checked={low} onChange={() => setLow(!low)} />}
+						/>
+						</Box>
+					</div>
 
-						</div>
-					</Popup>
+					</div>
+				</Popup>
 
-					<IconButton onClick={() => setAlpha(!alpha)} style = {{position : "absolute", left : "113%"}}><SortByAlphaIcon /></IconButton>
-				</div>
+				<IconButton onClick={() => setAlpha(!alpha)} style = {{position : "relative", right : "18vw"}}><SortByAlphaIcon /></IconButton>
+				
 			</div>
+		
 			<hr width = "73%" align="center" style = {{position: "absolute", left: "15%"}}/>
 			<br/>
-			<div className = "lowerpart">
-				<div className = "clients" >
-					<Box
-						borderRadius={16}
-						width="73%"
-						height="100%"
-						boxShadow={6}
-						style = {{position: "relative", left: "15%"}}
-						>
-						{customers && customers.map(d => (
-							<>
-								{/* A loop to handle customers directly from the database  */}
-								<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
-									<p className = "name">{d.firstName} {d.familyName}</p>
-									<p className = "status">{d.progress}</p>
-									<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
-								</button>
-								<hr width="95%" align="center"/>
-							</>
-						))}
-							
-						{/* total number of contacts */}
-						<div className="total">
-							<p>{customers && customers.length} contact(s).</p>
-						</div>
-						<br/>	
-					</Box>   
-				</div>
+			
+			<div className = "clients" >
+				<Box
+					borderRadius={16}
+					width="73%"
+					height="100%"
+					boxShadow={6}
+					style = {{position: "relative", left: "15%"}}
+					>
+					{customers && customers.map(d => (
+						<>
+							{/* A loop to handle customers directly from the database  */}
+							<button className = "client" onClick={()=> window.location.href='/user/profile/' + d._id}>
+								<p className = "name">{d.firstName} {d.familyName}</p>
+								<p className = "status">{d.progress}</p>
+								<p className = "progress" style ={{fontWeight: 'bold', color: d.priority === 'High' ? "Red" : d.priority === 'Medium' ? "Orange" : d.priority === "Low" ? "Green": "Yellow"}}>{d.priority}</p>
+							</button>
+							<hr width="95%" align="center"/>
+						</>
+					))}
+						
+					{/* total number of contacts */}
+					<div className="total">
+						<p>{customers && customers.length} contact(s).</p>
+					</div>
+					<br/>	
+				</Box>   
 			</div>
+			
 		</div>
 	</div>
 	);

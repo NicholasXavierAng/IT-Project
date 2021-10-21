@@ -24,10 +24,6 @@
   color: #000;
 }
 
-.createContact {
-  padding-left: 43px;
-}
-
 .searchbar {
   width: 70%;
   height: 41px;
@@ -35,36 +31,38 @@
   padding-top: 10px;
 }
 
-.line3 {
+.titles {
+  width: 100%;
   height: 56px;
-  width: 70%;
   display: flex;
+  font-size: 20px;
+  position: relative;
+  padding-left: 80px;
+  top: auto;
   justify-content: space-between;
   align-items: center;
 }
 
-.titles {
-  width: 73%;
-  display: flex;
-  font-size: 20px;
-  position: fixed;
-  top: auto;
-  left: 1.75%;
-}
-
 .n {
-  position: absolute;
-  left: 22.5%;
+  position: relative;
+  left: 15vw;
 }
 
 .s {
-  position: absolute;
-  left: 58%;
+  position: relative;
+  left: 15vw;
 }
 
 .pro {
-  position: absolute;
-  left: 88%;
+  position: relative;
+  left: 11vw;
+}
+
+.clients {
+  position: relative;
+  width: 100%;
+
+  top: 0.5vw;
 }
 
 .client {
@@ -84,17 +82,17 @@
 }
 
 .name {
-  position: absolute;
+  position: relative;
 }
 
 .status {
   position: absolute;
-  left: 40%;
+  left: 28vw;
 }
 
 .progress {
   position: absolute;
-  left: 70%;
+  left: 50vw;
 }
 
 .total {
