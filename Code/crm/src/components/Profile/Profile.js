@@ -52,6 +52,12 @@ export default function Profile({props}) {
     var [timeline, setTimeline] = useState();
     let {id} = useParams();
 
+    var [progress, setProgress] = useState();
+    var [priority, setPriority] = useState();
+
+    var [lastContact, setLastContact] = useState(new Date());
+    var [nextMeeting, setNextMeeting] = useState(new Date());
+
     const homepage = async (e) => {
         e.preventDefault();
         window.location.href = '/';
@@ -69,6 +75,19 @@ export default function Profile({props}) {
                     var comp = data.company; 
                     setCustomer(cust); 
                     setCompany(comp);
+                    setProgress(cust.progress);
+                    setPriority(cust.priority);
+                    setLastContact(cust.lastContact);
+                    setNextMeeting(cust.meeting);
+                    setNotes(cust.notes);
+                    setDescription(cust.description);
+                    setNumber(cust.phoneNumber);
+                    setEmail(cust.email);
+                    setTimeline(cust.timeline);
+                    setName(comp.name);
+                    setLocation(comp.location);
+                    setPosition(comp.position);
+                    setDepartment(comp.department);
                 })
             }
             catch (err) {
@@ -79,13 +98,14 @@ export default function Profile({props}) {
         }
 
         getCustomer();  
-    })
+    }, [])
 
-    useEffect( ()=> { 
+    useEffect(()=> { 
         if (notes) {
             try {
                 var req = {"notes":notes}; 
-                axios.post(link + 'user/notes/' + id, req); 
+                axios.post(link + 'user/notes/' + id, req);
+                setNotes(notes);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -95,7 +115,8 @@ export default function Profile({props}) {
         if (description) {
             try {
                 var req = {"description":description}; 
-                axios.post(link + 'user/description/' + id, req); 
+                axios.post(link + 'user/description/' + id, req);
+                setDescription(description);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -106,6 +127,7 @@ export default function Profile({props}) {
             try {
                 var req = {"timeline":timeline}; 
                 axios.post(link + 'user/timeline/' + id, req); 
+                setTimeline(timeline);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -116,6 +138,7 @@ export default function Profile({props}) {
             try {
                 var req = {"number":number}; 
                 axios.post(link + 'user/number/' + id, req); 
+                setNumber(number);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -126,6 +149,7 @@ export default function Profile({props}) {
             try {
                 var req = {"email":email}; 
                 axios.post(link + 'user/email/' + id, req); 
+                setEmail(email);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -136,6 +160,7 @@ export default function Profile({props}) {
             try {
                 var req = {"name":name}; 
                 axios.post(link + 'user/name/' + id, req); 
+                setName(name);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -146,6 +171,7 @@ export default function Profile({props}) {
             try {
                 var req = {"location":location}; 
                 axios.post(link + 'user/location/' + id, req); 
+                setLocation(location);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -156,6 +182,7 @@ export default function Profile({props}) {
             try {
                 var req = {"position":position}; 
                 axios.post(link + 'user/position/' + id, req); 
+                setPosition(position);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -165,7 +192,8 @@ export default function Profile({props}) {
         if (department) {
             try {
                 var req = {"department":department}; 
-                axios.post(link + 'user/department/' + id, req); 
+                axios.post(link + 'user/department/' + id, req);
+                setDepartment(department);
             }
             catch (err) {
                 if ((err)) return alert('check your connection');
@@ -177,10 +205,11 @@ export default function Profile({props}) {
     }, [notes, description, timeline, number, email, name, location, position, department]); 
 
 
-    async function changeProgress(progress) {
-        var req = {"progress": progress}
+    async function changeProgress(prog) {
+        var req = {"progress": prog}
         try {
-            axios.post(link + 'user/progress/' + id, req)
+            axios.post(link + 'user/progress/' + id, req);
+            setProgress(prog)
         }
         catch (err) {
             if ((err)) return alert('check your connection');
@@ -188,10 +217,11 @@ export default function Profile({props}) {
         }
     }
 
-    async function changePriority(priority) {
-        var req = {"priority": priority}
+    async function changePriority(prio) {
+        var req = {"priority": prio}
         try {
-            axios.post(link + 'user/priority/' + id, req)
+            axios.post(link + 'user/priority/' + id, req);
+            setPriority(prio);
         }
         catch (err) {
             if ((err)) return alert('check your connection');
@@ -203,6 +233,7 @@ export default function Profile({props}) {
         var req = {"lastContact": lcDate}
         try {
             axios.post(link + 'user/lastContact/' + id, req)
+            setLastContact(lcDate);
         }
         catch (err) {
             if ((err)) return alert('check your connection');
@@ -214,6 +245,7 @@ export default function Profile({props}) {
         var req = {"meeting": nmDate}
         try {
             axios.post(link + 'user/meeting/' + id, req)
+            setNextMeeting(nmDate);
         }
         catch (err) {
             if ((err)) return alert('check your connection');
@@ -260,7 +292,7 @@ export default function Profile({props}) {
                     <br/>
                     <Select
                         native
-                        defaultValue={customer && customer.progress}
+                        value={progress}
                         onChange={event => changeProgress(event.target.value)}
                         style={{width:130}}
                         input={
@@ -287,7 +319,7 @@ export default function Profile({props}) {
                     <br/>
                     <Select
                         native
-                        defaultValue={customer && customer.priority}
+                        defaultValue={priority}
                         onChange={event => changePriority(event.target.value)}
                         style={{width:130}}
                         input={
@@ -318,7 +350,7 @@ export default function Profile({props}) {
                                 ampm={false}
                                 label="Last Contact"
                                 inputVariant="outlined"
-                                value={customer && customer.lastContact}
+                                value={lastContact}
                                 onChange={changeLastContact}
                                 format="dd/MM/yyyy hh:mm"
                                 />
@@ -338,7 +370,7 @@ export default function Profile({props}) {
                                 ampm={false}
                                 label="Next Meeting"
                                 inputVariant="outlined"
-                                value={customer && customer.meeting}
+                                value={nextMeeting}
                                 onChange={changeNextMeeting}
                                 format="dd/MM/yyyy hh:mm"
                                 />

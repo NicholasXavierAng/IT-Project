@@ -159,7 +159,7 @@ userRouter.post('/filter', async (req, res) => {
 userRouter.post('/profile/:id', async (req, res) => {
 	var customer = await Customer.findById(req.params.id).lean();  
     var company = await Company.findById(customer.companyInfo);
-    res.json({"customer": customer, "company": company});
+	res.json({"customer": customer, "company": company});
 })
 
 userRouter.post('/addCustomer', async (req, res) => {
