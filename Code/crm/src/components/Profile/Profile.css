@@ -79,6 +79,6 @@
 
 .avatar {
   border: 50%;
-  height: 70%;
+  height: auto;
   width: 70%;
 }

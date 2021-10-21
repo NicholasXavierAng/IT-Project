@@ -25,11 +25,14 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Select from '@material-ui/core/Select';
 
 
+
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
     KeyboardDateTimePicker
 } from '@material-ui/pickers';
+
+import Avatar from "/Users/terrytran/Documents/GitHub/it_project/Code/crm/src/components/Profile/pngegg.png";
 
 export default function Profile({props}) {
     const config = require('../Configuration/config.json');
@@ -260,48 +263,12 @@ export default function Profile({props}) {
         <div className="rectangle"></div>
         
         
-        <div className="profilePicContainer">
-           {/* <img class = "avatar" src={avatar}/>*/}
-            <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_2:11)">
-            <path d="M0 150C0 67.1573 67.1573 0 150 0C232.843 0 300 67.1573 300 150C300 232.843 232.843 300 150 300C67.1573 300 0 232.843 0 150Z" fill="url(#paint0_linear_2:11)"/>
-            <path d="M95 209.784C113.333 223.117 131.667 233.784 150 233.784C168.333 233.784 186.667 223.117 205 209.784C189.889 205.184 182.222 198.317 182 189.184C182 187.556 182.012 185.244 182.023 180.903C182.023 180.214 182.025 179.508 182.028 178.785C182.058 167.145 182.107 151.785 182.176 136.185C196.508 117.608 191.243 95.829 186.752 96.372C181.246 97.042 133.543 51.774 124.393 49.453C115.243 47.132 92 54.625 88 75.5C84 96.375 82.328 148.993 97.5 170C101.817 175.978 108.617 178.316 117.9 177.015C117.913 181.384 117.939 183.836 118 188.784C117.881 198.333 110.215 205.189 95 209.784Z" fill="url(#paint1_linear_2:11)"/>
-            <path d="M118 177C140 174.5 154 165 154 165C154 165 138 185 118 189V177Z" fill="#FC9F6A"/>
-            <path d="M189.5 136.5C196.39 119.93 224 86.183 200.2 65.183C192.2 26.183 148 30.5 118.5 39.5C98.6731 45.549 83.7001 57.5 80.5001 48.5C60.5001 65.183 70.5161 81.5 83.7001 86.183C95.6661 90.433 115.9 94.683 150.306 90.683C156.452 89.968 155.165 108.791 158.449 110.826C163.376 113.879 167.2 94.683 180.708 100.447C194.216 106.211 186.2 132.937 171.7 132.937C166.7 132.937 164.2 146.684 177.7 153.184C187.5 158 185.023 147.267 189.5 136.5Z" fill="url(#paint2_linear_2:11)"/>
-            <path d="M255 240.308C264.52 259.665 270 304.308 270 304.308H30C30 304.308 35.482 259.66 45 240.308C54.518 220.956 110.1 203.007 110.1 203.007C140.813 215 159.608 215 189.871 203C189.871 203 245.48 220.951 255 240.308Z" fill="url(#paint3_linear_2:11)"/>
-            <path d="M157 210L162 302H138L143 210C143 210 147.667 205 150 205C152.333 205 157 210 157 210Z" fill="url(#paint4_linear_2:11)"/>
-            <path d="M158.139 228.692L142.414 219.606L143 210C146.111 206.667 148.445 205 150 205C151.555 205 153.889 206.667 157 210L158.14 228.692H158.139Z" fill="#645050"/>
-            <path d="M150 204.992L140 223L109 204L118 191L150 202.821L182 191L191 204L160 223L150 204.992Z" fill="white"/>
-            </g>
-            <defs>
-            <linearGradient id="paint0_linear_2:11" x1="150" y1="0" x2="150" y2="300" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#806A6A"/>
-            <stop offset="1" stop-color="#665654"/>
-            </linearGradient>
-            <linearGradient id="paint1_linear_2:11" x1="145.122" y1="49.0471" x2="145.122" y2="233.784" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#F7B186"/>
-            <stop offset="1" stop-color="#FFC299"/>
-            </linearGradient>
-            <linearGradient id="paint2_linear_2:11" x1="139.44" y1="33.3879" x2="139.44" y2="154.368" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1D0024"/>
-            <stop offset="1" stop-color="#100014"/>
-            </linearGradient>
-            <linearGradient id="paint3_linear_2:11" x1="150" y1="203" x2="150" y2="304.308" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1D0024"/>
-            <stop offset="1" stop-color="#100014"/>
-            </linearGradient>
-            <linearGradient id="paint4_linear_2:11" x1="150" y1="205" x2="150" y2="302" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#806A6A"/>
-            <stop offset="1" stop-color="#665654"/>
-            </linearGradient>
-            <clipPath id="clip0_2:11">
-            <path d="M0 150C0 67.1573 67.1573 0 150 0C232.843 0 300 67.1573 300 150C300 232.843 232.843 300 150 300C67.1573 300 0 232.843 0 150Z" fill="white"/>
-            </clipPath>
-            </defs>
-            </svg>
-
-        </div>
+        
         <div className="leftContainer" >
+            <div className="profilePicContainer">
+                <img class = "avatar" src={Avatar}/>
+
+            </div>
             <Grid container
                 direction="column"
                 justifyContent="space-between"
