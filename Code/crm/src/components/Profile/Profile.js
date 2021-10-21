@@ -260,10 +260,11 @@ export default function Profile({props}) {
                 </Box>
             </Toolbar>
         </AppBar>
-        <div className="rectangle"></div>
+        
         
         
         <div className = "container">
+            <div className="rectangle"></div>
             <div className="leftContainer" >
                 
                 <img class = "avatar" src={Avatar}/>
