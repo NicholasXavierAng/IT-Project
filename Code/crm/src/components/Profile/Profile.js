@@ -500,7 +500,7 @@ export default function Profile({props}) {
             </div>
 
             <div className="rightContainer">
-                <div style = {{backgroundColor: "orange", padding: "15px", margin: "8px" , width:"50vw"}}>
+                <div style = {{padding: "15px", margin: "8px" , width:"50vw"}}>
                     <Grid container
                         direction="row"
                         // justifyContent=""
@@ -571,7 +571,7 @@ export default function Profile({props}) {
                         </Grid>
                     </Grid>
                 </div>
-                <div style = {{backgroundColor: "yellow", padding: "15px", margin: "8px" , width:"50vw"}}>          
+                <div style = {{padding: "15px", margin: "8px" , width:"50vw"}}>          
                     <Grid container
                         direction="row"
                         // justifyContent="space-between"
