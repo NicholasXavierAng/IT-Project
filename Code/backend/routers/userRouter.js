@@ -156,6 +156,16 @@ userRouter.post('/filter', async (req, res) => {
 	res.json({"customers":customers});  
 })
 
+userRouter.post('/falseNotifyM/:id', async (req, res) => {
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"toNotifyM": false}}, {new: true});
+	res.json({"status":true}); 
+})
+
+userRouter.post('/falseNotifyLC/:id', async (req, res) => {
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"toNotifyLC": false}}, {new: true});
+	res.json({"status":true}); 
+})
+
 userRouter.post('/profile/:id', async (req, res) => {
 	var customer = await Customer.findById(req.params.id).lean();  
     var company = await Company.findById(customer.companyInfo);
@@ -186,7 +196,8 @@ userRouter.post('/addCustomer', async (req, res) => {
 		companyInfo: ObjectId(compId), 
 		priority: company.priority,
 		progress: company.status,
-		toNotify: true
+		toNotifyM: false,
+		toNotifyLC: false
 	})
 
 
@@ -196,12 +207,12 @@ userRouter.post('/addCustomer', async (req, res) => {
 })
 
 userRouter.post('/meeting/:id', async (req, res) => {
-	await Customer.findByIdAndUpdate(req.params.id, {$set: {"meeting": req.body.meeting}}, {new: true});
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"meeting": req.body.meeting, "toNotifyM": true}}, {new: true});
 	res.json({"status":true}); 
 })
 
 userRouter.post('/lastContact/:id', async (req, res) => {
-	await Customer.findByIdAndUpdate(req.params.id, {$set: {"lastContact": req.body.lastContact}}, {new: true});
+	await Customer.findByIdAndUpdate(req.params.id, {$set: {"lastContact": req.body.lastContact, "toNotifyLC": true}}, {new: true});
 	res.json({"status":true}); 
 })
 

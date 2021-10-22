@@ -26,7 +26,8 @@ var customerSchema = new mongoose.Schema({
     notes : String, 
     description: String, 
     timeline: String,
-    toNotify: Bool
+    toNotifyM: Boolean,
+    toNotifyLC: Boolean
 })
 
 const Customer = mongoose.model("customer", customerSchema); 

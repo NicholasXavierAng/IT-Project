@@ -62,6 +62,34 @@ function UserHome() {
         setAnchorE2(null);
     };
 
+	const handleNotificationsOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+		if (meetings) {
+			for (var i = 0; i < meetings.length; i++) {
+				var cust = meetings[i];
+				try {
+					axios.post(link + 'user/falseNotifyM/' + cust._id);
+				}
+				catch (err) {
+					if ((err)) return alert('check your connection');
+					throw err;
+				}
+			}
+		}
+		if (lastContacts) {
+			for (var i = 0; i < lastContacts.length; i++) {
+				var cust = lastContacts[i];
+				try {
+					axios.post(link + 'user/falseNotifyLC/' + cust._id);
+				}
+				catch (err) {
+					if ((err)) return alert('check your connection');
+					throw err;
+				}
+			}
+		}
+    };
+
 	const handleNotificationClose = () => {
 		setAnchorEl(null);
 		setNotifications(0);
@@ -151,7 +179,9 @@ function UserHome() {
 						"minutes": mDate.getMinutes()
 					}
 					meetings.push(meeting);
-					notifications++;
+					if (customer.toNotifyM === true) {
+						notifications++;
+					}
 				}
 				if (customer.lastContact) {
 					var toDate = new Date();
@@ -169,7 +199,9 @@ function UserHome() {
 								"lcMinutes": lcDate.getMinutes()
 							}
 							lastContacts.push(lastContacted);
-							notifications++;
+							if (customer.toNotifyLC === true) {
+								notifications++;
+							}
 						}
 					}
 					else if (prio === "Medium") {
@@ -183,7 +215,9 @@ function UserHome() {
 								"lcMinutes": lcDate.getMinutes()
 							}
 							lastContacts.push(lastContacted);
-							notifications++;
+							if (customer.toNotifyLC === true) {
+								notifications++;
+							}
 						}
 					}
 					else if (prio === "Low") {
@@ -197,7 +231,9 @@ function UserHome() {
 								"lcMinutes": lcDate.getMinutes()
 							}
 							lastContacts.push(lastContacted);
-							notifications++;
+							if (customer.toNotifyLC === true) {
+								notifications++;
+							}
 						}
 					}
 				}
@@ -311,7 +347,7 @@ function UserHome() {
                     </Box>
                     <IconButton>
 						<Badge color="secondary" badgeContent={notifications}>
-                        	<NotificationsIcon color="action" onClick = {handleClick}/>
+                        	<NotificationsIcon color="action" onClick = {handleNotificationsOpen}/>
 						</Badge>
                     </IconButton>
                     <Menu
