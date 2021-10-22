@@ -18,6 +18,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import AlertMessage from '../AlertMessage/AlertMessage';
 
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker
+} from '@material-ui/pickers';
+
 const config = require('../Configuration/config.json');
 const API_URL =  config.API_URL; 
 
@@ -31,7 +37,7 @@ export default function EditInfo() {
     // Client information
     const [firstName, setFirst] = useState(); 
     const [familyName, setFamily] = useState(); 
-    const [dob, setDob] = useState(); 
+    const [dob, setDob] = useState(new Date()); 
     const [gender, setGender] = useState(); 
     const [number, setNumber] = useState(); 
     const [email, setEmail] = useState(); 
@@ -117,17 +123,16 @@ export default function EditInfo() {
                         />
                         <br/>
                         <br/>
-                        <TextField
-                            required
-                            id="dob"
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
                             label="Date of Birth"
-                            placeholder="At least 8 symbols..."
-                            variant="outlined"
-                            color="secondary"
-                            height="56px"
-                            width="232px"
-                            onChange={e => setDob(e.target.value)}
-                        />
+                            inputVariant="outlined"
+                            value={dob}
+                            onChange={setDob}
+                            format="dd/MM/yyyy"
+                            style={{width: 200, height: 56}}
+                            />
+                        </MuiPickersUtilsProvider>
                         <br/>
                         <br/>
                         <TextField
