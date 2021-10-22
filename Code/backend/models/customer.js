@@ -12,6 +12,7 @@ var customerSchema = new mongoose.Schema({
     status: String, 
     phoneNumber: String,
     gender: String,
+    dob: String,
     companyInfo: {type: mongoose.Schema.Types.ObjectId, ref: 'company'},
     priority: {
         type: String,

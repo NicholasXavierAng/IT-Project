@@ -25,7 +25,8 @@ import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
-    KeyboardDateTimePicker
+    KeyboardDateTimePicker,
+    KeyboardDatePicker
 } from '@material-ui/pickers';
 
 import Button from '@material-ui/core/Button';
@@ -81,6 +82,19 @@ async function changeNotes(link, id, notes) {
     }
 }
 
+async function changePersonalDetails(link, id, firstName, familyName, dob) {
+    var req = {"firstName": firstName,
+               "familyName": familyName,
+               "dob": dob };
+    try {
+        axios.post(link + 'user/changePersonalDetails/' + id, req);
+    }
+    catch (err) {
+        if ((err)) return alert('check your connection');
+        throw err;
+    }
+}
+
 export default function Profile({props}) {
     const config = require('../Configuration/config.json');
     const link =  config.API_URL; 
@@ -101,6 +115,13 @@ export default function Profile({props}) {
     var [pnotes, setpNotes] = useState();
     var [pnumber, setpNumber] = useState();
     var [pemail, setpEmail] = useState();
+    var [dob, setDob] = useState(new Date());
+    
+    var [firstName, setFirstName] = useState();
+    var [familyName, setFamilyName] = useState();
+    var [pfirstName, setpFirstName] = useState();
+    var [pfamilyName, setpFamilyName] = useState();
+    var [gender, setGender] = useState();
 
     var [pname, setpName] = useState();
     var [plocation, setpLocation] = useState();
@@ -155,6 +176,12 @@ export default function Profile({props}) {
                     setpPosition(comp.position);
                     setDepartment(comp.department);
                     setpDepartment(comp.department);
+                    setDob(cust.dob);
+                    setFirstName(cust.firstName);
+                    setpFirstName(cust.firstName);
+                    setFamilyName(cust.familyName);
+                    setpFamilyName(cust.familyName);
+                    setGender(cust.gender);
                 })
             }
             catch (err) {
@@ -166,112 +193,6 @@ export default function Profile({props}) {
 
         getCustomer();  
     }, [])
-
-    
-
-    // useEffect(()=> { 
-    //     if (notes) {
-    //         try {
-    //             var req = {"notes":notes}; 
-    //             axios.post(link + 'user/notes/' + id, req);
-    //             setNotes(notes);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (description) {
-    //         try {
-    //             var req = {"description":description}; 
-    //             axios.post(link + 'user/description/' + id, req);
-    //             setDescription(description);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (timeline) {
-    //         try {
-    //             var req = {"timeline":timeline}; 
-    //             axios.post(link + 'user/timeline/' + id, req); 
-    //             setTimeline(timeline);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (number) {
-    //         try {
-    //             var req = {"number":number}; 
-    //             axios.post(link + 'user/number/' + id, req); 
-                
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (email) {
-    //         try {
-    //             var req = {"email":email}; 
-    //             axios.post(link + 'user/email/' + id, req); 
-    //             setEmail(email);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (name) {
-    //         try {
-    //             var req = {"name":name}; 
-    //             axios.post(link + 'user/name/' + id, req); 
-    //             setName(name);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (location) {
-    //         try {
-    //             var req = {"location":location}; 
-    //             axios.post(link + 'user/location/' + id, req); 
-    //             setLocation(location);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (position) {
-    //         try {
-    //             var req = {"position":position}; 
-    //             axios.post(link + 'user/position/' + id, req); 
-    //             setPosition(position);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-    //     if (department) {
-    //         try {
-    //             var req = {"department":department}; 
-    //             axios.post(link + 'user/department/' + id, req);
-    //             setDepartment(department);
-    //         }
-    //         catch (err) {
-    //             if ((err)) return alert('check your connection');
-    //             throw err;
-    //         }
-    //     }
-        
-
-    // }, [notes, description, timeline, number, email, name, location, position, department]); 
 
     const submitContact = async (e) => {
         e.preventDefault();
@@ -323,6 +244,19 @@ export default function Profile({props}) {
         setpNotes(notes);
     }
 
+    const submitPersonalDetails = async (e) => {
+        e.preventDefault();
+        const res = await changePersonalDetails(
+            link,
+            id,
+            firstName,
+            familyName
+        )
+        setpFirstName(firstName);
+        setpFamilyName(familyName);
+    }
+
+
     async function changeProgress(prog) {
         var req = {"progress": prog}
         try {
@@ -364,6 +298,18 @@ export default function Profile({props}) {
         try {
             axios.post(link + 'user/meeting/' + id, req)
             setNextMeeting(nmDate);
+        }
+        catch (err) {
+            if ((err)) return alert('check your connection');
+            throw err;
+        }
+    }
+
+    async function changeDOB(newDob) {
+        var req = {"dob": newDob}
+        try {
+            axios.post(link + 'user/dob/' + id, req)
+            setDob(newDob);
         }
         catch (err) {
             if ((err)) return alert('check your connection');
@@ -507,12 +453,54 @@ export default function Profile({props}) {
                         alignItems="center"
                     >
                         <div className="infoContainer">
-                            {customer  && 
-                                <>
-                                <h1>{customer.firstName} {customer.familyName}</h1>
-                                <p><b>Gender: </b> {customer.gender}</p>
-                                </>
-                            }
+                            <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                                <div>
+                                    <form onSubmit={submitPersonalDetails}>
+                                        <p>Edit First Name</p>
+                                        <TextField
+                                            id="newnotes"
+                                            label="First Name"
+                                            variant="outlined"
+                                            color="secondary"
+                                            fullWidth 
+                                            onChange={e => setFirstName(e.target.value)}
+                                        />
+                                        <p>Edit Family Name</p>
+                                        <TextField
+                                            id="newnotes"
+                                            label="Family Name"
+                                            variant="outlined"
+                                            color="secondary"
+                                            fullWidth 
+                                            onChange={e => setFamilyName(e.target.value)}
+                                        />
+                                        <br/>
+                                        <br/>
+                                        <section className="saveChanges">
+                                            <Button
+                                                type="save"
+                                                variant="contained"
+                                                color="secondary"
+                                                style={{minWidth: "85px", minHeight:"35px"}}>
+                                                Save changes
+                                            </Button>
+                                        </section>
+                                    </form>
+                                </div>
+                            </Popup>
+                            <>
+                            <h1>{pfirstName} {pfamilyName}</h1>
+                            <p><b>Gender: </b> {gender}</p>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <KeyboardDatePicker
+                                label="Date of Birth"
+                                inputVariant="outlined"
+                                value={dob}
+                                onChange={changeDOB}
+                                format="dd/MM/yyyy"
+                                />
+                            </MuiPickersUtilsProvider>
+                            </>
                         </div>
                         <Grid item spacing={4} style = {{position: "relative"}}>
                             <Box 
