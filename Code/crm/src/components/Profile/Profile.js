@@ -579,7 +579,7 @@ export default function Profile({props}) {
                         <Box 
                             boxShadow={4}
                             borderRadius={5}
-                            style={{ padding: "15px", "margin-right": "2em", width:"25em", marginRight:"7.5em", height:"15em"}}>
+                            style={{ padding: "15px", width:"25em", marginRight:"2em", height:"15em"}}>
                                 <Box display="flex" justifyContent="space-between">
                                      <h3>Company Information</h3>
                                     <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
