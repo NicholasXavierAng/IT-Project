@@ -500,12 +500,8 @@ export default function Profile({props}) {
             </div>
 
             <div className="rightContainer">
-                <div style = {{padding: "15px", margin: "8px" , width:"50vw"}}>
-                    <Grid container
-                        direction="row"
-                        // justifyContent=""
-                        alignItems="center"
-                    >
+                <div style = {{padding: "15px", margin: "8px"}}>
+                    <div className="top-wrapper">
                         <div className="infoContainer">
                             {customer  && 
                                 <>
@@ -514,11 +510,10 @@ export default function Profile({props}) {
                                 </>
                             }
                         </div>
-                        <Grid item spacing={4} style = {{position: "relative"}}>
                             <Box 
                                 boxShadow={4}
                                 borderRadius={5}
-                                style={{ padding: "15px", "margin-top": "10px", "margin-left": "6em", width:"25em", marginTop:"2em"}}>
+                                style={{ padding: "15px", "margin-left": "6em", width:"25em", marginTop:"2em"}}>
                                 <Box display="flex" justifyContent="space-between">
                                     <h3>Contact</h3>
                                     <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
@@ -568,10 +563,9 @@ export default function Profile({props}) {
                                 <p><b>Email: </b> <span className="contactInfo">{pemail}</span></p> 
                                 </>    
                             </Box>
-                        </Grid>
-                    </Grid>
+                    </div>
                 </div>
-                <div style = {{"padding-top": "15px", margin: "8px" , width:"50vw"}}>          
+                <div style = {{"padding-top": "15px", margin: "8px"}}>          
 
                     <div className="company-task">
                     {/*Company info div */}
