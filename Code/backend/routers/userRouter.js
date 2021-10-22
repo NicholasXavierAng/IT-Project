@@ -82,8 +82,8 @@ const justSearch = async (search) => {
 }
 
 userRouter.get('/customers', async (req, res) => {
-    var customers = await Customer.find().lean();  
-    res.json({"customers": customers}); 
+    var customers = await Customer.find().lean();
+    res.json({"customers": customers});
 })
 
 var addFiltered = (customers, c) => {
@@ -185,7 +185,8 @@ userRouter.post('/addCustomer', async (req, res) => {
 		email: client.email, 
 		companyInfo: ObjectId(compId), 
 		priority: company.priority,
-		progress: company.status
+		progress: company.status,
+		toNotify: true
 	})
 
 

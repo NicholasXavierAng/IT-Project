@@ -11,9 +11,7 @@ import { IconButton, AppBar, Toolbar, Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, Fragment } from 'react';
-import Moment from 'react-moment';
-import Calendar from 'react-calendar'
-// import 'moment-timezone';
+
 import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
 import 'react-calendar/dist/Calendar.css';

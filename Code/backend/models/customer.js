@@ -25,7 +25,8 @@ var customerSchema = new mongoose.Schema({
     lastContact: String,
     notes : String, 
     description: String, 
-    timeline: String
+    timeline: String,
+    toNotify: Bool
 })
 
 const Customer = mongoose.model("customer", customerSchema); 
