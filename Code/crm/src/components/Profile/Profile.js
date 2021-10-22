@@ -449,7 +449,10 @@ export default function Profile({props}) {
                 <div style = {{padding: "15px", margin: "8px"}}>
                     <div className="top-wrapper">
                         <div className="infoContainer">
-                            <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
+                            <>
+                            <Box display="flex" justifyContent="space-between">
+                                <h1>{pfirstName} {pfamilyName}</h1>
+                                <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
                                 <div>
                                     <form onSubmit={submitPersonalDetails}>
                                         <p>Edit First Name</p>
@@ -484,8 +487,7 @@ export default function Profile({props}) {
                                     </form>
                                 </div>
                             </Popup>
-                            <>
-                            <h1>{pfirstName} {pfamilyName}</h1>
+                            </Box>
                             <p><b>Gender: </b> {gender}</p>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
@@ -501,7 +503,7 @@ export default function Profile({props}) {
                             <Box 
                                 boxShadow={4}
                                 borderRadius={5}
-                                style={{ padding: "15px", "margin-left": "6em", width:"25em", marginTop:"2em"}}>
+                                style={{ padding: "15px", "margin-left": "6em", width:"25em", marginTop:"2em", marginLeft:"8.5em"}}>
                                 <Box display="flex" justifyContent="space-between">
                                     <h3>Contact</h3>
                                     <Popup trigger={<IconButton><Pen /></IconButton>} position="bottom center">
